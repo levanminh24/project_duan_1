@@ -40,7 +40,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink" style="color: #f1c40f;"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Vape Store</div>
+                <div class="sidebar-brand-text mx-3">web Điện thoại</div>
             </a>
 
             <!-- Divider -->
@@ -87,7 +87,7 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=danhmuc">Danh sách danh mục</a>
+                        <a class="collapse-item" href="?act=listdm">Danh sách danh mục</a>
                         <a class="collapse-item" href="?act=adddm" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
@@ -124,7 +124,7 @@
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=donhang">Danh sách đơn hàng</a>
-                        <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng <sup><?= $sup?></sup></a>
+                        <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
                         <a class="collapse-item" href="?act=dahuy">Danh sách đã hủy</a>
                     </div>
