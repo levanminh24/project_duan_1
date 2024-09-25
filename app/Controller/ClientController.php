@@ -51,10 +51,4 @@ if(isset($_GET['act'])){
                     include "app/views/Client/sanpham/ctsp.php";
                     break;
     }
-}else {
-    $list_banner_home = load_banner_home();
-    $list_sp_home =  loadall_spHome();
-    $list_sp_nb = load_spnoibat();
-    $listtintuchome = tintuc();
-    include './app/view/Client/home.php';
 }
