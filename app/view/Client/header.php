@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Urdan - Minimal eCommerce HTML Template</title>
+    <title>Web Store</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Urdan Minimal eCommerce Bootstrap 5 Template is a stunning eCommerce website template that is the best choice for any online store.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,24 +71,21 @@
                             <div class="main-menu text-center">
                                 <nav>
                                     <ul>
-                                        <li><a href="index.html">Trang Chủ</a>
-                                           
-                                        </li>
-                                        <li><a href="gioithieu.html">Giới Thiệu</a>
-                                           
-                                        </li>
-                                        <li><a href="#">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a> 
+                                        <li><a href="?act=trangchu">Trang Chủ</a></li>
+                                        <li><a href="?act=gioithieu">Giới Thiệu</a></li>
+                                        <li><a href="?act=sanpham">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a> 
                                             <ul class="sub-menu-style">
-                                                <li><a href="product-details.html">iPhone</a></li>
-                                                <li><a href="product-details-2.html">SamSung</a></li>
-                                                <li><a href="product-details-gallery.html">Xioami</a></li>
-                                                <li><a href="product-details-affiliate.html">Oppo</a></li>     
+                                                <?php
+                                                     $listdm = load_danhmuchome();
+                                                    foreach ($listdm as $dm) {
+                                                        extract($dm);
+                                                        echo '<li><a href="?act=sptheodm&id='.$id.'">'.$name.'</a></li>';
+                                                    }
+                                                ?>
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">Tin Tức</a>                                      
-                                        </li>
-                                        <li><a href="about-us.html">Liên Hệ </a></li>
-                                       
+                                        <li><a href="?act=tintuc">Tin Tức</a></li>
+                                        <li><a href="?act=lienhe">Liên Hệ </a></li>  
                                     </ul>
                                 </nav>
                             </div>
