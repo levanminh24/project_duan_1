@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "app/Model/clientModel/binhluan.php";
 require_once "app/Model/clientModel/banner.php";
 require_once "app/Model/clientModel/sanpham.php";
 require_once "app/Model/clientModel/danhmuc.php";
