@@ -47,6 +47,8 @@ if(isset($_GET['act'])){
                         }
                     }
                     include "app/view/Client/binhluan/binhluan.php";
+                    case 'add':
+                        break;
                     break;
     }
 }
