@@ -138,8 +138,8 @@
                 </a>
                 <div id="collapseThreer" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=listbanner">Danh sách banner</a>
-                        <a class="collapse-item" href="?act=listbanner" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="?act=quanlybanner">Danh sách banner</a>
+                        <a class="collapse-item" href="?act=addbanner" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
