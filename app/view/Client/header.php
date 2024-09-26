@@ -104,11 +104,38 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="header-action-style">
-                                    <a title="Login Register" href="login-register.html"><i class="pe-7s-user"></i></a>
+                                <div class="header-action-style main-menu">
+                                <nav>
+    <ul>
+        <?php
+            if(isset($_SESSION['idtendangnhap']) && $_SESSION['idtendangnhap'] != ""){
+                // Assume you have the role stored in the session as well
+                $role = $_SESSION['role'];
+        ?>
+            <li><a title="Tài khoản" href="?act=thongtintk"><i class="pe-7s-user"></i></a>
+                <ul class="sub-menu-style">
+                    <li><a href="?act=thongtintaikhoan" style="font-size:13px;">Thông tin tài khoản</a></li>
+                    <li><a href="?act=lichsumuahang" style="font-size:13px;">Đơn mua</a></li>
+                    <?php if($role == 1): ?>
+                        <li><a href="app/views/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
+                    <?php endif; ?>
+                    <li><a href="?act=dangxuat" style="font-size:13px;">Đăng xuất</a></li>
+                </ul>
+            </li>
+        <?php } else { ?>
+            <li><a title="Đăng nhập" href="?act=dangnhap"><i class="pe-7s-user"></i></a>
+                <ul class="sub-menu-style">
+                    <li><a href="?act=dangnhap" style="font-size:13px;">Đăng nhập</a></li>
+                    <li><a href="?act=dangky" style="font-size:13px;">Đăng ký</a></li>
+                </ul>
+            </li>
+        <?php } ?>
+    </ul>
+</nav>
+
                                 </div>
                                 <div class="header-action-style">
-                                    <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
+                                    <a title="Wishlist" href="index.php?act=dangnhap"><i class="pe-7s-like"></i></a>
                                 </div>
                                 <div class="header-action-style header-action-cart">
                                     <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
