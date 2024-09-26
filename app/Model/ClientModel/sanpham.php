@@ -28,9 +28,48 @@ function load_category_name($iddm)
     $category = pdo_query_one($sql);
     return $category;
 }
-
-
 function update_luotxem_sp($idsp) {
     $query = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $idsp";
     pdo_execute($query);
+}
+ua
+
+//client
+   
+function loadall_danhmuc(){
+    $sql = "SELECT * FROM danhmuc WHERE is_delete = 0";
+    $listdanhmuc = pdo_query($sql);
+    return $listdanhmuc;
+}
+function dem_sp_dm($iddm) {
+    $query = "SELECT COUNT(*) as countsp FROM sanpham WHERE iddm = '$iddm'";
+    return pdo_query_one($query);
+}
+
+ master
+function load_sp_lq($iddm){
+    $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
+    if($iddm!=""){
+        $query .=" AND iddm=".$iddm;
+    }
+    $query .=" ORDER BY id asc";
+    return pdo_query($query);
+}
+function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page) {
+    // Chuyển đổi biến $iddm, $giadau, $giacuoi thành kiểu số nguyên
+    $query="SELECT * FROM sanpham WHERE 1";
+    if($iddm > 0){
+        $query .=" AND iddm=$iddm";
+    }
+    if($kyw != ''){
+        $query .=" AND tensp like '%".$kyw."%' ";
+    }
+    if($giadau > 0 && $giacuoi > 0){
+        $query .=" AND giasp BETWEEN $giadau AND $giacuoi";
+    }
+    $batdau=intval($page*9-9);
+    $query .=" ORDER BY id desc limit $batdau,9";
+    return pdo_query($query);
+
+ master
 }
