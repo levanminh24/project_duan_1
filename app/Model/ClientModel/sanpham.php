@@ -34,3 +34,11 @@ function update_luotxem_sp($idsp) {
     $query = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $idsp";
     pdo_execute($query);
 }
+function load_sp_lq($iddm){
+    $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
+    if($iddm!=""){
+        $query .=" AND iddm=".$iddm;
+    }
+    $query .=" ORDER BY id asc";
+    return pdo_query($query);
+}
