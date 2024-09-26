@@ -1,22 +1,4 @@
 
-<div class="breadcrumb-area bg-gray-4 breadcrumb-padding-1">
-    <div class="container">
-        <div class="breadcrumb-content text-center">
-            <h2 data-aos="fade-up" data-aos-delay="200">Product Details</h2>
-            <ul data-aos="fade-up" data-aos-delay="400">
-                <li><a href="index.html">Home</a></li>
-                <li><i class="ti-angle-right"></i></li>
-                <li>Product Details Tab 2</li>
-            </ul>
-        </div>
-    </div>
-    <div class="breadcrumb-img-1" data-aos="fade-right" data-aos-delay="200">
-        <img src="assets/images/banner/breadcrumb-1.png" alt="">
-    </div>
-    <div class="breadcrumb-img-2" data-aos="fade-left" data-aos-delay="200">
-        <img src="assets/images/banner/breadcrumb-2.png" alt="">
-    </div>
-</div>
 <div class="product-details-area pb-100 pt-100">
     <div class="container">
         <div class="row">
@@ -24,7 +6,7 @@
                 <div class="product-details-img-wrap" data-aos="fade-up" data-aos-delay="200">
                     <div class="swiper-container product-details-big-img-slider-2 pd-big-img-style">
                         <a id="mainImageLink" href="#">
-                            <img id="mainImage" src="public/images/<?= $img ?>" alt="<?= $tensp ?>" width="500px">
+                            <img id="mainImage" src="public/images/<?= $img ?>" alt="<?= $tensp ?>" width="450px">
                         </a>
                       
                     </div>
@@ -99,7 +81,7 @@
                                                 <img src="../assets/images/userbl.png" alt="">
                                             </div>
                                             <div class="review-content">
-                                                <h5><span>'.$hovaten.'</span> - '.$ngaybinhluan.'</h5>
+                                                <h5><span>'.$tendangnhap.'</span> - '.$ngaybinhluan.'</h5>
                                                 <p>'.$noidung.'</p>
                                             </div>
                                         </div>';
@@ -134,7 +116,7 @@
                                         <div class="product-action-2-wrap">
                                             
                                             
-                                            <button data-id="<?= $id?>" onclick="themgiohang(<?= $id?>)" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                            <button data-id="<?= $id?>"  class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
                                         </div>
                                     </div>
                                     <div class="product-content">
@@ -151,48 +133,4 @@
                 </div>
             </div>
         </div>
-<style>
-    .product-colors-wrap {
-    margin-top: 20px;
-}
-.product-colors {
-    display: flex;
-    flex-wrap: wrap;
-}
-.product-color {
-    margin-right: 10px;
-    margin-left: 20px;
-    text-align: center;
-}
-.product-color img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-   transform: scale(1.2);
-    cursor: pointer;
-   
 
-}
-.product-color span {
-    display: block;
-    margin-top: 5px;
-}
-.product-details-description {
-    /* Giới hạn chiều cao của mô tả */
-    max-height: 80px; /* Thay đổi giá trị này nếu cần */
-    overflow: hidden; /* Ẩn phần văn bản vượt quá chiều cao */
-    position: relative;
-}
-
-.product-description a::after {
-    content: "..."; /* Hiển thị dấu ba chấm */
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: white; /* Màu nền tương tự như màu nền của phần tử để ẩn văn bản bị cắt */
-    padding-left: 5px; /* Khoảng cách giữa dấu ba chấm và văn bản */
-}
-
-
-
-</style>
