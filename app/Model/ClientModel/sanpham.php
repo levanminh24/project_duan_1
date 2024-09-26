@@ -32,6 +32,7 @@ function update_luotxem_sp($idsp) {
     $query = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $idsp";
     pdo_execute($query);
 }
+ua
 
 //client
    
@@ -44,6 +45,8 @@ function dem_sp_dm($iddm) {
     $query = "SELECT COUNT(*) as countsp FROM sanpham WHERE iddm = '$iddm'";
     return pdo_query_one($query);
 }
+
+ master
 function load_sp_lq($iddm){
     $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
     if($iddm!=""){
@@ -67,4 +70,6 @@ function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page) {
     $batdau=intval($page*9-9);
     $query .=" ORDER BY id desc limit $batdau,9";
     return pdo_query($query);
+
+ master
 }

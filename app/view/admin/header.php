@@ -174,17 +174,7 @@
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=tintuc">Quản lý tin tức</a>
-                    </div>
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=addtintuc">Thêm tin tức</a>
-                    </div>
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=quanlytieuthuyet">Quản lý tiểu thuyết</a>
-                    </div>
-                </div>
+               
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../../../index.php">Đăng xuất</a>
