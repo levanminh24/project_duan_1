@@ -95,5 +95,12 @@ if(isset($_GET['act'])){
                 }
                 include "app/view/Client/taikhoan/dangky.php";
                 break;
+                case 'dangxuat':
+                    unset($_SESSION['tendangnhap']);
+                    unset($_SESSION['role']);
+                    unset($_SESSION['idtendangnhap']);
+                    echo "<script>window.location.href='index.php?act=trangchu';</script>";
+                    exit;
+                    break;
     }
 }

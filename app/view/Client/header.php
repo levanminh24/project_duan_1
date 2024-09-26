@@ -114,10 +114,10 @@
         ?>
             <li><a title="Tài khoản" href="?act=thongtintk"><i class="pe-7s-user"></i></a>
                 <ul class="sub-menu-style">
-                    <li><a href="?act=thongtintaikhoan" style="font-size:13px;">Thông tin tài khoản</a></li>
-                    <li><a href="?act=lichsumuahang" style="font-size:13px;">Đơn mua</a></li>
+                   
+                   
                     <?php if($role == 1): ?>
-                        <li><a href="app/views/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
+                        <li><a href="app/view/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
                     <?php endif; ?>
                     <li><a href="?act=dangxuat" style="font-size:13px;">Đăng xuất</a></li>
                 </ul>
