@@ -3,7 +3,6 @@
 if(isset($_GET['act'])){
 
 if (isset($_GET['act'])) {
- master
     $act = $_GET['act'];
     switch ($act) {
         case 'trangchu':
