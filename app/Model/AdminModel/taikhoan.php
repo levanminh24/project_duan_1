@@ -13,3 +13,9 @@ function updatetaikhoan($id,$vaitro){
    pdo_execute($sql);
   
 }
+function dangnhap($tendangnhap,$matkhau){
+    $sql = "select * from tai_khoan where tendangnhap = '$tendangnhap' and matkhau = '$matkhau'";
+    $dn = pdo_query_one($sql);
+    return $dn; 
+    }
+

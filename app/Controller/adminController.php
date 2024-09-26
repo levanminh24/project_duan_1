@@ -1,8 +1,48 @@
 <?php
 
+// session_start(); // Bắt đầu session để sử dụng $_SESSION
+
+// // Kiểm tra xem người dùng đã đăng nhập và có quyền truy cập (role == 1)
+// if (!isset($_SESSION['tendangnhap']) || $_SESSION['role'] != 1) {
+//     header("Location: index.php?act=dangnhap"); // Chuyển hướng đến trang đăng nhập nếu không có quyền
+//     exit;
+// }
+// // Kiểm tra xem người dùng đã đăng nhập hay chưa và quyền truy cập
+
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
+        // case 'dangnhap':
+        //     $errors = ['tendangnhap' => '', 'matkhau' => ''];
+        //     if (isset($_POST['dangnhap'])) {
+        //         $tendangnhap = $_POST['tendangnhap'];
+        //         $matkhau = $_POST['matkhau'];
+
+        //         // Kiểm tra các giá trị trống
+        //         if (empty($tendangnhap)) {
+        //             $errors['tendangnhap'] = "Tên đăng nhập không được để trống";
+        //         }
+        //         if (empty($matkhau)) {
+        //             $errors['matkhau'] = "Mật khẩu không được để trống";
+        //         }
+
+        //         // Nếu không có lỗi, thực hiện kiểm tra đăng nhập
+        //         if (empty($errors['tendangnhap']) && empty($errors['matkhau'])) {
+        //             $taikhoan = dangnhap($tendangnhap, $matkhau);
+        //             if ($taikhoan) {
+        //                 // Lưu thông tin vào session
+        //                 $_SESSION['tendangnhap'] = $taikhoan['tendangnhap'];
+        //                 $_SESSION['role'] = $taikhoan['role'];
+        //                 $_SESSION['idtendangnhap'] = $taikhoan['id'];
+        //                 header("Location: index.php?act=listdm"); // Chuyển hướng sau khi đăng nhập thành công
+        //                 exit;
+        //             } else {
+        //                 $errors['tendangnhap'] = "Tên đăng nhập hoặc mật khẩu không đúng";
+        //             }
+        //         }
+        //     }
+        //     include "dangnhap/login.php";
+        //     break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -173,11 +213,13 @@ if (isset($_GET['act'])) {
                 $listbanner = loadall_banner('');
                 include "banner/list.php";
                 break;
-            // Trường hợp sửa banner
+               
+                
+
         
     
 
     }
 } else {
-    echo 'home';
+    
 }
