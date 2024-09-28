@@ -166,5 +166,9 @@ if (isset($_GET['act'])) {
                 }
                 include "app/view/Client/taikhoan/dangky.php";
                 break;
+                case 'gioithieu':
+                    include "app/view/Client/gioithieu/gioithieu.php";
+                    break;
     }
+}
 }
