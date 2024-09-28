@@ -1,7 +1,7 @@
 <?php
 function loadall_spHome()
 {
-    $sql = "select * from sanpham ";
+    $sql = "select * from sanpham order by id desc";
     $listsp = pdo_query($sql);
     return $listsp;
 }
@@ -32,9 +32,8 @@ function update_luotxem_sp($idsp) {
     $query = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $idsp";
     pdo_execute($query);
 }
-ua
 
-//client
+
    
 function loadall_danhmuc(){
     $sql = "SELECT * FROM danhmuc WHERE is_delete = 0";
@@ -46,7 +45,7 @@ function dem_sp_dm($iddm) {
     return pdo_query_one($query);
 }
 
- master
+ 
 function load_sp_lq($iddm){
     $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
     if($iddm!=""){
@@ -71,5 +70,5 @@ function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page) {
     $query .=" ORDER BY id desc limit $batdau,9";
     return pdo_query($query);
 
- master
+
 }
