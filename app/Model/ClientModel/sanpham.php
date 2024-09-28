@@ -44,8 +44,6 @@ function dem_sp_dm($iddm) {
     $query = "SELECT COUNT(*) as countsp FROM sanpham WHERE iddm = '$iddm'";
     return pdo_query_one($query);
 }
-
- 
 function load_sp_lq($iddm){
     $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
     if($iddm!=""){
