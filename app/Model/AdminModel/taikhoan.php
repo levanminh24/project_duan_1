@@ -18,4 +18,9 @@ function dangnhap($tendangnhap,$matkhau){
     $dn = pdo_query_one($sql);
     return $dn; 
     }
+    function insert_tk($tendangnhap,$matkhau,$email,$sodienthoai,$diachi,$role){
+        $query="INSERT INTO `tai_khoan`( `tendangnhap`, `matkhau`, `email`, `sodienthoai`, `diachi`, `role`) 
+        VALUES ('$tendangnhap','$matkhau','$email','$sodienthoai','$diachi','$role')";
+        pdo_execute($query);
+    }
 

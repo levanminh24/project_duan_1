@@ -190,9 +190,43 @@
         <div class="section-title-2 st-border-center text-center mb-75" data-aos="fade-up" data-aos-delay="200">
             <h2>Latest News</h2>
         </div>
-        
+        <div class="row">
+            <?php
+                $delay=200;
+                foreach ($listtintuchome as $tintuc) : ?>
+                    <?php extract($tintuc);
+                        if(strlen($tieude)>50) $tieude=substr($tieude,0,50);
+                        if(strlen($noidung)>150) $noidung=substr($noidung,0,150)."...";?>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="blog-wrap mb-30" data-aos="fade-up" data-aos-delay="<?= $delay?>">
+                            <div class="blog-img-date-wrap mb-25">
+                                <div class="blog-img">
+                                    <a href="#"><img src="public/images/<?= $img?>" alt=""></a>
+                                </div>
+                                <div class="blog-date">
+                                    <h5><?= $ngaydang?></h5>
+                                </div>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <ul>
+                                        <li><a href="#">Furniture</a>,</li>
+                                        <li>By:<a href="#"> <?= $tacgia?></a></li>
+                                    </ul>
+                                </div>
+                                <h3><a href="#"><?= $tieude?></a></h3>
+                                <div class="blog-btn">
+                                    <a href="#">Xem thêm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php $delay+=200;?>
+                <?php endforeach; ?>
+        </div>
     </div>
 </div>
+
 <script>
 
 </script>

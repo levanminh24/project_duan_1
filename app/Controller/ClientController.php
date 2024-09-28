@@ -163,6 +163,7 @@ if (isset($_GET['act'])) {
                 }
                 include "app/view/Client/taikhoan/dangky.php";
         break;
+       
         
 
     }
