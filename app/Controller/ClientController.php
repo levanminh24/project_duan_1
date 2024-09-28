@@ -1,7 +1,4 @@
 <?php
-
-if(isset($_GET['act'])){
-
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
@@ -18,6 +15,8 @@ if (isset($_GET['act'])) {
                 $listtintuchome = tintuc();
                 include 'app/view/Client/home.php';
             }
+            break;
+            
         case 'chitietsp':
             if (isset($_GET['id']) && ($_GET['id']) > 0) {
                 $id = $_GET['id'];
@@ -63,7 +62,7 @@ if (isset($_GET['act'])) {
                         $giacuoi=0;
                     }
                     // Lấy danh sách sản phẩm theo danh mục và các điều kiện lọc
-                    $list_sp_dm = load_all_spdm($_GET['id'], $kyw, $giadau, $giacuoi, 1); // Giả sử trang hiện tại là 1
+                    $list_sp_dm = load_all_spdm($_GET['id'], $kyw, $giadau, $giacuoi, 1);
                     $listdm = load_one_spdm($_GET['id']); 
                 }
             
@@ -169,6 +168,9 @@ if (isset($_GET['act'])) {
                 case 'gioithieu':
                     include "app/view/Client/gioithieu/gioithieu.php";
                     break;
+        break;
+       
     }
-}
+} else{
+    include "app/view/Client/home.php";
 }

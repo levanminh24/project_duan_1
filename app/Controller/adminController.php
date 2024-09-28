@@ -1,48 +1,11 @@
 <?php
 
-// session_start(); // Bắt đầu session để sử dụng $_SESSION
 
-// // Kiểm tra xem người dùng đã đăng nhập và có quyền truy cập (role == 1)
-// if (!isset($_SESSION['tendangnhap']) || $_SESSION['role'] != 1) {
-//     header("Location: index.php?act=dangnhap"); // Chuyển hướng đến trang đăng nhập nếu không có quyền
-//     exit;
-// }
-// // Kiểm tra xem người dùng đã đăng nhập hay chưa và quyền truy cập
 
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-        // case 'dangnhap':
-        //     $errors = ['tendangnhap' => '', 'matkhau' => ''];
-        //     if (isset($_POST['dangnhap'])) {
-        //         $tendangnhap = $_POST['tendangnhap'];
-        //         $matkhau = $_POST['matkhau'];
-
-        //         // Kiểm tra các giá trị trống
-        //         if (empty($tendangnhap)) {
-        //             $errors['tendangnhap'] = "Tên đăng nhập không được để trống";
-        //         }
-        //         if (empty($matkhau)) {
-        //             $errors['matkhau'] = "Mật khẩu không được để trống";
-        //         }
-
-        //         // Nếu không có lỗi, thực hiện kiểm tra đăng nhập
-        //         if (empty($errors['tendangnhap']) && empty($errors['matkhau'])) {
-        //             $taikhoan = dangnhap($tendangnhap, $matkhau);
-        //             if ($taikhoan) {
-        //                 // Lưu thông tin vào session
-        //                 $_SESSION['tendangnhap'] = $taikhoan['tendangnhap'];
-        //                 $_SESSION['role'] = $taikhoan['role'];
-        //                 $_SESSION['idtendangnhap'] = $taikhoan['id'];
-        //                 header("Location: index.php?act=listdm"); // Chuyển hướng sau khi đăng nhập thành công
-        //                 exit;
-        //             } else {
-        //                 $errors['tendangnhap'] = "Tên đăng nhập hoặc mật khẩu không đúng";
-        //             }
-        //         }
-        //     }
-        //     include "dangnhap/login.php";
-        //     break;
+        
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -167,6 +130,23 @@ if (isset($_GET['act'])) {
                 $taikhoan = getId($id);
             }
             include "taikhoan/update.php";
+            case 'addtk':
+                if (isset($_POST['themmoi'])) {
+                    $tendangnhap = $_POST['tendangnhap'];
+                    $matkhau = $_POST['matkhau'];
+                    $email = $_POST['email'];
+                    $sodienthoai = $_POST['sodienthoai'];
+                    $diachi = $_POST['diachi'];
+                    $role = isset($_POST['role']) ? $_POST['role'] : 1; // Role mặc định là 1 nếu không nhập
+            
+                    // Gọi model để thêm tài khoản mới
+                    insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
+                    $thongbao = "Thêm tài khoản thành công!";
+                }
+                include "taikhoan/add.php";
+                break;
+            
+            
         case 'updatetk':
             if (isset($_POST['capnhat'])) {
                 $id = $_POST['id'];
@@ -177,6 +157,36 @@ if (isset($_GET['act'])) {
                 include "taikhoan/list.php";
             }
             break;
+            case 'dangnhapadmin':
+                if (isset($_POST['dangnhap'])) {
+                    $tendangnhap = $_POST['tendangnhap'];
+                    $matkhau = $_POST['matkhau'];
+            
+                    // Gọi hàm dangnhap từ model
+                    $user = dangnhap($tendangnhap, $matkhau);
+            
+                    if ($user) {
+                        // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
+                        session_start();
+                        $_SESSION['user'] = $user;
+            
+                        // Kiểm tra quyền của người dùng (role)
+                        if ($user['role'] == 1) {
+                            // Chuyển hướng đến trang admin
+                            header("Location: ../view/admin/index.php");
+                        } else {
+                            // Chuyển hướng đến trang chủ nếu không phải admin
+                            header("Location: ../view/Client/home.php");
+                        }
+                        exit();
+                    } else {
+                        // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
+                        $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                    }
+                }
+                include "dangnhap/login.php";
+                break;
+            
         case "quanlybanner":
             $listbanner = loadall_banner('');
             include "banner/list.php";
@@ -213,6 +223,33 @@ if (isset($_GET['act'])) {
                 $listbanner = loadall_banner('');
                 include "banner/list.php";
                 break;
+                case "qltintuc":
+                    $listtintuc = load_tintuc();
+                    include "tintuc/list.php";
+                    break;
+                    case 'addtintuc':
+                        if(isset($_POST['themmoi'])){
+                           $ngaydang = $_POST['ngaydang'];
+                           $tacgia = $_POST['tacgia'];
+                           $tieude = $_POST['tieude'];
+                           $noidung = $_POST['noidung'];
+                           
+            
+                            // Xử lý file upload
+                            // Giữ hình ảnh cũ nếu không có hình mới được tải lên
+                            if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
+                                $hinh = basename($_FILES["hinh"]["name"]);
+                                $target_dir = "../../images/";
+                                $target_file = $target_dir . $hinh;
+                                move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
+                                insert_tintuc($ngaydang,$tacgia,$hinh,$tieude,$noidung);
+                                $thongbao = "thêm thành côg";
+                            }else{
+                                $thongbao = "Đã xảy ra lỗi khi tải lên hình ảnh!";
+                            }
+                    }
+                    include "tintuc/add.php";
+                    break;
                
                 
 

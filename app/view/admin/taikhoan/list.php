@@ -22,7 +22,7 @@
                                 <th>SĐT</th>
                                 <th>Địa chỉ</th>
                                 <th>vaitro</th>
-                                <th>Action</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,7 @@
                                    <td>
                              
                                 
-                                    <a href="' . $suatk . '" class="btn btn-primary btn-sm">Sửa</a>
+                              
                                     
                                 </td>
                             </tr>';
