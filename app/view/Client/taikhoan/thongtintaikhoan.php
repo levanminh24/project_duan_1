@@ -22,8 +22,6 @@
             <input type="text" name="tendangnhap" value="<?php echo htmlspecialchars($tendangnhap); ?>">
            
 
-            <label for="" class="form-label">Họ và tên:</label>
-            <input type="text" name="hovaten" value="<?php echo htmlspecialchars($hovaten); ?>">
             
 
             <label for="" class="form-label">Số điện thoại:</label>
@@ -38,7 +36,7 @@
          
             <div class="button-box btn-hover">
                                             <button type="submit" name="capnhat">Lưu</button>
-                                            <a href="?act=doimatkhau"><button type="button">Đổi mật khẩu</button></a>
+                                           
                                         </div>
         </form>
     <?php } ?>

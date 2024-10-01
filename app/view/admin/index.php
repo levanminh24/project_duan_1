@@ -1,6 +1,6 @@
 <?php
 
-
+require_once "../../Model/AdminModel/binhluan.php";
 require_once "../../Model/AdminModel/tintuc.php";
 require_once "../../Model/AdminModel/taikhoan.php";
 require_once "../../Model/AdminModel/sanpham.php";

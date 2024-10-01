@@ -5,7 +5,7 @@
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-        
+
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -124,69 +124,59 @@ if (isset($_GET['act'])) {
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
-        case 'suatk':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $taikhoan = getId($id);
-            }
-            include "taikhoan/update.php";
-            case 'addtk':
-                if (isset($_POST['themmoi'])) {
-                    $tendangnhap = $_POST['tendangnhap'];
-                    $matkhau = $_POST['matkhau'];
-                    $email = $_POST['email'];
-                    $sodienthoai = $_POST['sodienthoai'];
-                    $diachi = $_POST['diachi'];
-                    $role = isset($_POST['role']) ? $_POST['role'] : 1; // Role mặc định là 1 nếu không nhập
-            
-                    // Gọi model để thêm tài khoản mới
-                    insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
-                    $thongbao = "Thêm tài khoản thành công!";
-                }
-                include "taikhoan/add.php";
+            case 'listtkQtv':
+                $listtaikhoan = listtaikhoanadmin();
+                include "taikhoan/listtkQtv.php";
                 break;
-            
-            
-        case 'updatetk':
-            if (isset($_POST['capnhat'])) {
-                $id = $_POST['id'];
-                $vaitro = $_POST['role'];
-                updatetaikhoan($id, $vaitro);
-                $thongbao = "Cập nhật thành công";
-                $listtaikhoan = listtaikhoan();
-                include "taikhoan/list.php";
+       
+        case 'addtk':
+            if (isset($_POST['themmoi'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+                $email = $_POST['email'];
+                $sodienthoai = $_POST['sodienthoai'];
+                $diachi = $_POST['diachi'];
+                $role = isset($_POST['role']) ? $_POST['role'] : 1; // Role mặc định là 1 nếu không nhập
+
+                // Gọi model để thêm tài khoản mới
+                insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
+                $thongbao = "Thêm tài khoản thành công!";
             }
+            include "taikhoan/add.php";
             break;
-            case 'dangnhapadmin':
-                if (isset($_POST['dangnhap'])) {
-                    $tendangnhap = $_POST['tendangnhap'];
-                    $matkhau = $_POST['matkhau'];
-            
-                    // Gọi hàm dangnhap từ model
-                    $user = dangnhap($tendangnhap, $matkhau);
-            
-                    if ($user) {
-                        // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
-                        session_start();
-                        $_SESSION['user'] = $user;
-            
-                        // Kiểm tra quyền của người dùng (role)
-                        if ($user['role'] == 1) {
-                            // Chuyển hướng đến trang admin
-                            header("Location: ../view/admin/index.php");
-                        } else {
-                            // Chuyển hướng đến trang chủ nếu không phải admin
-                            header("Location: ../view/Client/home.php");
-                        }
-                        exit();
+
+
+        
+        case 'dangnhapadmin':
+            if (isset($_POST['dangnhap'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+
+                // Gọi hàm dangnhap từ model
+                $user = dangnhap($tendangnhap, $matkhau);
+
+                if ($user) {
+                    // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
+                    session_start();
+                    $_SESSION['user'] = $user;
+
+                    // Kiểm tra quyền của người dùng (role)
+                    if ($user['role'] == 1) {
+                        // Chuyển hướng đến trang admin
+                        header("Location: ../view/admin/index.php");
                     } else {
-                        // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
-                        $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                        // Chuyển hướng đến trang chủ nếu không phải admin
+                        header("Location: ../view/Client/home.php");
                     }
+                    exit();
+                } else {
+                    // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
+                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
                 }
-                include "dangnhap/login.php";
-                break;
-            
+            }
+            include "dangnhap/login.php";
+            break;
+
         case "quanlybanner":
             $listbanner = loadall_banner('');
             include "banner/list.php";
@@ -195,9 +185,6 @@ if (isset($_GET['act'])) {
             if (isset($_POST['thembanner'])) {
                 $idsanpham = $_POST['idsanpham'];
                 $ngaydang = $_POST['ngaydang'];
-
-                // Xử lý file upload
-                // Giữ hình ảnh cũ nếu không có hình mới được tải lên
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
                     $target_dir = "../../images/banner/";
@@ -214,49 +201,41 @@ if (isset($_GET['act'])) {
             include "banner/add.php";
             break;
 
-            case 'xoabanner':
-                if(isset($_GET['id'])&&($_GET['id']!="")){
-                    $id=$_GET['id'];
-                   delete_banner($id);
-                    
+        case 'xoabanner':
+            if (isset($_GET['id']) && ($_GET['id'] != "")) {
+                $id = $_GET['id'];
+                delete_banner($id);
+            }
+            $listbanner = loadall_banner('');
+            include "banner/list.php";
+            break;
+        case "qltintuc":
+            $listtintuc = load_tintuc();
+            include "tintuc/list.php";
+            break;
+        case 'addtintuc':
+            if (isset($_POST['themmoi'])) {
+                $ngaydang = $_POST['ngaydang'];
+                $tacgia = $_POST['tacgia'];
+                $tieude = $_POST['tieude'];
+                $noidung = $_POST['noidung'];
+                if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
+                    $hinh = basename($_FILES["hinh"]["name"]);
+                    $target_dir = "../../images/";
+                    $target_file = $target_dir . $hinh;
+                    move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
+                    insert_tintuc($ngaydang, $tacgia, $hinh, $tieude, $noidung);
+                    $thongbao = "thêm thành côg";
+                } else {
+                    $thongbao = "Đã xảy ra lỗi khi tải lên hình ảnh!";
                 }
-                $listbanner = loadall_banner('');
-                include "banner/list.php";
-                break;
-                case "qltintuc":
-                    $listtintuc = load_tintuc();
-                    include "tintuc/list.php";
-                    break;
-                    case 'addtintuc':
-                        if(isset($_POST['themmoi'])){
-                           $ngaydang = $_POST['ngaydang'];
-                           $tacgia = $_POST['tacgia'];
-                           $tieude = $_POST['tieude'];
-                           $noidung = $_POST['noidung'];
-                           
-            
-                            // Xử lý file upload
-                            // Giữ hình ảnh cũ nếu không có hình mới được tải lên
-                            if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
-                                $hinh = basename($_FILES["hinh"]["name"]);
-                                $target_dir = "../../images/";
-                                $target_file = $target_dir . $hinh;
-                                move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
-                                insert_tintuc($ngaydang,$tacgia,$hinh,$tieude,$noidung);
-                                $thongbao = "thêm thành côg";
-                            }else{
-                                $thongbao = "Đã xảy ra lỗi khi tải lên hình ảnh!";
-                            }
-                    }
-                    include "tintuc/add.php";
-                    break;
-               
+            }
+            include "tintuc/add.php";
+            break;
+            case 'listbinhluan':
                 
-
-        
-    
-
+                include "binhluan/list.php";
+                break;
     }
 } else {
-    
 }
