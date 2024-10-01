@@ -244,19 +244,12 @@ case 'allsanpham':
             
                 include "app/view/Client/cart/giohang.php"; // Hiển thị giỏ hàng
                 break;
-            
+                case "gioithieu":
+                    include "app/view/Client/gioithieu/gioithieu.php";
+                    break;
             
     }
 } else {
-}                include "app/view/Client/taikhoan/dangky.php";
-                break;
-                case 'gioithieu':
-                    include "app/view/Client/gioithieu/gioithieu.php";
-                    break;
-        break;
-       
-    }
-} else{
-    include "app/view/Client/home.php";
-}
+}                
+              
 
