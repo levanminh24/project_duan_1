@@ -1,7 +1,4 @@
 <?php
-
-
-
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
@@ -151,21 +148,14 @@ if (isset($_GET['act'])) {
             if (isset($_POST['dangnhap'])) {
                 $tendangnhap = $_POST['tendangnhap'];
                 $matkhau = $_POST['matkhau'];
-
-                // Gọi hàm dangnhap từ model
                 $user = dangnhap($tendangnhap, $matkhau);
-
                 if ($user) {
-                    // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
-                    session_start();
+                  
                     $_SESSION['user'] = $user;
-
-                    // Kiểm tra quyền của người dùng (role)
-                    if ($user['role'] == 1) {
-                        // Chuyển hướng đến trang admin
+                    if ($user['role'] == 0) {
                         header("Location: ../view/admin/index.php");
                     } else {
-                        // Chuyển hướng đến trang chủ nếu không phải admin
+                       
                         header("Location: ../view/Client/home.php");
                     }
                     exit();
@@ -237,5 +227,8 @@ if (isset($_GET['act'])) {
                 include "binhluan/list.php";
                 break;
     }
-} else {
+}
+ else {
+    $listdanhmuc = loadall_danhmuc();
+    include "danhmuc/list.php";
 }
