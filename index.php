@@ -10,10 +10,9 @@ require_once "app/Model/clientModel/tintuc.php";
 require_once "app/Model/clientModel/taikhoan.php";
 
 
- master
+ 
 require_once "app/Model/clientModel/pdo.php";
 require_once "app/view/Client/header.php";
 require_once "app/Controller/ClientController.php";
-require_once "app/view/Client/sanpham/sptheodm.php";
 require_once "app/view/Client/footer.php";
 ?>

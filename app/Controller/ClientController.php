@@ -170,7 +170,106 @@ if (isset($_GET['act'])) {
                     echo "<script>window.location.href='index.php?act=trangchu';</script>";
                     exit;
                     break;
+                case 'quenmatkhau':
+                        if (isset($_POST['quenmatkhau'])) {
+                            $email = $_POST['email'];
+            
+                            $check = laymatkhau($email);
+                            if (!empty($check)) {
+                                $matkhau = $check['matkhau'];
+            
+                                $errors = "Mật khẩu của bạn là: $matkhau";
+                            } else {
+                                $errors = "Email không tồn tại vui lòng nhập lại";
+                            }
+                        }
+                        include "app/views/Client/taikhoan/quenmatkhau.php";
+                        break;
+                        case 'updatethongtintaikhoan':
+                            if (isset($_POST['capnhat'])) {
+                                $id = $_SESSION['idtendangnhap'];
+                                $hovaten = $_POST['hovaten'];
+                                $tendangnhap = $_POST['tendangnhap'];
+                                $matkhau = $_POST['matkhau'];
+                                $email = $_POST['email'];
+                                $sodienthoai = $_POST['sodienthoai'];
+                                $diachi = $_POST['diachi'];
+                
+                                update_thongtin($id, $hovaten, $tendangnhap, $matkhau, $email, $sodienthoai, $diachi);
+                                echo "<script>alert(' cập nhật thành công');</script>";
+                            }
+                            include "app/views/Client/taikhoan/thongtintaikhoan.php";
+                            break;
+                            case 'doimatkhau':
+                                if (isset($_SESSION['idtendangnhap'])) {
+                                    $matkhaucuErr = "";
+                                    $matkhaumoiErr = "";
+                                    $nhaplaimatkhaumoiErr = "";
+                                    if (isset($_POST['doimatkhau'])) {
+                                        $matkhaucu = $_POST['matkhaucu'];
+                                        $matkhaumoi = $_POST['matkhaumoi'];
+                                        $nhaplaimatkhaumoi = $_POST['nhaplaimatkhaumoi'];
+                                        $check = true;
+                                        if (empty(trim($matkhaucu))) {
+                                            $check = false;
+                                            $matkhaucuErr = "Vui lòng không bỏ trống !";
+                                        }
+                                        $tk = load_one_tk($_SESSION['idtendangnhap']);
+                                        if ($tk) {
+                                            if ($matkhaucu !== $tk['matkhau']) {
+                                                $check = false;
+                                                $matkhaucuErr = "Mật khẩu không chính xác !";
+                                            }
+                                        }
+                                        if (empty(trim($matkhaumoi))) {
+                                            $check = false;
+                                            $matkhaumoiErr = "Vui lòng không bỏ trống !";
+                                        } else {
+                                            if (!preg_match("/^(?=.*[0-9])(?=.*[A-Z])\w{8,18}$/", $matkhaumoi)) {
+                                                $check = false;
+                                                $matkhaumoiErr = "Mật khẩu tối thiểu 8 ký tự bao gồm ký tự số và ký tự in hoa !";
+                                            }
+                                        }
+                                        if ($nhaplaimatkhaumoi !== $matkhaumoi) {
+                                            $check = false;
+                                            $nhaplaimatkhaumoiErr = "Mật khẩu nhập lại không trùng khớp !";
+                                        }
+                                        if ($check) {
+                                            if ($tk) {
+                                                update_mk($matkhaumoi, $tk['id']);
+                                                $nhaplaimatkhaumoiErr = "Chúc mừng bạn đã đổi mật khẩu thành công !";
+                                            }
+                                        }
+                                    }
+                                }
+                                include "app/views/Client/taikhoan/doimatkhau.php";
+                                break;  
+                                case 'thongtintaikhoan':
 
+                                    include "app/views/Client/taikhoan/thongtintaikhoan.php";
+                                    break;
+                        
+                                    case 'sptheodm':
+                                        if (isset($_GET['id']) && !empty($_GET['id'])) {
+                                            $iddm = $_GET['id'];
+                                            if(isset($_POST['submittimkiem'])) $kyw=$_POST['timkiem'];
+                                            else $kyw="";
+                                            if(isset($_POST['submitlocgia'])){
+                                                $giadau=$_POST['giaspdau'];
+                                                $giacuoi=$_POST['giaspcuoi'];
+                                            }else{
+                                                $giadau=0;
+                                                $giacuoi=0;
+                                            }
+                                            // Lấy danh sách sản phẩm theo danh mục và các điều kiện lọc
+                                            $list_sp_dm = load_all_spdm($_GET['id'], $kyw, $giadau, $giacuoi, 1); // Giả sử trang hiện tại là 1
+                                            $listdm = load_one_spdm($_GET['id']); 
+                                        }
+                                    
+                                        // Gọi view để hiển thị
+                                        include "app/views/Client/sanpham/sptheodm.php";
+                                        break;
+                                          
                 
     }
 }
