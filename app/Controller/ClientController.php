@@ -51,10 +51,10 @@ if (isset($_GET['act'])) {
             }
             include "app/view/Client/binhluan/binhluan.php";
             break;
-case 'allsanpham':
-    include "app/view/Client/sanpham/sanpham.php";
-    break;
-  
+        case 'allsanpham':
+            include "app/view/Client/sanpham/sanpham.php";
+            break;
+
         case 'sptheodm':
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $iddm = $_GET['id'];
@@ -148,7 +148,6 @@ case 'allsanpham':
                         echo "<script>window.location.href='index.php?act=trangchu';</script>";
                         exit;
                     }
-
                 }
             }
             include "app/view/Client/taikhoan/dangnhap.php";
@@ -176,80 +175,86 @@ case 'allsanpham':
             unset($_SESSION['role']);
             echo '<script>window.location.href ="index.php?act=dangnhap"</script>';
             break;
-            case 'giohang':
-                // Lấy ID tài khoản từ session
-                $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
+        case 'giohang':
+            // Lấy ID tài khoản từ session
+            $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
 
-                    include "app/view/Client/sanpham/ctsp.php";
-                    break;
-                    include "app/views/Client/sanpham/ctsp.php";
-                    break;
-
-            
-                // Kiểm tra nếu có POST dữ liệu từ form
-                if (isset($_POST['addtocart'])) {
-                    $idsanpham = isset($_POST['idsanpham']) ? $_POST['idsanpham'] : null; // Lấy ID sản phẩm từ form
-                    $soluong = isset($_POST['soluong']) ? $_POST['soluong'] : 1; // Số lượng sản phẩm
-                    $giasp = isset($_POST['giasp']) ? $_POST['giasp'] : 0; // Giá sản phẩm
-                    $thanhtien = $soluong * $giasp; // Tính tổng tiền cho sản phẩm này
-            
-                    // Kiểm tra xem ID tài khoản và ID sản phẩm có hợp lệ không
-                    if ($idtaikhoan && $idsanpham) {
-                        // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-                        $existingItem = load_cart_item($idtaikhoan, $idsanpham);
-                        if ($existingItem) {
-                            // Nếu sản phẩm đã có, không gọi hàm insert_cart
-                            echo " ";
-                        } else {
-                            // Nếu chưa có, gọi hàm insert_cart
-                            insert_cart($idtaikhoan, $idsanpham, $soluong, $thanhtien);
-                        }
+            // Kiểm tra nếu có POST dữ liệu từ form
+            if (isset($_POST['addtocart'])) {
+                $idsanpham = isset($_POST['idsanpham']) ? $_POST['idsanpham'] : null; // Lấy ID sản phẩm từ form
+                $soluong = isset($_POST['soluong']) ? $_POST['soluong'] : 1; // Số lượng sản phẩm
+                $giasp = isset($_POST['giasp']) ? $_POST['giasp'] : 0; // Giá sản phẩm
+                $thanhtien = $soluong * $giasp; // Tính tổng tiền cho sản phẩm này
+                // Kiểm tra xem ID tài khoản và ID sản phẩm có hợp lệ không
+                if ($idtaikhoan && $idsanpham) {
+                    // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+                    $existingItem = load_cart_item($idtaikhoan, $idsanpham);
+                    if ($existingItem) {
+                        // Nếu sản phẩm đã có, không gọi hàm insert_cart
+                        echo " ";
                     } else {
-                        echo "Lỗi: Không thể thêm sản phẩm vào giỏ hàng.";
+                        // Nếu chưa có, gọi hàm insert_cart
+                        insert_cart($idtaikhoan, $idsanpham, $soluong, $thanhtien);
                     }
-                }
-            
-                // Lấy giỏ hàng từ cơ sở dữ liệu
-                if ($idtaikhoan) {
-                    $giohang = load_all_giohang($idtaikhoan);
                 } else {
-                    $giohang = []; // Nếu không có ID tài khoản, khởi tạo giỏ hàng rỗng
+                    echo "<script>alert('vui lòng đăng nhập');</script>";
+                    echo '<script>window.location.href = "index.php?act=dangnhap"</script>';
                 }
-            
-                // Tính tổng thanh toán
-                $tongThanhToan = 0;
-                foreach ($giohang as $item) {
-                    $tongThanhToan += $item['thanhtien'];
-                }
-            
-                include "app/view/Client/cart/giohang.php";
-                break;
-            
-            case 'xoagiohang':
-                if (isset($_POST['delete_item'])) {
-                    $id = $_POST['delete_item'];
-                    delete_giohang($id); // Gọi hàm để xóa sản phẩm khỏi giỏ hàng
-                }
+            }
 
-            
-                // Sau khi xoá, load lại giỏ hàng và tính lại tổng thanh toán
-                $idtaikhoan = $_SESSION['idtendangnhap']; // Lấy ID tài khoản từ session
-                $giohang = load_all_giohang($idtaikhoan); // Lấy lại giỏ hàng
-            
-                // Tính tổng thanh toán
-                $tongThanhToan = 0;
-                foreach ($giohang as $item) {
-                    $tongThanhToan += $item['thanhtien'];
-                }
-            
-                include "app/view/Client/cart/giohang.php"; // Hiển thị giỏ hàng
-                break;
-                case "gioithieu":
-                    include "app/view/Client/gioithieu/gioithieu.php";
-                    break;
-            
+            // Lấy giỏ hàng từ cơ sở dữ liệu
+            if ($idtaikhoan) {
+                $giohang = load_all_giohang($idtaikhoan);
+            } else {
+                $giohang = []; // Nếu không có ID tài khoản, khởi tạo giỏ hàng rỗng
+            }
+
+            // Tính tổng thanh toán
+            $tongThanhToan = 0;
+            foreach ($giohang as $item) {
+                $tongThanhToan += $item['thanhtien'];
+            }
+
+            include "app/view/Client/cart/giohang.php";
+            break;
+        case 'timkiem':
+            if (isset($_POST['tensp']) && !empty($_POST['tensp'])) {
+                $tensp = $_POST['tensp'];
+                // Gọi hàm để tìm kiếm sản phẩm dựa trên tên sản phẩm
+                $list_sp_timkiem = search_sanpham($tensp);
+            } else {
+                $list_sp_timkiem = [];
+            }
+            // Gọi view hiển thị kết quả tìm kiếm
+            include "app/view/Client/sanpham/timkiem.php";
+            break;
+
+        case 'xoagiohang':
+            if (isset($_POST['delete_item'])) {
+                $id = $_POST['delete_item'];
+                delete_giohang($id); // Gọi hàm để xóa sản phẩm khỏi giỏ hàng
+            }
+
+            // Sau khi xoá, load lại giỏ hàng và tính lại tổng thanh toán
+            $idtaikhoan = $_SESSION['idtendangnhap']; // Lấy ID tài khoản từ session
+            $giohang = load_all_giohang($idtaikhoan); // Lấy lại giỏ hàng
+
+            // Tính tổng thanh toán
+            $tongThanhToan = 0;
+            foreach ($giohang as $item) {
+                $tongThanhToan += $item['thanhtien'];
+            }
+
+            include "app/view/Client/cart/giohang.php"; // Hiển thị giỏ hàng
+            break;
+        case 'donhang';
+                
+            break;
     }
 } else {
-}                
-              
-
+    $list_banner_home = load_banner_home();
+    $list_sp_home = loadall_spHome();
+    $list_sp_nb = load_spnoibat();
+    $listtintuchome = tintuc();
+    include "app/view/Client/home.php";
+}

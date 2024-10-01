@@ -121,12 +121,12 @@ if (isset($_GET['act'])) {
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
- 
-            case 'listtkQtv':
-                $listtaikhoan = listtaikhoanadmin();
-                include "taikhoan/listtkQtv.php";
-                break;
-       
+
+        case 'listtkQtv':
+            $listtaikhoan = listtaikhoanadmin();
+            include "taikhoan/listtkQtv.php";
+            break;
+
 
         case 'suatk':
             if (isset($_GET['id'])) {
@@ -147,7 +147,6 @@ if (isset($_GET['act'])) {
                 // Gọi model để thêm tài khoản mới
                 insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
                 $thongbao = "Thêm tài khoản thành công!";
-
             }
             include "taikhoan/add.php";
             break;
@@ -161,14 +160,13 @@ if (isset($_GET['act'])) {
                 $thongbao = "Cập nhật thành công";
                 $listtaikhoan = listtaikhoan();
                 include "taikhoan/list.php";
-
             }
             include "taikhoan/add.php";
             break;
 
 
 
-        
+
 
 
         case 'dangnhapadmin':
@@ -263,12 +261,10 @@ if (isset($_GET['act'])) {
             include "tintuc/add.php";
             break;
 
-            case 'listbinhluan':
-                
-                include "binhluan/list.php";
-                break;
+        case 'listbinhluan':
 
-
+            include "binhluan/list.php";
+            break;
     }
 } else {
 }
