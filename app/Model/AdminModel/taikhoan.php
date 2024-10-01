@@ -1,18 +1,15 @@
 <?php
 function listtaikhoan(){
-    $sql = "select * from tai_khoan order by id desc";
+    $sql = "select * from tai_khoan where role =0 order by id desc";
     $list = pdo_query($sql);
     return $list;
 }
-function getId($id){
-    $sql = "select * from tai_khoan where id=".$id;
- $update = pdo_query_one($sql);
+function listtaikhoanadmin(){
+    $sql = "select * from tai_khoan where role =1 order by id desc";
+    $list = pdo_query($sql);
+    return $list;
 }
-function updatetaikhoan($id,$vaitro){
-    $sql = "update tai_khoan set role = '$vaitro' where id = '$id' ";
-   pdo_execute($sql);
-  
-}
+
 function dangnhap($tendangnhap,$matkhau){
     $sql = "select * from tai_khoan where tendangnhap = '$tendangnhap' and matkhau = '$matkhau'";
     $dn = pdo_query_one($sql);
