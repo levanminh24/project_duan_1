@@ -1,7 +1,4 @@
 <?php
-
-
-
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
@@ -124,11 +121,20 @@ if (isset($_GET['act'])) {
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
+ 
             case 'listtkQtv':
                 $listtaikhoan = listtaikhoanadmin();
                 include "taikhoan/listtkQtv.php";
                 break;
        
+
+        case 'suatk':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $taikhoan = getId($id);
+            }
+            include "taikhoan/update.php";
+
         case 'addtk':
             if (isset($_POST['themmoi'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -141,12 +147,30 @@ if (isset($_GET['act'])) {
                 // Gọi model để thêm tài khoản mới
                 insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
                 $thongbao = "Thêm tài khoản thành công!";
+
             }
             include "taikhoan/add.php";
             break;
 
 
+        case 'updatetk':
+            if (isset($_POST['capnhat'])) {
+                $id = $_POST['id'];
+                $vaitro = $_POST['role'];
+                updatetaikhoan($id, $vaitro);
+                $thongbao = "Cập nhật thành công";
+                $listtaikhoan = listtaikhoan();
+                include "taikhoan/list.php";
+
+            }
+            include "taikhoan/add.php";
+            break;
+
+
+
         
+
+
         case 'dangnhapadmin':
             if (isset($_POST['dangnhap'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -219,6 +243,12 @@ if (isset($_GET['act'])) {
                 $tacgia = $_POST['tacgia'];
                 $tieude = $_POST['tieude'];
                 $noidung = $_POST['noidung'];
+
+
+
+                // Xử lý file upload
+                // Giữ hình ảnh cũ nếu không có hình mới được tải lên
+
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
                     $target_dir = "../../images/";
@@ -232,10 +262,13 @@ if (isset($_GET['act'])) {
             }
             include "tintuc/add.php";
             break;
+
             case 'listbinhluan':
                 
                 include "binhluan/list.php";
                 break;
+
+
     }
 } else {
 }

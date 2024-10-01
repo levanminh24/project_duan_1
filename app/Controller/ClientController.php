@@ -148,6 +148,7 @@ case 'allsanpham':
                         echo "<script>window.location.href='index.php?act=trangchu';</script>";
                         exit;
                     }
+
                 }
             }
             include "app/view/Client/taikhoan/dangnhap.php";
@@ -178,6 +179,12 @@ case 'allsanpham':
             case 'giohang':
                 // Lấy ID tài khoản từ session
                 $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
+
+                    include "app/view/Client/sanpham/ctsp.php";
+                    break;
+                    include "app/views/Client/sanpham/ctsp.php";
+                    break;
+
             
                 // Kiểm tra nếu có POST dữ liệu từ form
                 if (isset($_POST['addtocart'])) {
@@ -223,6 +230,7 @@ case 'allsanpham':
                     $id = $_POST['delete_item'];
                     delete_giohang($id); // Gọi hàm để xóa sản phẩm khỏi giỏ hàng
                 }
+
             
                 // Sau khi xoá, load lại giỏ hàng và tính lại tổng thanh toán
                 $idtaikhoan = $_SESSION['idtendangnhap']; // Lấy ID tài khoản từ session
@@ -240,4 +248,15 @@ case 'allsanpham':
             
     }
 } else {
+}                include "app/view/Client/taikhoan/dangky.php";
+                break;
+                case 'gioithieu':
+                    include "app/view/Client/gioithieu/gioithieu.php";
+                    break;
+        break;
+       
+    }
+} else{
+    include "app/view/Client/home.php";
 }
+
