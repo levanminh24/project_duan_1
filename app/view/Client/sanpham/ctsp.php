@@ -50,7 +50,7 @@
                                 <button type="button" class="inc qtybtn">+</button>
                             </div>
                             <div class="single-product-cart btn-hover">
-                                <button type="submit" class="btn-theme btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
+                                <button type="submit" class="btn-theme  btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
                             </div>
                         </form>
 

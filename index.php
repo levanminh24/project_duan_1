@@ -24,6 +24,7 @@ require_once "app/Controller/ClientController.php";
 
 require_once "app/Model/clientModel/pdo.php";
 require_once "app/view/Client/header.php";
+
 require_once "app/Controller/ClientController.php";
 
 

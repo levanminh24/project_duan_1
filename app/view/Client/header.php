@@ -116,7 +116,8 @@
                 <ul class="sub-menu-style">
 
                     <li><a href="?act=thongtintaikhoan" style="font-size:13px;">Thông tin tài khoản</a></li>
-                    
+
+                    <li><a href="?act=donhangcuatoi" style="font-size:13px;">Đơn hàng</a></li>
 
                     <?php if($role == 1): ?>
                         <li><a href="app/view/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
