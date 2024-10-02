@@ -19,7 +19,6 @@
                                         <h5 style="color:red"><?php echo $errors; ?></h5>
                                     <?php endif; ?>
                                         <div class="button-box btn-hover">
-                                           
                                             <button type="submit" name="quenmatkhau">Gửi</button>
                                             <a href="?act=dangnhap"><button type="button">Quay lại</button></a>
                                         </div>

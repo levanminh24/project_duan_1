@@ -73,7 +73,7 @@
                                     <ul>
                                         <li><a href="?act=trangchu">Trang Chủ</a></li>
                                         <li><a href="?act=gioithieu">Giới Thiệu</a></li>
-                                        <li><a href="?act=sanpham">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a> 
+                                        <li><a href="?act=allsanpham">Sản Phẩm <i class="fa-solid fa-chevron-down"></i></a> 
                                             <ul class="sub-menu-style">
                                                 <?php
                                                      $listdm = load_danhmuchome();
@@ -109,13 +109,15 @@
     <ul>
         <?php
             if(isset($_SESSION['idtendangnhap']) && $_SESSION['idtendangnhap'] != ""){
-                // Assume you have the role stored in the session as well
+               
                 $role = $_SESSION['role'];
         ?>
             <li><a title="Tài khoản" href="?act=thongtintk"><i class="pe-7s-user"></i></a>
                 <ul class="sub-menu-style">
-                   
-                   
+
+                    <li><a href="?act=thongtintaikhoan" style="font-size:13px;">Thông tin tài khoản</a></li>
+                    
+
                     <?php if($role == 1): ?>
                         <li><a href="app/view/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
                     <?php endif; ?>
@@ -135,13 +137,9 @@
 
                                 </div>
                                 <div class="header-action-style">
-                                    <a title="Wishlist" href="index.php?act=dangnhap"><i class="pe-7s-like"></i></a>
+                                    <a title="cart" href="index.php?act=giohang"><i class="pe-7s-shopbag"></i></a>
                                 </div>
-                                <div class="header-action-style header-action-cart">
-                                    <a class="cart-active" href="#"><i class="pe-7s-shopbag"></i>
-                                        <span class="product-count bg-black">01</span>
-                                    </a>
-                                </div>
+                              
                                 <div class="header-action-style d-block d-lg-none">
                                     <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>
                                 </div>
@@ -152,46 +150,4 @@
             </div>
         </header>
         <!-- mini cart start -->
-        <div class="sidebar-cart-active">
-            <div class="sidebar-cart-all">
-                <a class="cart-close" href="#"><i class="pe-7s-close"></i></a>
-                <div class="cart-content">
-                    <h3>Shopping Cart</h3>
-                    <ul>
-                        <li>
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Stylish Swing Chair</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h4><a href="#">Modern Chairs</a></h4>
-                                <span> 1 × $49.00	</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#">×</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="cart-total">
-                        <h4>Subtotal: <span>$170.00</span></h4>
-                    </div>
-                    <div class="cart-btn btn-hover">
-                        <a class="theme-color" href="cart.html">view cart</a>
-                    </div>
-                    <div class="checkout-btn btn-hover">
-                        <a class="theme-color" href="checkout.html">checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+       

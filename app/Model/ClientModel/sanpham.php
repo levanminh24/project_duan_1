@@ -1,7 +1,7 @@
 <?php
 function loadall_spHome()
 {
-    $sql = "select * from sanpham ";
+    $sql = "select * from sanpham order by id desc";
     $listsp = pdo_query($sql);
     return $listsp;
 }
@@ -34,7 +34,6 @@ function update_luotxem_sp($idsp) {
 }
 
 
-//client
    
 function loadall_danhmuc(){
     $sql = "SELECT * FROM danhmuc WHERE is_delete = 0";
@@ -71,5 +70,5 @@ function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page) {
     $query .=" ORDER BY id desc limit $batdau,9";
     return pdo_query($query);
 
- 
+
 }

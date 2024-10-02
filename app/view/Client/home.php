@@ -4,10 +4,10 @@
         <div class="swiper-wrapper">
             <?php
             $listbn = load_banner_home();
-            foreach ($listbn as $banner)  {
+            foreach ($listbn as $banner) {
                 extract($banner); ?>
                 <div class="swiper-slide">
-                    <div class="intro-section slider-height-1 slider-content-center bg-img single-animation-wrap slider-bg-color-1" >
+                    <div class="intro-section slider-height-1 slider-content-center bg-img single-animation-wrap slider-bg-color-1">
                         <div class="container">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 col-md-6">
@@ -43,7 +43,7 @@
                 <div class="service-wrap" data-aos="fade-up" data-aos-delay="200">
                     <div class="service-img">
                         <img src="assets/images/icon-img/car.png" alt="">
-                      
+
                     </div>
                     <div class="service-content">
                         <h3>Free Shipping</h3>
@@ -94,58 +94,54 @@
                 <div class="section-title-1">
                     <h2>Hot Sale Hôm Nay</h2>
                 </div>
-                
+
             </div>
         </div>
         <div class="product-slider-active-1 swiper-container">
             <div class="swiper-wrapper">
-            <?php 
-         
-            foreach ($list_sp_home as $sp) {
-              extract($sp); $delay=200; 
-              ?>
-                <div class="swiper-slide">
-                    <div class="product-wrap" data-aos="fade-up" data-aos-delay="<?= $delay?>">
-                        <div class="product-img img-zoom mb-25">
-                            <a href="?act=chitietsp&id=<?= $id?>">
-                                <img src="public/images/<?= $img?>" alt="">
-                            </a>
-                            <div class="product-action-wrap">
-    <button class="product-action-btn-1 like-btn"title="Wishlist"><i class="pe-7s-like"></i></button>
-    <button class="product-action-btn-1" title="Quick View">
-        <a href="?act=trangchu&idsp=<?= $id ?>"><i class="pe-7s-look"></i></a>
-    </button>
-</div>
+                <?php
 
+                foreach ($list_sp_home as $sp) {
+                    extract($sp);
+                    $delay = 200;
+                ?>
+                    <div class="swiper-slide">
+                        <div class="product-wrap" data-aos="fade-up" data-aos-delay="<?= $delay ?>">
+                            <div class="product-img img-zoom mb-25">
+                                <a href="?act=chitietsp&id=<?= $id ?>">
+                                    <img src="public/images/<?= $img ?>" alt="">
+                                </a>
+                                <div class="product-action-wrap">
+                                    <button class="product-action-btn-1 like-btn" title="Wishlist"><i class="pe-7s-like"></i></button>
+                                    <button class="product-action-btn-1" title="Quick View">
+                                        <a href="?act=trangchu&idsp=<?= $id ?>"><i class="pe-7s-look"></i></a>
+                                    </button>
+                                </div>
+                                <div class="product-action-2-wrap">
+                                    <?php if ($soluong > 0) { ?>
+                                        <button data-id="<?= $id ?>" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                    <?php } else { ?>
+                                        <button class="product-action-btn-2">Đang hết hàng</button>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>
 
-
-
-
-                            <div class="product-action-2-wrap">
-                                <?php if($soluong>0){ ?>
-                                    <button data-id="<?= $id?>" onclick="themgiohang(<?= $id?>)" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                <?php }else{ ?>
-                                    <button class="product-action-btn-2">Đang hết hàng</button>
-                                <?php } ?>
+                            </div>
+                            <div class="product-price">
+                                <span class=""><?= number_format($giasp, 3) ?>₫</span>
                             </div>
                         </div>
-                        <div class="product-content">
-                            <h3><a href="?act=chitietsp&id=<?= $id?>"><?= $tensp?></a></h3>
-                           
-                        </div>
-                        <div class="product-price">    
-                                    <span class=""><?= number_format($giasp, 3)?>₫</span>
-                                </div>
                     </div>
-                </div>
-                <?php $delay+=200;?>
-            <?php } ?>
+                    <?php $delay += 200; ?>
+                <?php } ?>
             </div>
             <div class="product-prev-1 product-nav-1" data-aos="fade-up" data-aos-delay="200"><i class="fa fa-angle-left"></i></div>
             <div class="product-next-1 product-nav-1" data-aos="fade-up" data-aos-delay="200"><i class="fa fa-angle-right"></i></div>
         </div>
     </div>
-</div> 
+</div>
 <div class="product-area pb-60">
     <div class="container">
         <div class="section-title-tab-wrap mb-75">
@@ -157,29 +153,29 @@
         <div id="pro-1" class="tab-pane">
             <div class="row">
                 <?php foreach ($list_sp_nb as $sp) : ?>
-                <?php extract($sp);?>
+                    <?php extract($sp); ?>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                         <div class="product-wrap mb-35" data-aos="fade-up" data-aos-delay="200">
                             <div class="product-img img-zoom mb-25">
-                                <a href="?act=chitietsp&id=<?= $id?>">
-                                    <img src="public/images/<?= $img?>" alt="">
+                                <a href="?act=chitietsp&id=<?= $id ?>">
+                                    <img src="public/images/<?= $img ?>" alt="">
                                 </a>
-                              
+
                                 <div class="product-action-2-wrap">
-                                    <?php if($soluong>0){ ?>
-                                        <button data-id="<?= $id?>" onclick="themgiohang(<?= $id?>)" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                    <?php }else{ ?>
+                                    <?php if ($soluong > 0) { ?>
+                                        <button data-id="<?= $id ?>" onclick="themgiohang(<?= $id ?>)" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                    <?php } else { ?>
                                         <button class="product-action-btn-2">Đang hết hàng</button>
                                     <?php } ?>
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h3><a href="?act=chitietsp&id=<?= $id?>"><?= $tensp?></a></h3>
-                               
+                                <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>
+
                             </div>
-                            <div class="product-price">    
-                                    <span class=""><?= number_format($giasp,3)?>₫</span>
-                                </div>
+                            <div class="product-price">
+                                <span class=""><?= number_format($giasp, 3) ?>₫</span>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -230,12 +226,13 @@
         </div>
     </div>
 </div>
+
 <script>
 
 </script>
 <style>
     .highlighted {
-    color: red; /* Change this to your desired highlight color */
-}
-
+        color: red;
+        /* Change this to your desired highlight color */
+    }
 </style>

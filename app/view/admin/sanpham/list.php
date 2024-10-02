@@ -6,17 +6,8 @@
             <div class="card-header py-3">
                 <div class="float-right">
                     <div class="input-group">
-                        <input type="text" name="kyw" class="form-control" placeholder="Nhập tên sản phẩm..." aria-label="Search product" aria-describedby="button-search">
-                        <select name="iddm" id="" class="form-select">
-                            <option value="0" selected>Tất cả</option>
-                            <?php 
-                                foreach ($listdanhmuc as $danhmuc) {
-                                    extract($danhmuc);
-                                    echo '<option value="'.$id.'">'.$name.'</option>';
-                                }
-                            ?>
-                        </select>
-                        <input type="submit" name="listok" class="btn btn-primary" value="Tìm kiếm">
+                        
+                        
                     </div>
                 </div>
             </div>

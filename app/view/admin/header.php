@@ -71,9 +71,10 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?act=listtk">Danh sách tai khoan</a>
+                        <a class="collapse-item" href="index.php?act=listtkQtv">Danh sách Admin</a>
                         <a class="collapse-item" href="?act=addtk" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
+                            <span>Add Tài khoản Admin</span></a>
                     </div>
                 </div>
             </li>
@@ -149,7 +150,7 @@
            
               <!-- Nav Item - Tables -->
               <li class="nav-item">
-                <a class="nav-link" href="?act=qlbinhlunan">
+                <a class="nav-link" href="?act=listbinhluan">
                     <i class="fas fa-fw fa-comment"></i>
                     <span>Quản lý bình luận</span></a>
             </li>
@@ -174,7 +175,15 @@
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-               
+                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="?act=qltintuc">Quản lý tin tức</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="?act=addtintuc">Thêm tin tức</a>
+                    </div>
+                    
+                </div>
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../../../index.php">Đăng xuất</a>
