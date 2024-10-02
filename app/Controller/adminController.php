@@ -2,7 +2,25 @@
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-
+        case 'dangnhapadmin':
+            if (isset($_POST['dangnhap'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+                $user = dangnhap($tendangnhap, $matkhau);
+                if ($user) {
+                    $_SESSION['user'] = $user;
+                    if ($user['role'] == 0) {
+                        header("Location: ../view/admin/index.php");
+                    }else{
+                        echo "<script>window.location.href='index.php?act=listdm';</script>";
+                    }
+                    exit();
+                } else {
+                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                }
+            }
+            include "dangnhap/login.php";
+            break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -121,11 +139,11 @@ if (isset($_GET['act'])) {
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
-            case 'listtkQtv':
-                $listtaikhoan = listtaikhoanadmin();
-                include "taikhoan/listtkQtv.php";
-                break;
-       
+
+        case 'listtkQtv':
+            $listtaikhoan = listtaikhoanadmin();
+            include "taikhoan/listtkQtv.php";
+            break;
         case 'addtk':
             if (isset($_POST['themmoi'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -142,30 +160,6 @@ if (isset($_GET['act'])) {
             include "taikhoan/add.php";
             break;
 
-
-        
-        case 'dangnhapadmin':
-            if (isset($_POST['dangnhap'])) {
-                $tendangnhap = $_POST['tendangnhap'];
-                $matkhau = $_POST['matkhau'];
-                $user = dangnhap($tendangnhap, $matkhau);
-                if ($user) {
-                  
-                    $_SESSION['user'] = $user;
-                    if ($user['role'] == 0) {
-                        header("Location: ../view/admin/index.php");
-                    } else {
-                       
-                        header("Location: ../view/Client/home.php");
-                    }
-                    exit();
-                } else {
-                    // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
-                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
-                }
-            }
-            include "dangnhap/login.php";
-            break;
 
         case "quanlybanner":
             $listbanner = loadall_banner('');
@@ -209,6 +203,7 @@ if (isset($_GET['act'])) {
                 $tacgia = $_POST['tacgia'];
                 $tieude = $_POST['tieude'];
                 $noidung = $_POST['noidung'];
+
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
                     $target_dir = "../../images/";
@@ -222,13 +217,13 @@ if (isset($_GET['act'])) {
             }
             include "tintuc/add.php";
             break;
-            case 'listbinhluan':
-                
-                include "binhluan/list.php";
-                break;
+
+        case 'listbinhluan':
+
+            include "binhluan/list.php";
+            break;
     }
-}
- else {
+} else {
     $listdanhmuc = loadall_danhmuc();
     include "danhmuc/list.php";
 }

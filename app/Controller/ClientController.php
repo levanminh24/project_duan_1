@@ -175,6 +175,9 @@ case 'allsanpham':
             unset($_SESSION['role']);
             echo '<script>window.location.href ="index.php?act=dangnhap"</script>';
             break;
+            case 'gioithieu':
+                include "app/view/Client/gioithieu/gioithieu.php";
+                break;
             case 'giohang':
                 // Lấy ID tài khoản từ session
                 $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
