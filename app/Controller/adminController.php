@@ -2,7 +2,25 @@
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-
+        case 'dangnhapadmin':
+            if (isset($_POST['dangnhap'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+                $user = dangnhap($tendangnhap, $matkhau);
+                if ($user) {
+                    $_SESSION['user'] = $user;
+                    if ($user['role'] == 0) {
+                        header("Location: ../view/admin/index.php");
+                    }else{
+                        echo "<script>window.location.href='index.php?act=listdm';</script>";
+                    }
+                    exit();
+                } else {
+                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                }
+            }
+            include "dangnhap/login.php";
+            break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -121,20 +139,11 @@ if (isset($_GET['act'])) {
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
- 
-            case 'listtkQtv':
-                $listtaikhoan = listtaikhoanadmin();
-                include "taikhoan/listtkQtv.php";
-                break;
-       
 
-        case 'suatk':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $taikhoan = getId($id);
-            }
-            include "taikhoan/update.php";
-
+        case 'listtkQtv':
+            $listtaikhoan = listtaikhoanadmin();
+            include "taikhoan/listtkQtv.php";
+            break;
         case 'addtk':
             if (isset($_POST['themmoi'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -147,59 +156,10 @@ if (isset($_GET['act'])) {
                 // Gọi model để thêm tài khoản mới
                 insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role);
                 $thongbao = "Thêm tài khoản thành công!";
-
             }
             include "taikhoan/add.php";
             break;
 
-
-        case 'updatetk':
-            if (isset($_POST['capnhat'])) {
-                $id = $_POST['id'];
-                $vaitro = $_POST['role'];
-                updatetaikhoan($id, $vaitro);
-                $thongbao = "Cập nhật thành công";
-                $listtaikhoan = listtaikhoan();
-                include "taikhoan/list.php";
-
-            }
-            include "taikhoan/add.php";
-            break;
-
-
-
-        
-
-
-        case 'dangnhapadmin':
-            if (isset($_POST['dangnhap'])) {
-                $tendangnhap = $_POST['tendangnhap'];
-                $matkhau = $_POST['matkhau'];
-
-                // Gọi hàm dangnhap từ model
-                $user = dangnhap($tendangnhap, $matkhau);
-
-                if ($user) {
-                    // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
-                    session_start();
-                    $_SESSION['user'] = $user;
-
-                    // Kiểm tra quyền của người dùng (role)
-                    if ($user['role'] == 1) {
-                        // Chuyển hướng đến trang admin
-                        header("Location: ../view/admin/index.php");
-                    } else {
-                        // Chuyển hướng đến trang chủ nếu không phải admin
-                        header("Location: ../view/Client/home.php");
-                    }
-                    exit();
-                } else {
-                    // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
-                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
-                }
-            }
-            include "dangnhap/login.php";
-            break;
 
         case "quanlybanner":
             $listbanner = loadall_banner('');
@@ -244,11 +204,6 @@ if (isset($_GET['act'])) {
                 $tieude = $_POST['tieude'];
                 $noidung = $_POST['noidung'];
 
-
-
-                // Xử lý file upload
-                // Giữ hình ảnh cũ nếu không có hình mới được tải lên
-
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
                     $target_dir = "../../images/";
@@ -263,12 +218,12 @@ if (isset($_GET['act'])) {
             include "tintuc/add.php";
             break;
 
-            case 'listbinhluan':
-                
-                include "binhluan/list.php";
-                break;
+        case 'listbinhluan':
 
-
+            include "binhluan/list.php";
+            break;
     }
 } else {
+    $listdanhmuc = loadall_danhmuc();
+    include "danhmuc/list.php";
 }

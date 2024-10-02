@@ -20,4 +20,5 @@ function dangnhap($tendangnhap,$matkhau){
         VALUES ('$tendangnhap','$matkhau','$email','$sodienthoai','$diachi','$role')";
         pdo_execute($query);
     }
+  
 

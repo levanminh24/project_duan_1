@@ -148,7 +148,6 @@ case 'allsanpham':
                         echo "<script>window.location.href='index.php?act=trangchu';</script>";
                         exit;
                     }
-
                 }
             }
             include "app/view/Client/taikhoan/dangnhap.php";
@@ -176,15 +175,12 @@ case 'allsanpham':
             unset($_SESSION['role']);
             echo '<script>window.location.href ="index.php?act=dangnhap"</script>';
             break;
+            case 'gioithieu':
+                include "app/view/Client/gioithieu/gioithieu.php";
+                break;
             case 'giohang':
                 // Lấy ID tài khoản từ session
                 $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
-
-                    include "app/view/Client/sanpham/ctsp.php";
-                    break;
-                    include "app/views/Client/sanpham/ctsp.php";
-                    break;
-
             
                 // Kiểm tra nếu có POST dữ liệu từ form
                 if (isset($_POST['addtocart'])) {
@@ -205,7 +201,8 @@ case 'allsanpham':
                             insert_cart($idtaikhoan, $idsanpham, $soluong, $thanhtien);
                         }
                     } else {
-                        echo "Lỗi: Không thể thêm sản phẩm vào giỏ hàng.";
+                        echo "<script>alert('vui lòng đăng nhập');</script>";
+                        echo '<script>window.location.href = "index.php?act=dangnhap"</script>';
                     }
                 }
             
@@ -230,7 +227,6 @@ case 'allsanpham':
                     $id = $_POST['delete_item'];
                     delete_giohang($id); // Gọi hàm để xóa sản phẩm khỏi giỏ hàng
                 }
-
             
                 // Sau khi xoá, load lại giỏ hàng và tính lại tổng thanh toán
                 $idtaikhoan = $_SESSION['idtendangnhap']; // Lấy ID tài khoản từ session
@@ -244,19 +240,56 @@ case 'allsanpham':
             
                 include "app/view/Client/cart/giohang.php"; // Hiển thị giỏ hàng
                 break;
+               
+                case 'thanhtoan':
+                    if (isset($_POST['thanhtoan'])) {
+                        // Lấy thông tin từ form
+                        $hovatennhan = $_POST['hovatennhan'];
+                        $diachi = $_POST['diachi'];
+                        $sodienthoai = $_POST['sodienthoai'];
+                        date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        $ngaydathang = date('Y-m-d H:i:s');
+                        $pttt = $_POST['pttt']; // Phương thức thanh toán (0 hoặc 1)
+                        $trangthai = 0; // Trạng thái mặc định là "chờ xác nhận"
+                
+                        // Lấy thông tin từ giỏ hàng
+                        $idtaikhoan = $_SESSION['idtendangnhap'];
+                        $giohang = load_all_giohang($idtaikhoan);
+                
+                        // Thêm dữ liệu vào bảng bill
+                        $idbill = insert_bill($idtaikhoan,$hovatennhan,$diachi, $sodienthoai, $ngaydathang, $pttt, $trangthai);
+
+                
+                        foreach ($giohang as $item) {
+                            $idsanpham = $item['idsanpham'];
+                            $soluong = $item['soluong'];
+                            $dongia = $item['giasp'];
+                            $thanhtien = $item['thanhtien'];
+                           
+                
+                            // Thêm dữ liệu vào bảng bill_chitiet
+                            insert_bill_chitiet($idsanpham, $soluong, $dongia, $thanhtien, $idbill);
+                
+                            // Cập nhật số lượng sản phẩm trong bảng sanpham
+                            update_soluong_sanpham($idsanpham, $soluong);
+                        }
+                
+                        // Xóa giỏ hàng của người dùng sau khi đặt hàng
+                        delete_all_giohang($idtaikhoan);
+                
+                        echo '<script>alert("Đơn hàng của bạn đã được đặt thành công."); window.location.href = "index.php?act=donhangcautoi";</script>';
+                       
+                    }
+                
+                    include "app/view/Client/cart/donhang.php";
+                    break;
             
             
     }
 } else {
-}                include "app/view/Client/taikhoan/dangky.php";
-                break;
-                case 'gioithieu':
-                    include "app/view/Client/gioithieu/gioithieu.php";
-                    break;
-        break;
-       
-    }
-} else{
+    $list_banner_home = load_banner_home();
+    $list_sp_home = loadall_spHome();
+    $list_sp_nb = load_spnoibat();
+    $listtintuchome = tintuc();
     include "app/view/Client/home.php";
 }
-

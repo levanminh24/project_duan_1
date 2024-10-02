@@ -20,7 +20,7 @@
                     <?php foreach ($giohang as $item): ?>
                         <tr>
                             <td class="product-thumbnail">
-                                <a href="product-details.php?id=<?= $item['idsp'] ?>">
+                                <a href="?act=chitietsp&id=<?= $item['idsp'] ?>">
                                     <img src="public/images/<?= $item['img'] ?>" alt="<?= $item['tensp'] ?>">
                                 </a>
                             </td>
@@ -29,9 +29,9 @@
                             </td>
                             <td class="product-cart-price"><span class="amount"><?= number_format($item['giasp'], 3) ?> VND</span></td>
                             <td class="cart-quality">
-                                <div class="product-quality">
-                                    <input type="text" name="soluong[<?= $item['id'] ?>]" class="cart-plus-minus-box input-text qty text" value="<?= $item['soluong'] ?>" readonly>
-                                </div>
+                               
+                                   <p><?= $item['soluong'] ?></p>
+                                
                             </td>
                             <td class="product-total">
                                 <span><?= number_format($item['soluong'] * $item['giasp'], 3) ?> VND</span>
@@ -52,12 +52,10 @@
         <div class="col-lg-12">
             <div class="cart-shiping-update-wrapper">
                 <div class="cart-shiping-update btn-hover">
-                    <a href="?act=trangchu">Continue Shopping</a>
+                    <a href="?act=allsanpham">Continue Shopping</a>
                 </div>
                 <div class="cart-clear-wrap">
-                    <div class="cart-clear btn-hover">
-                        <button type="submit" name="update_cart">Update Cart</button>
-                    </div>
+                    
                     <div class="cart-clear btn-hover">
                         <a href="?act=clear_cart">Clear Cart</a>
                     </div>
@@ -76,7 +74,7 @@
                         <h3>Subtotal <span><?= number_format($tongThanhToan, 3) ?> VND</span></h3>
                     </div>
                     <div class="grand-total-btn btn-hover">
-                        <a class="btn theme-color" href="checkout.php">Proceed to checkout</a>
+                        <a class="btn theme-color" href="?act=thanhtoan">Proceed to checkout</a>
                     </div>
                 </div>
             </div>

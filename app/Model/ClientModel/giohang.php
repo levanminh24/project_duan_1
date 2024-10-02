@@ -29,4 +29,26 @@ function load_cart_item($idtaikhoan, $idsanpham) {
     $query = "SELECT * FROM giohang WHERE idtaikhoan = '$idtaikhoan' AND idsanpham = '$idsanpham'";
     return pdo_query($query); // Hàm này nên trả về một mảng các sản phẩm trong giỏ hàng
 }
+function insert_bill($idtaikhoan,$hovatennhan, $diachinhan, $sodienthoainhan, $ngaydathang, $pttt, $trangthai) {
+    $query = "INSERT INTO bill (idtaikhoan,hovatennhan, diachinhan, sodienthoainhan, ngaydathang, pttt, trangthai) 
+              VALUES ('$idtaikhoan','$hovatennhan', '$diachinhan', '$sodienthoainhan', '$ngaydathang', '$pttt', '$trangthai')";
+    return pdo_execute_return_lastInsertId($query);
+}
 
+
+function insert_bill_chitiet($idsanpham, $soluong, $dongia, $thanhtien,  $idbill) {
+    $query = "INSERT INTO bill_chitiet (idsanpham, soluong, dongia, thanhtien, idbill) 
+              VALUES ('$idsanpham', '$soluong', '$dongia', '$thanhtien', '$idbill')";
+   
+    pdo_execute($query);
+}
+function update_soluong_sanpham($idsanpham, $soluong) {
+    $query = "UPDATE sanpham SET soluong = soluong - $soluong WHERE id = $idsanpham";
+   
+    pdo_execute($query);
+}
+function delete_all_giohang($idtaikhoan) {
+    $query = "DELETE FROM giohang WHERE idtaikhoan = $idtaikhoan";
+   
+    pdo_execute($query);
+}
