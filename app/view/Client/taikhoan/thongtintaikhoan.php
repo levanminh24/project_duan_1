@@ -40,9 +40,10 @@
                                         </div>
         </form>
     <?php } ?>
+    <a href="?act=doimatkhau"><button class="btn btn-">doi mat khau</button></a>
 </div>
 
-
+ 
                     </div>
                 </div>
             </div>

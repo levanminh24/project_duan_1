@@ -140,10 +140,21 @@ if (isset($_GET['act'])) {
             include "taikhoan/list.php";
             break;
 
+ 
+            case 'listtkQtv':
+                $listtaikhoan = listtaikhoanadmin();
+                include "taikhoan/listtkQtv.php";
+                break;
+       
+
+       
+
+
         case 'listtkQtv':
             $listtaikhoan = listtaikhoanadmin();
             include "taikhoan/listtkQtv.php";
             break;
+
         case 'addtk':
             if (isset($_POST['themmoi'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -158,6 +169,45 @@ if (isset($_GET['act'])) {
                 $thongbao = "Thêm tài khoản thành công!";
             }
             include "taikhoan/add.php";
+            break;
+
+
+
+      
+
+
+
+        
+
+
+        case 'dangnhapadmin':
+            if (isset($_POST['dangnhap'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+
+                // Gọi hàm dangnhap từ model
+                $user = dangnhap($tendangnhap, $matkhau);
+
+                if ($user) {
+                    // Nếu đăng nhập thành công, lưu thông tin người dùng vào session
+                    session_start();
+                    $_SESSION['user'] = $user;
+
+                    // Kiểm tra quyền của người dùng (role)
+                    if ($user['role'] == 1) {
+                        // Chuyển hướng đến trang admin
+                        header("Location: ../view/admin/index.php");
+                    } else {
+                        // Chuyển hướng đến trang chủ nếu không phải admin
+                        header("Location: ../view/Client/home.php");
+                    }
+                    exit();
+                } else {
+                    // Nếu thông tin đăng nhập sai, hiển thị thông báo lỗi
+                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                }
+            }
+            include "dangnhap/login.php";
             break;
 
 
