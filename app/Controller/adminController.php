@@ -11,7 +11,7 @@ if (isset($_GET['act'])) {
                     $_SESSION['user'] = $user;
                     if ($user['role'] == 0) {
                         header("Location: ../view/admin/index.php");
-                    }else{
+                    } else {
                         echo "<script>window.location.href='index.php?act=listdm';</script>";
                     }
                     exit();
@@ -221,6 +221,27 @@ if (isset($_GET['act'])) {
         case 'listbinhluan':
 
             include "binhluan/list.php";
+            break;
+        case 'listBill':
+            $donHang = loadall_giohang();
+            include "donhang/list.php";
+            break;
+        case 'suaDonHang':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $dm = getIdDonHang($_GET['id']);
+            }
+            $donHang = loadall_giohang();
+            include "donhang/update.php";
+            break;
+
+        case 'updatedonhang':
+            if (isset($_POST['capnhat'])) {
+                $id = $_POST['id'];
+                $trangthai = $_POST['trangthai'];
+                updatetrangthaiDonHang($id, $trangthai);
+                $thongbao = "Cập nhật trạng thái đơn hàng thành công!";
+            }
+            include "donhang/update.php";
             break;
     }
 } else {
