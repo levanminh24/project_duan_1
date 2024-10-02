@@ -124,7 +124,7 @@
                 </a>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=donhang">Danh sách đơn hàng</a>
+                        <a class="collapse-item" href="?act=listBill">Danh sách đơn hàng</a>
                         <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
                         <a class="collapse-item" href="?act=dahuy">Danh sách đã hủy</a>

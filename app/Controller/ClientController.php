@@ -277,12 +277,23 @@ case 'allsanpham':
                         // Xóa giỏ hàng của người dùng sau khi đặt hàng
                         delete_all_giohang($idtaikhoan);
                 
-                        echo '<script>alert("Đơn hàng của bạn đã được đặt thành công."); window.location.href = "index.php?act=donhangcautoi";</script>';
+                        echo '<script>alert("Đơn hàng của bạn đã được đặt thành công."); window.location.href = "index.php?act=donhangcuatoi";</script>';
                        
                     }
                 
                     include "app/view/Client/cart/donhang.php";
                     break;
+                    case 'donhangcuatoi':
+                        // Lấy id của tài khoản người dùng đang đăng nhập từ session
+                        $idtaikhoan = $_SESSION['idtendangnhap'];
+                        
+                        // Gọi hàm để lấy thông tin chi tiết tất cả đơn hàng và sản phẩm trong từng đơn hàng
+                        $donhang = load_all_billchitiet($idtaikhoan);
+                        
+                        // Gọi giao diện để hiển thị thông tin đơn hàng
+                        include "app/view/Client/cart/dhct.php";
+                        break;
+                    
             
             
     }

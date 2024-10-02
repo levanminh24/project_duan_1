@@ -52,3 +52,22 @@ function delete_all_giohang($idtaikhoan) {
    
     pdo_execute($query);
 }
+// Lấy tất cả các đơn hàng của người dùng
+function load_all_bills_by_user($idtaikhoan) {
+    $query = "SELECT * FROM bill WHERE idtaikhoan = $idtaikhoan ORDER BY id DESC";
+    return pdo_query($query);
+}
+
+// Lấy chi tiết sản phẩm cho từng đơn hàng
+function load_all_billchitiet($idtaikhoan) {
+    $query = "SELECT bill.id, bill.hovatennhan, bill.diachinhan, bill.sodienthoainhan, bill.ngaydathang, bill.pttt, bill.trangthai,
+              bill_chitiet.idsanpham, bill_chitiet.soluong, bill_chitiet.dongia, bill_chitiet.thanhtien,
+              sanpham.tensp, sanpham.img
+              FROM bill
+              INNER JOIN bill_chitiet ON bill.id = bill_chitiet.idbill
+              INNER JOIN sanpham ON bill_chitiet.idsanpham = sanpham.id
+              WHERE bill.idtaikhoan = $idtaikhoan
+              ORDER BY bill.ngaydathang DESC";
+  
+    return pdo_query($query);
+}

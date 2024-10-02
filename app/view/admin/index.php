@@ -5,7 +5,7 @@ if (!isset($_SESSION['user']) && (!isset($_GET['act']) || $_GET['act'] != 'dangn
     header("Location: index.php?act=dangnhapadmin");
     exit();
 }
-
+require_once "../../Model/AdminModel/giohang.php";
 require_once "../../Model/AdminModel/binhluan.php";
 require_once "../../Model/AdminModel/tintuc.php";
 require_once "../../Model/AdminModel/taikhoan.php";
