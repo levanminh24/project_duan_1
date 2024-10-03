@@ -1,4 +1,5 @@
 <?php
+include_once "pdo.php";
 function loadall_spHome()
 {
     $sql = "select * from sanpham order by id desc";
@@ -49,14 +50,13 @@ function dem_sp_dm($iddm)
     return pdo_query_one($query);
 }
 
- 
+
 
 function load_sp_lq($iddm)
 {
     $query = "SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
     if ($iddm != "") {
         $query .= " AND iddm=" . $iddm;
-
     }
     $query .= " ORDER BY id asc";
     return pdo_query($query);
@@ -78,5 +78,14 @@ function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page)
     $query .= " ORDER BY id desc limit $batdau,9";
     return pdo_query($query);
 }
-
-    
+function allsp()
+{
+    $sql = "select * from sanpham";
+    $list_sp_home = pdo_query($sql);
+    return $list_sp_home;
+}
+function search_sanpham($tensp)
+{
+    $sql = "SELECT * FROM sanpham WHERE tensp LIKE '%$tensp%'";
+    return pdo_query($sql);
+}
