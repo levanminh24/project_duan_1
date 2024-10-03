@@ -140,20 +140,12 @@ if (isset($_GET['act'])) {
             include "taikhoan/list.php";
             break;
 
-<<<<<<< HEAD
-        case 'listtkQtv':
-            $listtaikhoan = listtaikhoanadmin();
-            include "taikhoan/listtkQtv.php";
-            break;
-
-=======
  
             case 'listtkQtv':
                 $listtaikhoan = listtaikhoanadmin();
                 include "taikhoan/listtkQtv.php";
                 break;
        
->>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
 
        
 
@@ -180,26 +172,12 @@ if (isset($_GET['act'])) {
             break;
 
 
-<<<<<<< HEAD
-        case 'updatetk':
-            if (isset($_POST['capnhat'])) {
-                $id = $_POST['id'];
-                $vaitro = $_POST['role'];
-                updatetaikhoan($id, $vaitro);
-                $thongbao = "Cập nhật thành công";
-                $listtaikhoan = listtaikhoan();
-                include "taikhoan/list.php";
-            }
-            include "taikhoan/add.php";
-            break;
-=======
 
       
->>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
 
 
 
-
+        
 
 
         case 'dangnhapadmin':
@@ -291,10 +269,6 @@ if (isset($_GET['act'])) {
             break;
 
         case 'listbinhluan':
-<<<<<<< HEAD
-
-            include "binhluan/list.php";
-=======
 
             include "binhluan/list.php";
             break;
@@ -318,7 +292,6 @@ if (isset($_GET['act'])) {
                 $thongbao = "Cập nhật trạng thái đơn hàng thành công!";
             }
             include "donhang/update.php";
->>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
             break;
     }
 } else {
