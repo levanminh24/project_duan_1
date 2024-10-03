@@ -26,3 +26,4 @@ function delete_sanpham($id)
     $sql = "delete from sanpham where id = " . $id;
     pdo_execute($sql);
 }
+

@@ -98,6 +98,8 @@
                                         <i class="pe-7s-close s-close"></i>
                                     </a>
                                     <div class="search-wrap-1">
+                                    <form action="index.php?act=timkiem" method="post">
+
                                         <form action="index.php?act=timkiem" method="post">
                                             <input name="tensp" placeholder="Search products…" type="text">
                                             <button class="button-search" type="submit"><i class="pe-7s-search"></i></button>

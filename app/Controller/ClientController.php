@@ -247,8 +247,125 @@ if (isset($_GET['act'])) {
 
             include "app/view/Client/cart/giohang.php"; // Hiển thị giỏ hàng
             break;
-        case 'donhang';
-                
+            case 'doimatkhau':
+                if (isset($_SESSION['idtendangnhap'])) {
+                    $matkhaucuErr = "";
+                    $matkhaumoiErr = "";
+                    $nhaplaimatkhaumoiErr = "";
+                    if (isset($_POST['doimatkhau'])) {
+                        $matkhaucu = $_POST['matkhaucu'];
+                        $matkhaumoi = $_POST['matkhaumoi'];
+                        $nhaplaimatkhaumoi = $_POST['nhaplaimatkhaumoi'];
+                        $check = true;
+                        if (empty(trim($matkhaucu))) {
+                            $check = false;
+                            $matkhaucuErr = "Vui lòng không bỏ trống !";
+                        }
+                        $tk = load_one_tk($_SESSION['idtendangnhap']);
+                        if ($tk) {
+                            if ($matkhaucu !== $tk['matkhau']) {
+                                $check = false;
+                                $matkhaucuErr = "Mật khẩu không chính xác !";
+                            }
+                        }
+                        if (empty(trim($matkhaumoi))) {
+                            $check = false;
+                            $matkhaumoiErr = "Vui lòng không bỏ trống !";
+                        } else {
+                            if (!preg_match("/^(?=.*[0-9])(?=.*[A-Z])\w{8,18}$/", $matkhaumoi)) {
+                                $check = false;
+                                $matkhaumoiErr = "Mật khẩu tối thiểu 8 ký tự bao gồm ký tự số và ký tự in hoa !";
+                            }
+                        }
+                        if ($nhaplaimatkhaumoi !== $matkhaumoi) {
+                            $check = false;
+                            $nhaplaimatkhaumoiErr = "Mật khẩu nhập lại không trùng khớp !";
+                        }
+                        if ($check) {
+                            if ($tk) {
+                                update_mk($matkhaumoi, $tk['id']);
+                                $nhaplaimatkhaumoiErr = "Chúc mừng bạn đã đổi mật khẩu thành công !";
+                            }
+                        }
+                    }
+                }
+                include "app/view/Client/taikhoan/doimatkhau.php";
+                case 'quenmatkhau':
+                    if (isset($_POST['quenmatkhau'])) {
+                        $email = $_POST['email'];
+        
+                        $check = laymatkhau($email);
+                        if (!empty($check)) {
+                            $matkhau = $check['matkhau'];
+        
+                            $errors = "Mật khẩu của bạn là: $matkhau";
+                        } else {
+                            $errors = "Email không tồn tại vui lòng nhập lại";
+                        }
+                    }
+                    include "app/view/Client/taikhoan/quenmatkhau.php";
+                    break;
+                break;
+                    case 'muangay':
+                        if (isset($_POST['idsanpham'])) {
+                            $idsanpham = $_POST['idsanpham'];
+                            $idtaikhoan = $_SESSION['idtaikhoan']; // Lấy id tài khoản của người dùng hiện tại
+                    
+                            // Lấy thông tin sản phẩm từ database
+                            $sanpham = load_sanpham_by_id($idsanpham);
+                            if ($sanpham) {
+                                $soluong = 1; // Mặc định số lượng là 1 cho mua lại
+                                $giasp = $sanpham['giasp'];
+                                $thanhtien = $soluong * $giasp;
+                    
+                                // Lưu thông tin vào session để tiến hành thanh toán
+                                $_SESSION['muangay'] = [
+                                    'idsanpham' => $idsanpham,
+                                    'tensp' => $sanpham['tensp'], // Lưu tên sản phẩm
+                                    'soluong' => $soluong,
+                                    'giasp' => $giasp,
+                                    'thanhtien' => $thanhtien
+                                ];
+                    
+                                // Chuyển đến trang thanh toán
+                                echo '<script>window.location.href = "?act=thanhtoan";</script>';
+                            } else {
+                                echo '<script>alert("Sản phẩm không tồn tại.");</script>';
+                            }
+                        }
+                        include "app/view/Client/cart/dhct.php";
+                        break;
+                        
+                    
+                        case 'huydonhang':
+                            if (isset($_POST['cancel_order'])) {
+                                $id = $_POST['cancel_order'];
+                        
+                                // Cập nhật trạng thái đơn hàng thành 'Đã Hủy' (trangthai = 4)
+                                update_order_status($id, 4);
+                        
+                                // Hiển thị thông báo đã hủy thành công
+                                echo '<script>alert("Đơn hàng đã được hủy thành công.");</script>';
+                        
+                                // Chuyển hướng lại trang đơn hàng của tôi
+                                echo '<script>window.location.href = "?act=donhangcuatoi";</script>';
+                            }
+                            break;
+                                            
+                    case 'donhangcuatoi':
+                        // Lấy id của tài khoản người dùng đang đăng nhập từ session
+                        $idtaikhoan = $_SESSION['idtendangnhap'];
+                        
+                        // Gọi hàm để lấy thông tin chi tiết tất cả đơn hàng và sản phẩm trong từng đơn hàng
+                        $donhang = load_all_billchitiet($idtaikhoan);
+                        
+                        // Gọi giao diện để hiển thị thông tin đơn hàng
+                        include "app/view/Client/cart/dhct.php";
+                        break;
+                    
+            
+            
+
             break;
             case 'thanhtoan':
                 if (isset($_POST['thanhtoan'])) {
@@ -301,6 +418,7 @@ if (isset($_GET['act'])) {
                 // Gọi giao diện để hiển thị thông tin đơn hàng
                 include "app/view/Client/cart/dhct.php";
                 break;
+
     }
 } else {
     $list_banner_home = load_banner_home();

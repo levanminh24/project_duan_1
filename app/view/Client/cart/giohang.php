@@ -56,9 +56,7 @@
                 </div>
                 <div class="cart-clear-wrap">
                     
-                    <div class="cart-clear btn-hover">
-                        <a href="?act=clear_cart">Clear Cart</a>
-                    </div>
+                    
                 </div>
             </div>
         </div>

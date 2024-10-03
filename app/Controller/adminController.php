@@ -276,6 +276,14 @@ if (isset($_GET['act'])) {
             $donHang = loadall_giohang();
             include "donhang/list.php";
             break;
+            case 'donhangbihuy':
+              $litshuy = donHangbiHuy();
+              include "donhang/donhuy.php";
+              break;
+              case 'dagiao':
+                $dagiao = daGiao();
+                include "donhang/dagiao.php";
+                break;
         case 'suaDonHang':
             if (isset($_GET['id']) && ($_GET['id']) > 0) {
                 $dm = getIdDonHang($_GET['id']);

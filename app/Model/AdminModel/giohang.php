@@ -1,7 +1,22 @@
 <?php
 function loadall_giohang()
 {
-    $sql = "select * from bill order by id desc";
+    // Chỉ lấy các đơn hàng có trạng thái từ 0 đến 3
+    $sql = "SELECT * FROM bill WHERE trangthai IN (0, 1, 2, 3) ORDER BY id DESC";
+    $listbill = pdo_query($sql);
+    return $listbill;
+}
+function donHangbiHuy()
+{
+    // Chỉ lấy các đơn hàng có trạng thái từ 0 đến 3
+    $sql = "SELECT * FROM bill WHERE trangthai = 4 ORDER BY id DESC";
+    $listbill = pdo_query($sql);
+    return $listbill;
+}
+function daGiao()
+{
+    // Chỉ lấy các đơn hàng có trạng thái từ 0 đến 3
+    $sql = "SELECT * FROM bill WHERE trangthai = 3 ORDER BY id DESC";
     $listbill = pdo_query($sql);
     return $listbill;
 }
