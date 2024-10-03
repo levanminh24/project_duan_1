@@ -36,13 +36,14 @@
          
             <div class="button-box btn-hover">
                                             <button type="submit" name="capnhat">Lưu</button>
-                                           
+                                            <a href="?act=doimatkhau" class="p-5"><button class="btn btn-">Đổi mật khẩu</button></a>
                                         </div>
         </form>
     <?php } ?>
+    
 </div>
 
-
+ 
                     </div>
                 </div>
             </div>

@@ -15,7 +15,11 @@ function thongtin(){
 return pdo_query($sql);
 }
 function  update_thongtin($id,$tendangnhap,$matkhau,$email,$sodienthoai,$diachi){
+
     $sql = "update tai_khoan set tendangnhap = '$tendangnhap', matkhau = '$matkhau', email = '$email', sodienthoai = '$sodienthoai', diachi = '$diachi' where id = $id";
+
+    $sql = "update tai_khoan set  tendangnhap = '$tendangnhap', matkhau = '$matkhau', email = '$email', sodienthoai = '$sodienthoai', diachi = '$diachi' where id = $id";
+
     pdo_execute($sql);
 }
 function update_mk($matkhau,$id){

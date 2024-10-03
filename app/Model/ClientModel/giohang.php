@@ -72,6 +72,7 @@ function load_all_billchitiet($idtaikhoan) {
     return pdo_query($query);
 }
 
+
 function load_sanpham_by_id($idsanpham) {
     $sql = "SELECT * FROM sanpham WHERE id = $idsanpham";
     return pdo_query_one($sql); // Giả sử bạn đang dùng hàm này để lấy dữ liệu từ database
@@ -79,6 +80,19 @@ function load_sanpham_by_id($idsanpham) {
 function update_order_status($id, $status) {
     $sql = "UPDATE bill SET trangthai = '$status' WHERE id = '$id'";
     pdo_execute($sql);
+}
+//cap nhap so luong gio hang
+function get_product_details($idsanpham) {
+    $query = "SELECT * FROM sanpham WHERE id = $idsanpham";
+    $result = pdo_query($query); // Giả định pdo_query trả về một mảng các sản phẩm
+
+    // Kiểm tra xem sản phẩm có tồn tại không
+    if (count($result) > 0) {
+        return $result[0]; // Trả về thông tin sản phẩm
+    }
+    
+    return null; // Nếu không tìm thấy sản phẩm
+
 }
 
 

@@ -99,6 +99,8 @@
                                     </a>
                                     <div class="search-wrap-1">
                                     <form action="index.php?act=timkiem" method="post">
+
+                                        <form action="index.php?act=timkiem" method="post">
                                             <input name="tensp" placeholder="Search products…" type="text">
                                             <button class="button-search" type="submit"><i class="pe-7s-search"></i></button>
                                         </form>
@@ -114,8 +116,11 @@
         ?>
             <li><a title="Tài khoản" href="?act=thongtintk"><i class="pe-7s-user"></i></a>
                 <ul class="sub-menu-style">
+
                     <li><a href="?act=thongtintaikhoan" style="font-size:13px;">Thông tin tài khoản</a></li>
+
                     <li><a href="?act=donhangcuatoi" style="font-size:13px;">Đơn hàng</a></li>
+
                     <?php if($role == 1): ?>
                         <li><a href="app/view/admin/index.php" style="font-size:13px;">Quản trị viên</a></li>
                     <?php endif; ?>
