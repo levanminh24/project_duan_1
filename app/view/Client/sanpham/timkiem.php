@@ -7,9 +7,13 @@
                         <div id="shop-1" class="tab-pane active">
                             <div class="row">
                                 <?php 
-                                if (isset($_POST['tensp']) && !empty($_POST['tensp'])) {
-                                    $tensp = $_POST['tensp'];
+                                // Kiểm tra từ khóa tìm kiếm
+                                $tensp = isset($_POST['tensp']) ? $_POST['tensp'] : '';
+                                if (!empty($tensp)) {
                                     $list_sp_timkiem = search_sanpham($tensp);
+                                    
+                                    // Hiển thị từ khóa tìm kiếm
+                                    echo '<h2 class="search-keyword">Kết quả tìm kiếm cho: <strong>' . htmlspecialchars($tensp) . '</strong></h2>';
                                 } else {
                                     $list_sp_timkiem = [];
                                 }
