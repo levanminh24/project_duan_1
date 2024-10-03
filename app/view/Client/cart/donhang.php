@@ -16,27 +16,27 @@
                     <div class="col-lg-12">
                         <div class="billing-info mb-20">
                             <label>Họ và Tên <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="hovatennhan" value="<?= $tendangnhap ?>" required>
+                            <input type="text" name="hovatennhan" required>
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="billing-info mb-20">
                             <label>Địa chỉ <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="diachi" value="" required>
+                            <input type="text" name="diachi">
                         </div>
                     </div>
                     
                     <div class="col-lg-12 col-md-12">
                         <div class="billing-info mb-20">
                             <label>Số Điện Thoại <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="sodienthoai" value="<?= $sodienthoai ?>" required>
+                            <input type="text" name="sodienthoai">
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12">
                         <div class="billing-info mb-20">
                             <label>Ngày đặt hàng <abbr class="required" title="required">*</abbr></label>
-                            <input type="date" name="ngaydat" value="">
+                            <input type="date" name="ngaydat" value="<?= date('Y-m-d') ?>">
                         </div>
                     </div>
                     <?php } ?>
@@ -82,10 +82,7 @@
                     <input id="payment-method-1" class="input-radio" type="radio" value="0" name="pttt" checked>
                     <label for="payment-method-1">Thanh toán bằng tiền mặt khi nhận hàng</label>
                 </div>
-                <div class="pay-top sin-payment">
-                    <input id="payment-method-2" class="input-radio" type="radio" value="1" name="pttt">
-                    <label for="payment-method-2">Thanh toán qua chuyển khoản</label>
-                </div>
+                
             </div>
         </div>
         <div class="Place-order btn-hover">

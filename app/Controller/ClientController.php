@@ -283,6 +283,52 @@ case 'allsanpham':
                 
                     include "app/view/Client/cart/donhang.php";
                     break;
+                    case 'muangay':
+                        if (isset($_POST['idsanpham'])) {
+                            $idsanpham = $_POST['idsanpham'];
+                            $idtaikhoan = $_SESSION['idtaikhoan']; // Lấy id tài khoản của người dùng hiện tại
+                    
+                            // Lấy thông tin sản phẩm từ database
+                            $sanpham = load_sanpham_by_id($idsanpham);
+                            if ($sanpham) {
+                                $soluong = 1; // Mặc định số lượng là 1 cho mua lại
+                                $giasp = $sanpham['giasp'];
+                                $thanhtien = $soluong * $giasp;
+                    
+                                // Lưu thông tin vào session để tiến hành thanh toán
+                                $_SESSION['muangay'] = [
+                                    'idsanpham' => $idsanpham,
+                                    'tensp' => $sanpham['tensp'], // Lưu tên sản phẩm
+                                    'soluong' => $soluong,
+                                    'giasp' => $giasp,
+                                    'thanhtien' => $thanhtien
+                                ];
+                    
+                                // Chuyển đến trang thanh toán
+                                echo '<script>window.location.href = "?act=thanhtoan";</script>';
+                            } else {
+                                echo '<script>alert("Sản phẩm không tồn tại.");</script>';
+                            }
+                        }
+                        include "app/view/Client/cart/dhct.php";
+                        break;
+                        
+                    
+                        case 'huydonhang':
+                            if (isset($_POST['cancel_order'])) {
+                                $id = $_POST['cancel_order'];
+                        
+                                // Cập nhật trạng thái đơn hàng thành 'Đã Hủy' (trangthai = 4)
+                                update_order_status($id, 4);
+                        
+                                // Hiển thị thông báo đã hủy thành công
+                                echo '<script>alert("Đơn hàng đã được hủy thành công.");</script>';
+                        
+                                // Chuyển hướng lại trang đơn hàng của tôi
+                                echo '<script>window.location.href = "?act=donhangcuatoi";</script>';
+                            }
+                            break;
+                                            
                     case 'donhangcuatoi':
                         // Lấy id của tài khoản người dùng đang đăng nhập từ session
                         $idtaikhoan = $_SESSION['idtendangnhap'];

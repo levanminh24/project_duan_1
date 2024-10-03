@@ -49,11 +49,17 @@
                                 <input type="text" value="1" name="soluong" id="quantity-input">
                                 <button type="button" class="inc qtybtn">+</button>
                             </div>
-                            <div class="single-product-cart btn-hover">
+                            <div class="product-action-2-wrap">
                                 <button type="submit" class="btn-theme  btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
-                            </div>
+                              
+                                </div>
+                          
                         </form>
-
+                       
+          
+    
+   
+    
 
                     </div>
                 </div>
@@ -61,7 +67,48 @@
         </div>
     </div>
 </div>
+<style>
+    .btn-theme {
+    background-color: #333; /* Màu nền mặc định */
+    color: #fff; /* Màu chữ mặc định */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+   
+}
 
+.btn-theme:hover {
+    background-color: #ffa500; /* Màu cam khi di chuột */
+}
+.product-quality {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 60px;
+}
+
+.product-quality .qtybtn {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0; /* Màu nền của nút */
+    border: 1px solid #ccc;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product-quality #quantity-input {
+    width: 40px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 5px; /* Khoảng cách giữa ô số lượng và các nút */
+    font-size: 16px;
+}
+
+</style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const qtyInput = document.getElementById('quantity-input');

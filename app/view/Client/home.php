@@ -112,18 +112,11 @@
                                     <img src="public/images/<?= $img ?>" alt="">
                                 </a>
                                 <div class="product-action-wrap">
-                                    <button class="product-action-btn-1 like-btn" title="Wishlist"><i class="pe-7s-like"></i></button>
-                                    <button class="product-action-btn-1" title="Quick View">
-                                        <a href="?act=trangchu&idsp=<?= $id ?>"><i class="pe-7s-look"></i></a>
+
+                                    <a href="?act=trangchu&idsp=<?= $id ?>"><i class="pe-7s-look"></i></a>
                                     </button>
                                 </div>
-                                <div class="product-action-2-wrap">
-                                    <?php if ($soluong > 0) { ?>
-                                        <button data-id="<?= $id ?>" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                    <?php } else { ?>
-                                        <button class="product-action-btn-2">Đang hết hàng</button>
-                                    <?php } ?>
-                                </div>
+
                             </div>
                             <div class="product-content">
                                 <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>
@@ -161,13 +154,7 @@
                                     <img src="public/images/<?= $img ?>" alt="">
                                 </a>
 
-                                <div class="product-action-2-wrap">
-                                    <?php if ($soluong > 0) { ?>
-                                        <button data-id="<?= $id ?>" onclick="themgiohang(<?= $id ?>)" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                    <?php } else { ?>
-                                        <button class="product-action-btn-2">Đang hết hàng</button>
-                                    <?php } ?>
-                                </div>
+
                             </div>
                             <div class="product-content">
                                 <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>
@@ -192,37 +179,37 @@
         </div>
         <div class="row">
             <?php
-                $delay=200;
-                foreach ($listtintuchome as $tintuc) : ?>
-                    <?php extract($tintuc);
-                        if(strlen($tieude)>50) $tieude=substr($tieude,0,50);
-                        if(strlen($noidung)>150) $noidung=substr($noidung,0,150)."...";?>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-wrap mb-30" data-aos="fade-up" data-aos-delay="<?= $delay?>">
-                            <div class="blog-img-date-wrap mb-25">
-                                <div class="blog-img">
-                                    <a href="#"><img src="public/images/<?= $img?>" alt=""></a>
-                                </div>
-                                <div class="blog-date">
-                                    <h5><?= $ngaydang?></h5>
-                                </div>
+            $delay = 200;
+            foreach ($listtintuchome as $tintuc) : ?>
+                <?php extract($tintuc);
+                if (strlen($tieude) > 50) $tieude = substr($tieude, 0, 50);
+                if (strlen($noidung) > 150) $noidung = substr($noidung, 0, 150) . "..."; ?>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-wrap mb-30" data-aos="fade-up" data-aos-delay="<?= $delay ?>">
+                        <div class="blog-img-date-wrap mb-25">
+                            <div class="blog-img">
+                                <a href="#"><img src="public/images/<?= $img ?>" alt=""></a>
                             </div>
-                            <div class="blog-content">
-                                <div class="blog-meta">
-                                    <ul>
-                                        <li><a href="#">Furniture</a>,</li>
-                                        <li>By:<a href="#"> <?= $tacgia?></a></li>
-                                    </ul>
-                                </div>
-                                <h3><a href="#"><?= $tieude?></a></h3>
-                                <div class="blog-btn">
-                                    <a href="#">Xem thêm</a>
-                                </div>
+                            <div class="blog-date">
+                                <h5><?= $ngaydang ?></h5>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <ul>
+                                    <li><a href="#">Furniture</a>,</li>
+                                    <li>By:<a href="#"> <?= $tacgia ?></a></li>
+                                </ul>
+                            </div>
+                            <h3><a href="#"><?= $tieude ?></a></h3>
+                            <div class="blog-btn">
+                                <a href="#">Xem thêm</a>
                             </div>
                         </div>
                     </div>
-                    <?php $delay+=200;?>
-                <?php endforeach; ?>
+                </div>
+                <?php $delay += 200; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

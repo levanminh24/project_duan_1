@@ -60,14 +60,19 @@
                                                 ?>
                                             </td>
                                             <td>
-                                                <?php if ($item['trangthai'] == 0): ?>
-                                                    <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
-                                                    <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này chứ?');">
-                                                        <i class="ti-trash"></i> Hủy
-                                                    </button>
-                                                <?php else: ?>
-                                                    <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
-                                                <?php endif; ?>
+                                            <?php if ($item['trangthai'] == 0): ?>
+                    <form action="?act=huydonhang" method="POST">
+                        <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
+                        <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này chứ?');">
+                            <i class="ti-trash"></i> Hủy
+                        </button>
+                    </form>
+                <?php elseif ($item['trangthai'] == 4): ?>
+                    <!-- Hiển thị nút Mua lại cho đơn hàng đã hủy -->
+                   
+                <?php else: ?>
+                    <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
+                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -67,7 +67,18 @@ function load_all_billchitiet($idtaikhoan) {
               INNER JOIN bill_chitiet ON bill.id = bill_chitiet.idbill
               INNER JOIN sanpham ON bill_chitiet.idsanpham = sanpham.id
               WHERE bill.idtaikhoan = $idtaikhoan
-              ORDER BY bill.ngaydathang DESC";
-  
+              ORDER BY bill.ngaydathang DESC, bill_chitiet.id DESC";  // Sắp xếp sản phẩm trong mỗi hóa đơn theo mã sản phẩm mới nhất
+              
     return pdo_query($query);
 }
+
+function load_sanpham_by_id($idsanpham) {
+    $sql = "SELECT * FROM sanpham WHERE id = $idsanpham";
+    return pdo_query_one($sql); // Giả sử bạn đang dùng hàm này để lấy dữ liệu từ database
+}
+function update_order_status($id, $status) {
+    $sql = "UPDATE bill SET trangthai = '$status' WHERE id = '$id'";
+    pdo_execute($sql);
+}
+
+

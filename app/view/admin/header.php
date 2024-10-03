@@ -127,7 +127,7 @@
                         <a class="collapse-item" href="?act=listBill">Danh sách đơn hàng</a>
                         <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
-                        <a class="collapse-item" href="?act=dahuy">Danh sách đã hủy</a>
+                        <a class="collapse-item" href="?act=donhangbihuy">Danh sách đã hủy</a>
                     </div>
                 </div>
             </li>

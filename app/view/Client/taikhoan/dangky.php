@@ -14,7 +14,6 @@
                                     <div class="login-form-container">
                                         <div class="login-register-form">
                                         <form action="?act=dangky" method="post">
-                                          
                                                 <input type="text" name="tendangnhap" placeholder="Username" value="<?= $tendangnhap ?>">
                                                 <p style="color: red;"><?= $errors['tendangnhap'] ?></p>
                                                 <input type="password" name="matkhau" placeholder="Password">
