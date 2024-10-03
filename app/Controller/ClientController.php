@@ -418,13 +418,9 @@ if (isset($_GET['act'])) {
                 // Gọi giao diện để hiển thị thông tin đơn hàng
                 include "app/view/Client/cart/dhct.php";
                 break;
-<<<<<<< HEAD
-
-=======
             case 'gioithieu':
                 include 'app/view/Client/gioithieu/gioithieu.php';
                 break;
->>>>>>> 474ddba62537f1c6cb62669be5992348e29ec3c3
     }
 } else {
     $list_banner_home = load_banner_home();
