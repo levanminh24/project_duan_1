@@ -2,7 +2,25 @@
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
-
+        case 'dangnhapadmin':
+            if (isset($_POST['dangnhap'])) {
+                $tendangnhap = $_POST['tendangnhap'];
+                $matkhau = $_POST['matkhau'];
+                $user = dangnhap($tendangnhap, $matkhau);
+                if ($user) {
+                    $_SESSION['user'] = $user;
+                    if ($user['role'] == 0) {
+                        header("Location: ../view/admin/index.php");
+                    } else {
+                        echo "<script>window.location.href='index.php?act=listdm';</script>";
+                    }
+                    exit();
+                } else {
+                    $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                }
+            }
+            include "dangnhap/login.php";
+            break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -122,18 +140,28 @@ if (isset($_GET['act'])) {
             include "taikhoan/list.php";
             break;
 
+<<<<<<< HEAD
         case 'listtkQtv':
             $listtaikhoan = listtaikhoanadmin();
             include "taikhoan/listtkQtv.php";
             break;
 
+=======
+ 
+            case 'listtkQtv':
+                $listtaikhoan = listtaikhoanadmin();
+                include "taikhoan/listtkQtv.php";
+                break;
+       
+>>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
 
-        case 'suatk':
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $taikhoan = getId($id);
-            }
-            include "taikhoan/update.php";
+       
+
+
+        case 'listtkQtv':
+            $listtaikhoan = listtaikhoanadmin();
+            include "taikhoan/listtkQtv.php";
+            break;
 
         case 'addtk':
             if (isset($_POST['themmoi'])) {
@@ -152,6 +180,7 @@ if (isset($_GET['act'])) {
             break;
 
 
+<<<<<<< HEAD
         case 'updatetk':
             if (isset($_POST['capnhat'])) {
                 $id = $_POST['id'];
@@ -163,6 +192,10 @@ if (isset($_GET['act'])) {
             }
             include "taikhoan/add.php";
             break;
+=======
+
+      
+>>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
 
 
 
@@ -198,6 +231,7 @@ if (isset($_GET['act'])) {
             }
             include "dangnhap/login.php";
             break;
+
 
         case "quanlybanner":
             $listbanner = loadall_banner('');
@@ -242,11 +276,6 @@ if (isset($_GET['act'])) {
                 $tieude = $_POST['tieude'];
                 $noidung = $_POST['noidung'];
 
-
-
-                // Xử lý file upload
-                // Giữ hình ảnh cũ nếu không có hình mới được tải lên
-
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
                     $target_dir = "../../images/";
@@ -262,9 +291,37 @@ if (isset($_GET['act'])) {
             break;
 
         case 'listbinhluan':
+<<<<<<< HEAD
+
+            include "binhluan/list.php";
+=======
 
             include "binhluan/list.php";
             break;
+        case 'listBill':
+            $donHang = loadall_giohang();
+            include "donhang/list.php";
+            break;
+        case 'suaDonHang':
+            if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                $dm = getIdDonHang($_GET['id']);
+            }
+            $donHang = loadall_giohang();
+            include "donhang/update.php";
+            break;
+
+        case 'updatedonhang':
+            if (isset($_POST['capnhat'])) {
+                $id = $_POST['id'];
+                $trangthai = $_POST['trangthai'];
+                updatetrangthaiDonHang($id, $trangthai);
+                $thongbao = "Cập nhật trạng thái đơn hàng thành công!";
+            }
+            include "donhang/update.php";
+>>>>>>> d590bda7c290a8344a4526dc5f5b331e01193273
+            break;
     }
 } else {
+    $listdanhmuc = loadall_danhmuc();
+    include "danhmuc/list.php";
 }

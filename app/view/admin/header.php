@@ -124,7 +124,7 @@
                 </a>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=donhang">Danh sách đơn hàng</a>
+                        <a class="collapse-item" href="?act=listBill">Danh sách đơn hàng</a>
                         <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
                         <a class="collapse-item" href="?act=dahuy">Danh sách đã hủy</a>
@@ -226,10 +226,7 @@
                                     Settings
                                 </a> -->
                                 <!-- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="../../../index.php" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                
                             </div>
                         </li>
                     </ul>
