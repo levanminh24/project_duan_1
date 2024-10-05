@@ -147,14 +147,6 @@ if (isset($_GET['act'])) {
                 break;
        
 
-       
-
-
-        case 'listtkQtv':
-            $listtaikhoan = listtaikhoanadmin();
-            include "taikhoan/listtkQtv.php";
-            break;
-
         case 'addtk':
             if (isset($_POST['themmoi'])) {
                 $tendangnhap = $_POST['tendangnhap'];
@@ -301,6 +293,9 @@ if (isset($_GET['act'])) {
             }
             include "donhang/update.php";
             break;
+            case 'logout':
+                dangxuat();
+                break;
     }
 } else {
     $listdanhmuc = loadall_danhmuc();
