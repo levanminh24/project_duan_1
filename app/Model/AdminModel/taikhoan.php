@@ -22,6 +22,18 @@ function insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role)
 {
     $query = "INSERT INTO `tai_khoan`( `tendangnhap`, `matkhau`, `email`, `sodienthoai`, `diachi`, `role`) 
         VALUES ('$tendangnhap','$matkhau','$email','$sodienthoai','$diachi','$role')";
+
+        pdo_execute($query);
+    }
+    function dangxuat()
+    {
+        session_unset();
+        session_destroy();
+        include_once '../../view/admin/dangnhap/login.php';
+        exit();
+    }
+
+
     pdo_execute($query);
 }
 function dangxuat()
@@ -31,3 +43,4 @@ function dangxuat()
     include_once '../../view/admin/dangnhap/login.php';
     exit();
 }
+

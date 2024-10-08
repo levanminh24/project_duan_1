@@ -8,39 +8,47 @@
                 <h3>Billing Details</h3>
                 
                 <div class="row">
-                    <?php 
-                    $thongtin = thongtin();
-                    foreach($thongtin as $tt){
-                        extract($tt);
-                    ?>
-                    <div class="col-lg-12">
-                        <div class="billing-info mb-20">
-                            <label>Họ và Tên <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="hovatennhan" required>
-                        </div>
-                    </div>
+    <div class="col-lg-12">
+        <div class="billing-info mb-20">
+            <label>Họ và Tên <abbr class="required" title="required">*</abbr></label>
+            <input type="text" name="hovatennhan" value="<?= isset($hovatennhan) ? htmlspecialchars($hovatennhan) : '' ?>">
+            <!-- Hiển thị lỗi nếu có -->
+            <?php if (isset($errors['hovatennhan'])): ?>
+                <p class="error-message" style="color: red;"><?= htmlspecialchars($errors['hovatennhan']) ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
 
-                    <div class="col-lg-12">
-                        <div class="billing-info mb-20">
-                            <label>Địa chỉ <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="diachi">
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-12 col-md-12">
-                        <div class="billing-info mb-20">
-                            <label>Số Điện Thoại <abbr class="required" title="required">*</abbr></label>
-                            <input type="text" name="sodienthoai">
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <div class="billing-info mb-20">
-                            <label>Ngày đặt hàng <abbr class="required" title="required">*</abbr></label>
-                            <input type="date" name="ngaydat" value="<?= date('Y-m-d') ?>">
-                        </div>
-                    </div>
-                    <?php } ?>
-                </div>
+    <div class="col-lg-12">
+        <div class="billing-info mb-20">
+            <label>Địa chỉ <abbr class="required" title="required">*</abbr></label>
+            <input type="text" name="diachi" value="<?= isset($diachi) ? htmlspecialchars($diachi) : '' ?>">
+            <!-- Hiển thị lỗi nếu có -->
+            <?php if (isset($errors['diachi'])): ?>
+                <p class="error-message" style="color: red;"><?= htmlspecialchars($errors['diachi']) ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+    <div class="col-lg-12 col-md-12">
+        <div class="billing-info mb-20">
+            <label>Số Điện Thoại <abbr class="required" title="required">*</abbr></label>
+            <input type="text" name="sodienthoai" value="<?= isset($sodienthoai) ? htmlspecialchars($sodienthoai) : '' ?>">
+            <!-- Hiển thị lỗi nếu có -->
+            <?php if (isset($errors['sodienthoai'])): ?>
+                <p class="error-message" style="color: red;"><?= htmlspecialchars($errors['sodienthoai']) ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12">
+        <div class="billing-info mb-20">
+            <label>Ngày đặt hàng <abbr class="required" title="required">*</abbr></label>
+            <input type="text" name="ngaydat" value="<?= date('Y-m-d') ?>" readonly>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
         

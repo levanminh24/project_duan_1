@@ -53,14 +53,7 @@
                                 <button type="submit" class="btn-theme  btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
                               
                                 </div>
-                          
                         </form>
-                       
-          
-    
-   
-    
-
                     </div>
                 </div>
             </div>
