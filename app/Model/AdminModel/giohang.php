@@ -56,3 +56,27 @@ function kttt($idbill)
     $result = pdo_query($sql);
     return $result;
 }
+function layDanhSachTaiKhoanDatHang() {
+    $sql = "SELECT tk.id, tk.tendangnhap, tk.email 
+            FROM tai_khoan tk 
+            JOIN bill dh ON tk.id = dh.idtaikhoan
+            GROUP BY tk.id";
+    $return = pdo_query($sql);
+    return $return;
+}
+
+function layChiTietDonHangTheoTaiKhoan($idTaiKhoan) {
+    $sql = "SELECT dh.id, dh.ngaydathang, dh.trangthai, dh.diachinhan,dh.hovatennhan, dh.sodienthoainhan, 
+                   bc.soluong, bc.thanhtien, sp.tensp, sp.img
+            FROM bill dh
+            JOIN bill_chitiet bc ON dh.id = bc.idbill
+            JOIN sanpham sp ON bc.idsanpham = sp.id
+            WHERE dh.idtaikhoan = $idTaiKhoan
+            ORDER BY dh.ngaydathang DESC";
+    $donHang = pdo_query($sql);
+    return $donHang;
+}
+
+
+
+

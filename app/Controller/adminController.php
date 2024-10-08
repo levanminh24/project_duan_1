@@ -21,6 +21,9 @@ if (isset($_GET['act'])) {
             }
             include "dangnhap/login.php";
             break;
+            case 'logout':
+                dangxuat();
+                break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();
             include 'danhmuc/list.php';
@@ -145,15 +148,6 @@ if (isset($_GET['act'])) {
                 $listtaikhoan = listtaikhoanadmin();
                 include "taikhoan/listtkQtv.php";
                 break;
-       
-
-       
-
-
-        case 'listtkQtv':
-            $listtaikhoan = listtaikhoanadmin();
-            include "taikhoan/listtkQtv.php";
-            break;
 
         case 'addtk':
             if (isset($_POST['themmoi'])) {
@@ -170,15 +164,6 @@ if (isset($_GET['act'])) {
             }
             include "taikhoan/add.php";
             break;
-
-
-
-      
-
-
-
-        
-
 
         case 'dangnhapadmin':
             if (isset($_POST['dangnhap'])) {
@@ -272,10 +257,19 @@ if (isset($_GET['act'])) {
 
             include "binhluan/list.php";
             break;
-        case 'listBill':
-            $donHang = loadall_giohang();
-            include "donhang/list.php";
-            break;
+            case 'listBill':
+                // Lấy danh sách tất cả tài khoản có đơn hàng
+                $taiKhoans = layDanhSachTaiKhoanDatHang();
+                include "donhang/list.php";
+                break;
+                case 'chitietDonHang':
+                    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+                        $idTaiKhoan = (int)$_GET['id'];
+                        $donHang = layChiTietDonHangTheoTaiKhoan($idTaiKhoan);
+                        include "donhang/ctdh.php";
+                    }
+                    break;
+                
             case 'donhangbihuy':
               $litshuy = donHangbiHuy();
               include "donhang/donhuy.php";
@@ -298,9 +292,11 @@ if (isset($_GET['act'])) {
                 $trangthai = $_POST['trangthai'];
                 updatetrangthaiDonHang($id, $trangthai);
                 $thongbao = "Cập nhật trạng thái đơn hàng thành công!";
+                
             }
             include "donhang/update.php";
             break;
+           
     }
 } else {
     $listdanhmuc = loadall_danhmuc();
