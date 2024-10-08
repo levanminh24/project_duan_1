@@ -19,13 +19,6 @@
         <div class="row mb-4">
             <div class="col">
                 <div class="boxcontent cart p-3 border rounded">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>TÌNH TRẠNG ĐƠN HÀNG</th>
-                            </tr>
-                        </thead>
-                    </table>
                     <form action="index.php?act=updatedonhang" method="post" enctype="multipart/form-data">
 
                         <?php
@@ -37,36 +30,54 @@
 
                             // Lấy trạng thái từ kết quả trả về
                             if ($kttt) {
-                                $trangthai = $kttt[0]['trangthai']; // Giả sử pdo_query trả về một mảng
+                                $trangthai = $kttt[0]['trangthai']; // Giả sử kttt trả về một mảng
                                 $id = $idbill; // Lưu lại ID đơn hàng
                         ?>
 
                                 <div class="form-group">
                                     <label for="trangthai">Trạng thái</label>
                                     <select class="form-control" name="trangthai" id="trangthai">
-                                        <option value="0" <?php if ($trangthai == 0) echo 'selected'; ?>>Chờ xác nhận</option>
-                                        <option value="1" <?php if ($trangthai == 1) echo 'selected'; ?>>Đang lấy hàng</option>
-                                        <option value="2" <?php if ($trangthai == 2) echo 'selected'; ?>>Đang giao hàng</option>
-                                        <option value="3" <?php if ($trangthai == 3) echo 'selected'; ?>>Giao thành công</option>
+                                        <?php
+                                        // Tạo danh sách trạng thái có thể cập nhật
+                                        $trangthaiOptions = [
+                                            0 => 'Chờ xác nhận',
+                                            1 => 'Đang lấy hàng',
+                                            2 => 'Đang giao hàng',
+                                            3 => 'Giao thành công',
+                                        ];
+
+                                        // Hiển thị trạng thái hiện tại
+                                        echo '<option value="' . $trangthai . '">' . $trangthaiOptions[$trangthai] . ' (Hiện tại)</option>';
+
+                                        // Hiển thị các trạng thái tiếp theo
+                                        foreach ($trangthaiOptions as $value => $label) {
+                                            // Chỉ cho phép chọn trạng thái tiếp theo
+                                            if ($value > $trangthai) {
+                                                echo '<option value="' . $value . '">' . $label . '</option>';
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>
 
                                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
-                                <button type="submit" name="capnhat" class="btn btn-primary">CẬP NHẬT</button>
-                                <a href="?act=listBill"><button type="button" class="btn btn-success">Quay lại</button></a>
+                                <button type="submit" name="capnhat" class="btn btn-primary" <?php echo ($trangthai == 3) ? 'disabled' : ''; ?>>CẬP NHẬT</button>
+                                
 
                         <?php
                             }
                         }
                         ?>
                         <?php if (isset($thongbao) && $thongbao !== "") : ?>
-                            <div class="alert alert-info"><?= $thongbao ?></div>
-                        <?php endif; ?>
+    <div class="alert alert-info"><?= $thongbao ?></div>
+    <a href="?act=listBill" class="btn btn-secondary mt-2">Quay lại trang đơn hàng</a>
+<?php endif; ?>
+
                     </form>
                 </div>
             </div>
         </div>
-
+       
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

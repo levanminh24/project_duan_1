@@ -184,13 +184,27 @@
                     </div>
 
                 </div>
+
+                <?php
+                if (isset($_SESSION['user'])) {
+                ?>
+                    <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <form action="index.php?act=logout" method="POST">
+                                <button type="submit" class="collapse-item">Đăng xuất</button>
+                            </form>
+                        </div>
+
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <form action="index.php?act=logout" method="POST"> <!-- Thay your_script.php bằng tệp thực thi của bạn -->
                             <button type="submit" class="collapse-item">Đăng xuất</button>
                         </form>
+
                     </div>
-                </div>
+                <?php
+                }
+                ?>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

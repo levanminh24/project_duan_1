@@ -1,14 +1,13 @@
 <?php
 function load_all_giohang($idtaikhoan)
 {
-    $query = "SELECT giohang.id, giohang.idtaikhoan, giohang.idsanpham, giohang.soluong, giohang.thanhtien,
-              sanpham.id as idsp, sanpham.tensp, sanpham.giasp, sanpham.img, sanpham.soluong as soluongsp, sanpham.trangthai
-              
-              FROM giohang 
-              INNER JOIN sanpham ON giohang.idsanpham = sanpham.id 
-             
-              WHERE giohang.idtaikhoan = $idtaikhoan AND sanpham.trangthai = 0
-              ORDER BY giohang.id DESC";
+    $query = "SELECT giohang.id, giohang.idtaikhoan, giohang.idsanpham, giohang.soluong, giohang.thanhtien, 
+       sanpham.id as idsp, sanpham.tensp, sanpham.giasp, sanpham.img, sanpham.soluong as soluongsp, sanpham.trangthai
+FROM giohang 
+INNER JOIN sanpham ON giohang.idsanpham = sanpham.id 
+WHERE giohang.idtaikhoan = $idtaikhoan AND sanpham.trangthai = 0
+ORDER BY giohang.id DESC
+";
     return pdo_query($query);
    
 }
@@ -25,10 +24,13 @@ function delete_giohang($id) {
     pdo_execute($sql);
    
 }
+
 function load_cart_item($idtaikhoan, $idsanpham) {
-    $query = "SELECT * FROM giohang WHERE idtaikhoan = '$idtaikhoan' AND idsanpham = '$idsanpham'";
-    return pdo_query($query); // Hàm này nên trả về một mảng các sản phẩm trong giỏ hàng
+    $sql = "SELECT * FROM giohang WHERE idtaikhoan = $idtaikhoan AND idsanpham = $idsanpham";
+    // Thực thi truy vấn và trả về sản phẩm nếu có
+    return pdo_query_one($sql); // pdo_query_one trả về 1 bản ghi
 }
+
 function insert_bill($idtaikhoan,$hovatennhan, $diachinhan, $sodienthoainhan, $ngaydathang, $pttt, $trangthai) {
     $query = "INSERT INTO bill (idtaikhoan,hovatennhan, diachinhan, sodienthoainhan, ngaydathang, pttt, trangthai) 
               VALUES ('$idtaikhoan','$hovatennhan', '$diachinhan', '$sodienthoainhan', '$ngaydathang', '$pttt', '$trangthai')";
@@ -70,6 +72,12 @@ function load_all_billchitiet($idtaikhoan) {
               ORDER BY bill.ngaydathang DESC, bill_chitiet.id DESC";  // Sắp xếp sản phẩm trong mỗi hóa đơn theo mã sản phẩm mới nhất
               
     return pdo_query($query);
+}
+
+function update_cart_item($idtaikhoan, $idsanpham, $soluong, $thanhtien) {
+    $sql = "UPDATE giohang SET soluong = $soluong, thanhtien = $thanhtien 
+            WHERE idtaikhoan = $idtaikhoan AND idsanpham = $idsanpham";
+    pdo_execute($sql);
 }
 
 

@@ -14,10 +14,11 @@
                                     <div class="login-form-container">
                                         <div class="login-register-form">
                                         <form action="?act=dangky" method="post">
-                                                <input type="text" name="tendangnhap" placeholder="Username" value="<?= $tendangnhap ?>">
-                                                <p style="color: red;"><?= $errors['tendangnhap'] ?></p>
+                                        <input type="text" name="tendangnhap" placeholder="username" >
+                                        <p style="color: red;"><?= $errors['tendangnhap'] ?></p>
                                                 <input type="password" name="matkhau" placeholder="Password">
                                                 <p style="color: red;"><?= $errors['matkhau'] ?></p>
+                                                
                                                 <input name="email" placeholder="Email" type="email">
                                                 <p style="color: red;"><?= $errors['email'] ?></p>
                                                 <input name="sodienthoai" placeholder="Số điện thoại" type="text">
