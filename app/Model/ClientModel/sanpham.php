@@ -52,15 +52,18 @@ function dem_sp_dm($iddm)
 
 
 
-function load_sp_lq($iddm)
-{
-    $query = "SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
-    if ($iddm != "") {
-        $query .= " AND iddm=" . $iddm;
+function load_sp_lq($iddm){
+    $query="SELECT sanpham.*, danhmuc.name FROM sanpham INNER JOIN danhmuc ON sanpham.iddm=danhmuc.id WHERE 1";
+    if($iddm!=""){
+        $query .=" AND iddm=".$iddm;
     }
-    $query .= " ORDER BY id asc";
+    $query .=" ORDER BY id asc";
     return pdo_query($query);
 }
+
+
+
+
 function load_all_spdm($iddm, $kyw, $giadau, $giacuoi, $page)
 {
     // Chuyển đổi biến $iddm, $giadau, $giacuoi thành kiểu số nguyên

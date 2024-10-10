@@ -73,14 +73,14 @@
                             $tongthanhtoan += $item['thanhtien']; 
                         ?>
                             <!-- Hiển thị tên sản phẩm, số lượng và tổng tiền của từng sản phẩm -->
-                            <li><?= $item['tensp'] ?> x <?= $item['soluong'] ?> <span><?= number_format($item['thanhtien'],3) ?> đ</span></li>
+                            <li><?= $item['tensp'] ?> x <?= $item['soluong'] ?> <span><?= number_format($item['thanhtien']) ?> đ</span></li>
                         <?php } ?>
                     </ul>
                 </div>
                 <div class="your-order-info order-total">
                     <ul>
                         <!-- Hiển thị tổng số tiền thanh toán -->
-                        <li>Total <span><?= number_format($tongthanhtoan,3) ?> đ</span></li>
+                        <li>Total <span><?= number_format($tongthanhtoan) ?> đ</span></li>
                     </ul>
                 </div>
             </div>

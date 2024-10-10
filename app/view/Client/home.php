@@ -123,7 +123,7 @@
 
                             </div>
                             <div class="product-price">
-                                <span class=""><?= number_format($giasp, 3) ?>₫</span>
+                                <span class=""><?= number_format($giasp) ?>₫</span>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
 
                             </div>
                             <div class="product-price">
-                                <span class=""><?= number_format($giasp, 3) ?>₫</span>
+                                <span class=""><?= number_format($giasp) ?>₫</span>
                             </div>
                         </div>
                     </div>

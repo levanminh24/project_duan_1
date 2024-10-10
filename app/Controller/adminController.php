@@ -258,18 +258,9 @@ if (isset($_GET['act'])) {
             include "binhluan/list.php";
             break;
             case 'listBill':
-                // Lấy danh sách tất cả tài khoản có đơn hàng
-                $taiKhoans = layDanhSachTaiKhoanDatHang();
+                $donHang = loadall_giohang();
                 include "donhang/list.php";
-                break;
-                case 'chitietDonHang':
-                    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-                        $idTaiKhoan = (int)$_GET['id'];
-                        $donHang = layChiTietDonHangTheoTaiKhoan($idTaiKhoan);
-                        include "donhang/ctdh.php";
-                    }
-                    break;
-                
+                break;  
             case 'donhangbihuy':
               $litshuy = donHangbiHuy();
               include "donhang/donhuy.php";
@@ -285,18 +276,17 @@ if (isset($_GET['act'])) {
             $donHang = loadall_giohang();
             include "donhang/update.php";
             break;
-
         case 'updatedonhang':
             if (isset($_POST['capnhat'])) {
                 $id = $_POST['id'];
                 $trangthai = $_POST['trangthai'];
                 updatetrangthaiDonHang($id, $trangthai);
-                $thongbao = "Cập nhật trạng thái đơn hàng thành công!";
-                
+                echo '<script>alert("Đơn hàng đã cập nhật thành công.");</script>';
+                echo '<script>window.location.href = "?act=listBill";</script>';
             }
-            include "donhang/update.php";
+            $donHang = loadall_giohang();
+            include "donhang/list.php";
             break;
-           
     }
 } else {
     $listdanhmuc = loadall_danhmuc();

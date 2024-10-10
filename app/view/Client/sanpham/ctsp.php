@@ -39,22 +39,26 @@
                         </ul>
                     </div>
                     <div class="product-details-action-wrap">
-                        <form action="index.php?act=giohang" method="POST">
-                            <input type="hidden" name="idsanpham" value="<?= $id ?>">
-                            <input type="hidden" name="tensp" value="<?= $tensp ?>">
-                            <input type="hidden" name="giasp" value="<?= $giasp ?>">
+    <form action="index.php?act=giohang" method="POST">
+        <input type="hidden" name="idsanpham" value="<?= $id ?>">
+        <input type="hidden" name="tensp" value="<?= $tensp ?>">
+        <input type="hidden" name="giasp" value="<?= $giasp ?>">
+        <input type="hidden" id="available-quantity" value="<?= $soluong ?>"> <!-- Số lượng sản phẩm hiện có -->
 
-                            <div class="product-quality">
-                                <button type="button" class="dec qtybtn">-</button>
-                                <input type="text" value="1" name="soluong" id="quantity-input">
-                                <button type="button" class="inc qtybtn">+</button>
-                            </div>
-                            <div class="product-action-2-wrap">
-                                <button type="submit" class="btn-theme  btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
-                              
-                                </div>
-                        </form>
-                    </div>
+        <div class="product-quality">
+            <button type="button" class="dec qtybtn">-</button>
+            <input type="text" value="1" name="soluong" id="quantity-input" min="1" readonly>
+            <button type="button" class="inc qtybtn">+</button>
+        </div>
+        <div class="product-action-2-wrap">
+            <?php if ($soluong > 0) { ?>
+                <button type="submit" class="btn-theme btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
+            <?php } else { ?>
+                <button type="button" class="btn-theme btn-sm ml-3" disabled>Hết hàng</button>
+            <?php } ?>
+        </div>
+    </form>
+</div>
                 </div>
             </div>
         </div>
@@ -107,20 +111,35 @@
         const qtyInput = document.getElementById('quantity-input');
         const decBtn = document.querySelector('.dec.qtybtn');
         const incBtn = document.querySelector('.inc.qtybtn');
+        const availableQty = parseInt(document.getElementById('available-quantity').value); // Số lượng sản phẩm hiện có
+
+        // Hàm cập nhật trạng thái của nút tăng
+        function updateIncBtnState() {
+            let currentQty = parseInt(qtyInput.value);
+            incBtn.disabled = currentQty >= availableQty; // Vô hiệu hóa nút tăng nếu số lượng >= số lượng hiện có
+        }
+
+        // Cập nhật trạng thái nút tăng khi trang được tải
+        updateIncBtnState();
 
         decBtn.addEventListener('click', function() {
             let currentQty = parseInt(qtyInput.value);
             if (currentQty > 1) {
                 qtyInput.value = currentQty - 1;
+                updateIncBtnState(); // Cập nhật lại trạng thái nút tăng
             }
         });
 
         incBtn.addEventListener('click', function() {
             let currentQty = parseInt(qtyInput.value);
-            qtyInput.value = currentQty + 1;
+            if (currentQty < availableQty) { // Kiểm tra xem số lượng có nhỏ hơn số lượng hiện có không
+                qtyInput.value = currentQty + 1;
+                updateIncBtnState(); // Cập nhật lại trạng thái nút tăng
+            }
         });
     });
 </script>
+
 <div class="description-review-area pb-85">
     <div class="container">
         <div class="description-review-topbar nav" data-aos="fade-up" data-aos-delay="200">
@@ -179,11 +198,7 @@
                                         <img src="public/images/<?= $img ?>" alt="">
                                     </a>
 
-                                    <div class="product-action-2-wrap">
-
-
-                                        <button data-id="<?= $id ?>" class="product-action-btn-2" title="Add To Cart"><i class="pe-7s-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                    </div>
+                                    
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>

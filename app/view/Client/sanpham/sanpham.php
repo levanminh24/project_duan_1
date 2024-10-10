@@ -18,11 +18,13 @@
                                                 <a href="?act=chitietsp&id=<?= $id ?>">
                                                     <img src="public/images/<?= $img?>" alt="">
                                                 </a>
+
+
                                             </div>
                                             <div class="product-content">
                                                 <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp?></a></h3>
                                                 <div class="product-price">
-                                                    <a href="" style="font-size: large;"><?=number_format($giasp, 3) ?>₫</a>
+                                                    <a href="" style="font-size: large;"><?=number_format($giasp) ?>₫</a>
                                                     
                                                 </div>
                                             </div>

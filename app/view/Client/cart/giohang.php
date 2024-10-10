@@ -27,7 +27,7 @@
                             <td class="product-name">
                                 <h5><a href="product-details.php?id=<?= $item['idsp'] ?>"><?= $item['tensp'] ?></a></h5>
                             </td>
-                            <td class="product-cart-price"><span class="amount"><?= number_format($item['giasp'], 3) ?> VND</span></td>
+                            <td class="product-cart-price"><span class="amount"><?= number_format($item['giasp']) ?> VND</span></td>
                               
                             <td class="cart-quality">
   <p><?= $item['soluong'] ?></p>
@@ -36,7 +36,7 @@
                                 
                           
                             <td class="product-total">
-                                <span><?= number_format($item['soluong'] * $item['giasp'], 3) ?> VND</span>
+                                <span><?= number_format($item['soluong'] * $item['giasp']) ?> VND</span>
                             </td>
                             <td class="product-remove">
                                 <input type="hidden" name="delete_item" value="<?= $item['id'] ?>">
@@ -54,7 +54,7 @@
         <div class="col-lg-12">
             <div class="cart-shiping-update-wrapper">
                 <div class="cart-shiping-update btn-hover">
-                    <a href="?act=trangchu">Continue Shopping</a>
+                    <a href="?act=allsanpham">Continue Shopping</a>
                 </div>
                 <div class="cart-clear-wrap">
                     
@@ -71,7 +71,7 @@
     <div class="col-lg-4 col-md-12 col-12">
         <div class="grand-total-wrap">
             <div class="grand-total-content">
-                <h3>Subtotal <span><?= number_format($tongThanhToan, 3) ?> VND</span></h3>
+                <h3>Subtotal <span><?= number_format($tongThanhToan) ?> VND</span></h3>
             </div>
             <div class="grand-total-btn btn-hover">
                 <?php if (count($giohang) > 0): ?>
