@@ -12,7 +12,7 @@
     <title>Admin</title>
     <!-- Custom fonts for this template -->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -60,7 +60,7 @@
             <div class="sidebar-heading">
                 Quản lý
             </div>
-            
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </li>
-       
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -115,7 +115,7 @@
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseFive">
@@ -131,7 +131,7 @@
                     </div>
                 </div>
             </li>
-                 <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThreer"
                     aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-folder"></i>
@@ -147,9 +147,9 @@
                 </div>
             </li>
             <!-- Nav Item - Tables -->
-           
-              <!-- Nav Item - Tables -->
-              <li class="nav-item">
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
                 <a class="nav-link" href="?act=listbinhluan">
                     <i class="fas fa-fw fa-comment"></i>
                     <span>Quản lý bình luận</span></a>
@@ -182,7 +182,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=addtintuc">Thêm tin tức</a>
                     </div>
-                    
+
                 </div>
                 <?php
                 if (isset($_SESSION['user'])) {
@@ -234,7 +234,7 @@
                                     Settings
                                 </a> -->
                                 <!-- <div class="dropdown-divider"></div> -->
-                                
+
                             </div>
                         </li>
                     </ul>

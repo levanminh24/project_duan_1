@@ -18,8 +18,8 @@
                                                 <a href="?act=chitietsp&id=<?= $id ?>">
                                                     <img src="public/images/<?= $img?>" alt="">
                                                 </a>
-                                                
-                                                
+
+
                                             </div>
                                             <div class="product-content">
                                                 <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp?></a></h3>
