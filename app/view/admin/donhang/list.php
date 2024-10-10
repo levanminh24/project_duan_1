@@ -1,12 +1,13 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản đặt hàng</h1>
+    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đơn hàng</h1>
     <form action="" method="post">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="float-right">
                     <div class="input-group">
-                        <!-- Bạn có thể thêm các tùy chọn tìm kiếm ở đây nếu cần -->
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -17,23 +18,32 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <thead class="thead-light">
                     <tr>
-                        <th>Mã tài khoản</th>
-                        <th>Họ và tên</th>
-                        <th>Email</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Họ và tên nhận</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Địa chỉ nhận</th>
+                        <th>Trạng thái</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($taiKhoans as $taiKhoan) {
-                        extract($taiKhoan);
-                        $chitietLink = "index.php?act=chitietDonHang&id=" . $id;
+                    <?php foreach ($donHang as $bill) {
+                        extract($bill);
+                        $suabill = "index.php?act=suaDonHang&id=" . $id;
 
+                        // Sử dụng hàm get_trangthai_text từ model của bạn
+                        $trangthai_text = get_trangthai_text($trangthai);
+                        $disabled = ($trangthai == 3 || $trangthai == 4) ? 'disabled' : ''; 
                         echo '<tr>
                             <td>' . $id . '</td>
-                            <td>' . $tendangnhap . '</td>
-                            <td>' . $email . '</td>
+                            <td>' . $hovatennhan . '</td>
+                            <td>' . $ngaydathang . '</td>
+                            <td>' . $sodienthoainhan . '</td>
+                            <td>' . $diachinhan . '</td>
+                            <td>' . $trangthai_text . '</td>
                             <td>
-                                <a href="' . $chitietLink . '" class="btn btn-info btn-sm">Chi tiết</a>
+                                <a href="' . $suabill . '" class="btn btn-primary btn-sm ' . $disabled . '">Cập nhật</a>
                             </td>
                         </tr>';
                     } ?>

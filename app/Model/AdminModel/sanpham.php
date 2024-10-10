@@ -26,4 +26,15 @@ function delete_sanpham($id)
     $sql = "delete from sanpham where id = " . $id;
     pdo_execute($sql);
 }
+function layChiTietSanPham($idbill) {
+    $sql = "SELECT sp.tensp, sp.img, ctdh.soluong, ctdh.dongia, (ctdh.soluong * ctdh.dongia) AS thanhtien 
+            FROM bill_chitiet ctdh 
+            JOIN sanpham sp ON ctdh.idsanpham = sp.id 
+            WHERE ctdh.idbill = $idbill";
+    $list = pdo_query($sql);
+    return $list;
+}
+
+
+
 

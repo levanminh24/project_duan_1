@@ -16,7 +16,7 @@
         <h2>Cửa Hàng Bán Điện Thoại Uy Tín & Chất Lượng</h2>
         <p>Chúng tôi cung cấp các dòng điện thoại chính hãng từ các thương hiệu hàng đầu với giá tốt nhất, cùng nhiều chương trình khuyến mãi hấp dẫn.</p>
             <div class="buttons">
-            <a href="#" class="btn btn-primary">Xem Sản Phẩm</a>
+            <a href="?act=allsanpham" class="btn btn-primary">Xem Sản Phẩm</a>
             <a href="#" class="btn btn-secondary">Liên Hệ Tư Vấn</a>
             </div>
         </div>

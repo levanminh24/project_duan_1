@@ -22,7 +22,7 @@
                                             <div class="product-content">
                                                 <h3><a href=""><?= $tensp ?></a></h3>
                                                 <div class="product-price">
-                                                    <span class="new-price"><?= number_format($giasp, 3) ?> </span>
+                                                    <span class="new-price"><?= number_format($giasp) ?> </span>
                                                 </div>
                                             </div>
                                         </div>
