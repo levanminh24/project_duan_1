@@ -4,83 +4,80 @@
         <div class="row">
         <h2>Đơn Hàng Của Tôi</h2>
             <div class="col-12">
-            <form action="?act=donhangcuatoi" method="POST">
-                    <div class="orders-table-content">
-                        <div class="table-content table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Mã Đơn Hàng</th>
-                                        <th class="width-thumbnail">Ảnh</th>
-                                        <th class="width-name">Sản Phẩm</th>
-                                        <th>Số Lượng</th>
-                                        <th>Ngày Đặt Hàng</th>
-                                        <th>Địa Chỉ Nhận</th>
-                                        <th>Thành Tiền</th>
-                                        <th>Trạng Thái</th>
-                                        <th>Hủy</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($donhang as $item): ?>
-                                        <tr>
-                                            <td><?= $item['id'] ?></td>
-                                            <td class="order-thumbnail">
-                                                <a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>">
-                                                    <img src="public/images/<?= $item['img'] ?>" alt="<?= $item['tensp'] ?>" style="width: 50px;">
-                                                </a>
-                                            </td>
-                                            <td class="order-name">
-                                                <h6><a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>"><?= $item['tensp'] ?></a></h6>
-                                            </td>
-                                            
-                                            <td><?= $item['soluong'] ?></td>
-                                            <td><?= $item['ngaydathang'] ?></td>
-                                            <td><?= $item['diachinhan'] ?></td>
-                                            <td><?= number_format($item['thanhtien'], 3) ?> VND</td>
-                                            <td>
-                                                <?php
-                                                switch ($item['trangthai']) {
-                                                    case 0:
-                                                        echo 'Chờ Xác Nhận';
-                                                        break;
-                                                    case 1:
-                                                        echo 'Đang Lấy Hàng';
-                                                        break;
-                                                    case 2:
-                                                        echo 'Đang Giao Hàng';
-                                                        break;
-                                                    case 3:
-                                                        echo 'Giao Hàng Thành Công';
-                                                        break;
-                                                    case 4:
-                                                        echo 'Đã Hủy';
-                                                        break;
-                                                }
-                                                ?>
-                                            </td>
-                                            <td>
-                                            <?php if ($item['trangthai'] == 0): ?>
-                    <form action="?act=huydonhang" method="POST">
-                        <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
-                        <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này chứ?');">
-                            <i class="ti-trash"></i> Hủy
-                        </button>
-                    </form>
-                <?php elseif ($item['trangthai'] == 4): ?>
-                    <!-- Hiển thị nút Mua lại cho đơn hàng đã hủy -->
-                   
-                <?php else: ?>
-                    <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
-                <?php endif; ?>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </form>
+            <div class="orders-table-content">
+    <div class="table-content table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã Đơn Hàng</th>
+                    <th class="width-thumbnail">Ảnh</th>
+                    <th class="width-name">Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Ngày Đặt Hàng</th>
+                    <th>Địa Chỉ Nhận</th>
+                    <th>Thành Tiền</th>
+                    <th>Trạng Thái</th>
+                    <th>Hủy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($donhang as $item): ?>
+                    <tr>
+                        <td><?= $item['id'] ?></td>
+                        <td class="order-thumbnail">
+                            <a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>">
+                                <img src="public/images/<?= $item['img'] ?>" alt="<?= $item['tensp'] ?>" style="width: 50px;">
+                            </a>
+                        </td>
+                        <td class="order-name">
+                            <h6><a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>"><?= $item['tensp'] ?></a></h6>
+                        </td>
+                        <td><?= $item['soluong'] ?></td>
+                        <td><?= $item['ngaydathang'] ?></td>
+                        <td><?= $item['diachinhan'] ?></td>
+                        <td><?= number_format($item['thanhtien'], 3) ?> VND</td>
+                        <td>
+                            <?php
+                            switch ($item['trangthai']) {
+                                case 0:
+                                    echo 'Chờ Xác Nhận';
+                                    break;
+                                case 1:
+                                    echo 'Đang Lấy Hàng';
+                                    break;
+                                case 2:
+                                    echo 'Đang Giao Hàng';
+                                    break;
+                                case 3:
+                                    echo 'Giao Hàng Thành Công';
+                                    break;
+                                case 4:
+                                    echo 'Đã Hủy';
+                                    break;
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <form action="?act=huydonhang" method="POST">
+                                <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
+                                <?php if ($item['trangthai'] == 0): ?>
+                                    <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này chứ?');">
+                                        <i class="ti-trash"></i> Hủy
+                                    </button>
+                                <?php elseif ($item['trangthai'] == 4): ?>
+                                    <!-- Hiển thị nút Mua lại cho đơn hàng đã hủy -->
+                                <?php else: ?>
+                                    <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
+                                <?php endif; ?>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
             </div>
         </div>

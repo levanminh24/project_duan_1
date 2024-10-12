@@ -38,32 +38,31 @@ if (isset($_GET['act'])) {
 
             case 'addbinhluan':
                 if (isset($_POST['guibinhluan'])) {
-                    // Check if the user is logged in
+                
                     if (isset($_SESSION['tendangnhap'])) {
                         $idtaikhoan = $_POST['idtaikhoan'];
                         $idsanpham = $_POST['idsanpham'];
-                        $noidung = trim($_POST['noidung']);  // Remove any unnecessary whitespace
+                        $noidung = trim($_POST['noidung']);  
                         $ngaybinhluan = $_POST['ngaybinhluan'];
             
-                        // Validation
+                      
                         $errors = [];
             
-                        // Check if account ID is valid
+                      
                         if (empty($idtaikhoan)) {
                             $errors[] = "Tài khoản không hợp lệ.";
                         }
             
-                        // Check if product ID is valid
+                        
                         if (empty($idsanpham)) {
                             $errors[] = "Sản phẩm không hợp lệ.";
                         }
             
-                        // Check if content is provided
+                       
                         if (empty($noidung)) {
                             $errors[] = "Nội dung bình luận không được để trống.";
                         }
             
-                        // If no errors, insert comment
                         if (empty($errors)) {
                             insert_bl($idtaikhoan, $idsanpham, $noidung, $ngaybinhluan);
                             echo "<script>window.location.href='index.php?act=chitietsp&id=$idsanpham';</script>";
@@ -176,7 +175,9 @@ if (isset($_GET['act'])) {
                         $_SESSION['idtendangnhap'] = $taikhoan['id'];
                         echo "<script>alert('Đăng nhập thành công');</script>";
                         echo "<script>window.location.href='index.php?act=trangchu';</script>";
-                        exit;
+                      
+                    }else {
+                        $errors['tendangnhap'] = "Sai tài khoản hoặc mật khẩu.";
                     }
                 }
             }
@@ -215,6 +216,7 @@ if (isset($_GET['act'])) {
                     $soluong = isset($_POST['soluong']) ? intval($_POST['soluong']) : 1; // Số lượng sản phẩm, phải là số nguyên
                     $giasp = isset($_POST['giasp']) ? floatval($_POST['giasp']) : 0; // Giá sản phẩm, chuyển về số thực
                     $thanhtien = $soluong * $giasp; // Tính tổng tiền cho sản phẩm này
+                    $currentUrl = isset($_POST['current_url']) ? $_POST['current_url'] : 'index.php'; // Lấy URL hiện tại
             
                     // Kiểm tra xem ID tài khoản và ID sản phẩm có hợp lệ không
                     if ($idtaikhoan && $idsanpham) {
@@ -236,8 +238,9 @@ if (isset($_GET['act'])) {
                         echo '<script>window.location.href = "index.php?act=dangnhap"</script>';
                     }
             
-                    // Chuyển hướng lại trang để tránh gửi lại form khi reload
-                    echo '<script>window.location.href = "index.php?act=giohang"</script>';
+                    // Chuyển hướng lại trang chi tiết sản phẩm sau khi thêm vào giỏ hàng thành công
+                    echo "<script>alert('Sản phẩm đã được thêm vào giỏ hàng');</script>";
+                    echo '<script>window.location.href = "'.$currentUrl.'"</script>';
                     exit();
                 }
             
@@ -257,6 +260,7 @@ if (isset($_GET['act'])) {
                 // Gọi view để hiển thị giỏ hàng
                 include "app/view/Client/cart/giohang.php";
                 break;
+            
             
             
         case 'timkiem':
@@ -369,6 +373,7 @@ if (isset($_GET['act'])) {
                     case 'donhangcuatoi':
                         // Lấy id của tài khoản người dùng đang đăng nhập từ session
                         $idtaikhoan = $_SESSION['idtendangnhap'];
+                        
                         
                         // Gọi hàm để lấy thông tin chi tiết tất cả đơn hàng và sản phẩm trong từng đơn hàng
                         $donhang = load_all_billchitiet($idtaikhoan);
