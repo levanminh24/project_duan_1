@@ -17,12 +17,14 @@ if (isset($_GET['act'])) {
                     exit();
                 } else {
                     $thongbao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                  
                 }
             }
-            include "dangnhap/login.php";
+         
             break;
             case 'logout':
                 dangxuat();
+               
                 break;
         case 'listdm':
             $listdanhmuc = loadall_danhmuc();

@@ -43,6 +43,7 @@
         <input type="hidden" name="idsanpham" value="<?= $id ?>">
         <input type="hidden" name="tensp" value="<?= $tensp ?>">
         <input type="hidden" name="giasp" value="<?= $giasp ?>">
+        <input type="hidden" name="current_url" value="<?= $_SERVER['REQUEST_URI'] ?>"> <!-- Lưu URL hiện tại -->
         <input type="hidden" id="available-quantity" value="<?= $soluong ?>"> <!-- Số lượng sản phẩm hiện có -->
 
         <div class="product-quality">
@@ -50,7 +51,7 @@
             <input type="text" value="1" name="soluong" id="quantity-input" min="1" readonly>
             <button type="button" class="inc qtybtn">+</button>
         </div>
-        <div class="product-action-2-wrap">
+        <div class="product-action-2-wrap pt-3">
             <?php if ($soluong > 0) { ?>
                 <button type="submit" class="btn-theme btn-sm ml-3" name="addtocart">Thêm vào giỏ hàng</button>
             <?php } else { ?>
@@ -59,6 +60,7 @@
         </div>
     </form>
 </div>
+<style></style>
                 </div>
             </div>
         </div>
@@ -76,7 +78,7 @@
 }
 
 .btn-theme:hover {
-    background-color: #ffa500; /* Màu cam khi di chuột */
+    background-color:#e67e22; /* Màu cam khi di chuột */
 }
 .product-quality {
     display: flex;
