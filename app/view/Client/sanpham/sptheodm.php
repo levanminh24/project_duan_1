@@ -13,16 +13,16 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap mb-35" data-aos="fade-up" data-aos-delay="200">
                                             <div class="product-img img-zoom mb-25">
-                                                <a href="product-details.html">
+                                                <a href="?act=chitietsp&id=<?= $id ?>">
                                                     <img src="public/images/<?= $img ?>" alt="">
                                                 </a>
 
     
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href=""><?= $tensp ?></a></h3>
+                                                <h3><a href="?act=chitietsp&id=<?= $id ?>"><?= $tensp ?></a></h3>
                                                 <div class="product-price">
-                                                    <span class="new-price"><?= number_format($giasp, 3) ?> </span>
+                                                    <span class="new-price"><?= number_format($giasp) ?> </span>
                                                 </div>
                                             </div>
                                         </div>

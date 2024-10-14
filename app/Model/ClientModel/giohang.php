@@ -89,6 +89,8 @@ function update_order_status($id, $status) {
     $sql = "UPDATE bill SET trangthai = '$status' WHERE id = '$id'";
     pdo_execute($sql);
 }
+
+
 //cap nhap so luong gio hang
 function get_product_details($idsanpham) {
     $query = "SELECT * FROM sanpham WHERE id = $idsanpham";

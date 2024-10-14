@@ -64,7 +64,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 col-6">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo"></a>
+                                <a href="?act=trangchu"><img src="assets/images/logo/logo.png" alt="logo"></a>
                             </div>
                         </div>
                         <div class="col-lg-6 d-none d-lg-block d-flex justify-content-center">
@@ -84,7 +84,7 @@
                                                 ?>
                                             </ul>
                                         </li>
-                                        <li><a href="?act=tintuc">Tin Tức</a></li>
+                                        <li><a href="?act=tatcatintuc">Tin Tức</a></li>
                                         <li><a href="?act=lienhe">Liên Hệ </a></li>  
                                     </ul>
                                 </nav>
