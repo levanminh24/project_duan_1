@@ -203,7 +203,7 @@
                             </div>
                             <h3><a href="#"><?= $tieude ?></a></h3>
                             <div class="blog-btn">
-                                <a href="#">Xem thêm</a>
+                            <a href="?act=tintucchitiet&id=<?= $id ?>">Xem thêm</a>
                             </div>
                         </div>
                     </div>

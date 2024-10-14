@@ -468,6 +468,15 @@ if (isset($_GET['act'])) {
                 include 'app/view/Client/gioithieu/gioithieu.php';
                 break;
 
+                case 'tatcatintuc':
+                    include "app/view/Client/tintuc/tatcatintuc.php";
+                    break;
+                    case 'tintucchitiet':
+                        $id = $_GET['id'];
+                        $tintucchitiet = tintuc_chitiet($id);
+                        include "app/view/Client/tintuc/tintucchitiet.php";
+                        break;   
+
     }
 } else {
     $list_banner_home = load_banner_home();

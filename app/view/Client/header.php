@@ -84,7 +84,7 @@
                                                 ?>
                                             </ul>
                                         </li>
-                                        <li><a href="?act=tintuc">Tin Tức</a></li>
+                                        <li><a href="?act=tatcatintuc">Tin Tức</a></li>
                                         <li><a href="?act=lienhe">Liên Hệ </a></li>  
                                     </ul>
                                 </nav>
