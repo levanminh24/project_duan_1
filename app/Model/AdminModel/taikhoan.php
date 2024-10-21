@@ -30,11 +30,11 @@ function insert_tk($tendangnhap, $matkhau, $email, $sodienthoai, $diachi, $role)
 
    
 
-function dangxuat()
-{
-    session_unset();
-    session_destroy();
-    include_once '../../view/admin/dangnhap/login.php';
-    exit();
-}
+    function dangxuat() {
+        session_destroy(); 
+        session_unset();
+        include_once '../../view/admin/login.php';
+        exit(); 
+    }
 
+    

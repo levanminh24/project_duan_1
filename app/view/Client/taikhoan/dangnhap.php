@@ -5,11 +5,9 @@
                         <div class="login-register-wrapper">
                             <div class="login-register-tab-list nav">
                                 <a class="active" data-bs-toggle="tab" href="#lg1">
-                                    <h4> login </h4>
+                                    <h4> Đăng Nhập </h4>
                                 </a>
-                                <a data-bs-toggle="tab" href="#lg2">
-                                    <h4> register </h4>
-                                </a>
+                                
                             </div>
                             <div class="tab-content">
                                 <div id="lg1" class="tab-pane active">
@@ -21,10 +19,9 @@
                                                 <input type="password" name="matkhau" placeholder="Password">
                                                 <p style="color: red;"><?= $errors['matkhau'] ?></p>
                                                 <div class="button-box btn-hover d-flex justify-content-between">
-                                                    <button type="submit" name="dangnhap">Login</button>
+                                                    <button type="submit" name="dangnhap"> Đăng Nhập</button>
                                                     <a href="?act=quenmatkhau"><button type="button">Quên mật khẩu?</button></a>
-                                                </div>
-                                                
+                                                </div> 
                                             
                                         </div>
                                             </form>

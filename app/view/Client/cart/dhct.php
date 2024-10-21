@@ -17,63 +17,76 @@
                     <th>Địa Chỉ Nhận</th>
                     <th>Thành Tiền</th>
                     <th>Trạng Thái</th>
-                    <th>Hủy</th>
+                    <th>Thanh Toán</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($donhang as $item): ?>
-                    <tr>
-                        <td><?= $item['id'] ?></td>
-                        <td class="order-thumbnail">
-                            <a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>">
-                                <img src="public/images/<?= $item['img'] ?>" alt="<?= $item['tensp'] ?>" style="width: 50px;">
-                            </a>
-                        </td>
-                        <td class="order-name">
-                            <h6><a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>"><?= $item['tensp'] ?></a></h6>
-                        </td>
-                        <td><?= $item['soluong'] ?></td>
-                        <td><?= $item['ngaydathang'] ?></td>
-                        <td><?= $item['diachinhan'] ?></td>
-                        <td><?= number_format($item['thanhtien'], 3) ?> VND</td>
-                        <td>
-                            <?php
-                            switch ($item['trangthai']) {
-                                case 0:
-                                    echo 'Chờ Xác Nhận';
-                                    break;
-                                case 1:
-                                    echo 'Đang Lấy Hàng';
-                                    break;
-                                case 2:
-                                    echo 'Đang Giao Hàng';
-                                    break;
-                                case 3:
-                                    echo 'Giao Hàng Thành Công';
-                                    break;
-                                case 4:
-                                    echo 'Đã Hủy';
-                                    break;
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <form action="?act=huydonhang" method="POST">
-                                <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
-                                <?php if ($item['trangthai'] == 0): ?>
-                                    <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này chứ?');">
-                                        <i class="ti-trash"></i> Hủy
-                                    </button>
-                                <?php elseif ($item['trangthai'] == 4): ?>
-                                    <!-- Hiển thị nút Mua lại cho đơn hàng đã hủy -->
-                                <?php else: ?>
-                                    <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
-                                <?php endif; ?>
-                            </form>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+    <?php foreach ($donhang as $item): ?>
+        <tr>
+            <td><?= $item['id'] ?></td>
+            <td class="order-thumbnail">
+                <a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>">
+                    <img src="public/images/<?= $item['img'] ?>" alt="<?= $item['tensp'] ?>" style="width: 50px;">
+                </a>
+            </td>
+            <td class="order-name">
+                <h6><a href="?act=chitietsp&id=<?= $item['idsanpham'] ?>"><?= $item['tensp'] ?></a></h6>
+            </td>
+            <td><?= $item['soluong'] ?></td>
+            <td><?= $item['ngaydathang'] ?></td>
+            <td><?= $item['diachinhan'] ?></td>
+            <td><?= number_format($item['thanhtien'], 3) ?> VND</td>
+            <td>
+                <?php
+                switch ($item['trangthai']) {
+                    case 0:
+                        echo 'Chờ Xác Nhận';
+                        break;
+                    case 1:
+                        echo 'Đang Lấy Hàng';
+                        break;
+                    case 2:
+                        echo 'Đang Giao Hàng';
+                        break;
+                    case 3:
+                        echo 'Giao Hàng Thành Công';
+                        break;
+                    case 4:
+                        echo 'Đã Hủy';
+                        break;
+                }
+                ?>
+            </td>
+            <td>
+                <?php if ($item['trangthai'] == 3): ?>
+                   
+                    <span style="color: red;"> Đã Thanh Toán</span>
+                <?php else: ?>
+                    Chưa Thanh Toán
+                <?php endif; ?>
+            </td>
+            <td>
+                <form action="?act=huydonhang" method="POST">
+                    <input type="hidden" name="cancel_order" value="<?= $item['id'] ?>">
+                    <?php if ($item['trangthai'] == 0): ?>
+                        <button type="submit" class="btn-cancel" title="Hủy đơn hàng" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                            <i class="ti-trash"></i> Hủy
+                        </button>
+                    <?php elseif ($item['trangthai'] == 4): ?>
+                        <!-- Hiển thị nút Mua lại cho đơn hàng đã hủy -->
+                    <?php elseif ($item['trangthai'] == 3): ?>
+                        <!-- Nếu đơn hàng đã giao thành công, không hiển thị nút hủy -->
+                    <?php else: ?>
+                        <!-- Trạng thái khác sẽ hiển thị thông báo -->
+                        <button class="btn-cancel-disabled" disabled title="Không thể hủy đơn hàng"><i class="ti-lock"></i> Không thể hủy</button>
+                    <?php endif; ?>
+                </form>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody>
+
         </table>
     </div>
 </div>

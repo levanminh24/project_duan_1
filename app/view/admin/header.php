@@ -107,6 +107,7 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=listsp">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="?act=listspkhoiphuc">Kho lưu trữ sản phẩm</a>
                         <a class="collapse-item" href="?act=addsp" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
@@ -146,14 +147,23 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThreertt"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Quản bình luận</span>
+                </a>
+                <div id="collapseThreertt" class="collapse" aria-labelledby="headingThree">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="?act=listbinhluan">Danh sách binh luận</a>
+                        <a class="collapse-item" href="?act=listbinhluanan">Danh sách bl ẩn</a>
+                    </div>
+                </div>
+            </li>
             <!-- Nav Item - Tables -->
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="?act=listbinhluan">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>Quản lý bình luận</span></a>
-            </li>
+           
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -165,7 +175,7 @@
                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=bieudo">Biểu đồ</a>
-                        <a class="collapse-item" href="?act=home">Danh sách</a>
+                        <a class="collapse-item" href="?act=danhsachthongke">Danh sách</a>
                     </div>
                 </div>
             </li>

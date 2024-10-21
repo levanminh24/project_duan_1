@@ -467,6 +467,7 @@ if (isset($_GET['act'])) {
             case 'gioithieu':
                 include 'app/view/Client/gioithieu/gioithieu.php';
                 break;
+               
 
     }
 } else {

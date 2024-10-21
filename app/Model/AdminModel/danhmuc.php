@@ -5,14 +5,21 @@ function loadall_danhmuc(){
     return $listdanhmuc;
 }
 
-function insert_danhmuc($tenloai,$hinh){
-    $sql = "insert into danhmuc(name,img) values('$tenloai','$hinh')";
+function insert_danhmuc($tenloai, $hinh) {
+    // Kiểm tra xem tên danh mục đã tồn tại chưa
+    $sql_check = "SELECT * FROM danhmuc WHERE name = '$tenloai' OR img = '$hinh'";
+    $result = pdo_query($sql_check); // Sử dụng hàm pdo_query để thực hiện truy vấn
+
+    if (count($result) > 0) {
+        return false; // Tên danh mục hoặc hình ảnh đã tồn tại
+    }
+
+    // Nếu không tồn tại thì thực hiện thêm mới
+    $sql = "INSERT INTO danhmuc(name, img) VALUES('$tenloai', '$hinh')";
     pdo_execute($sql);
+    return true; // Thêm mới thành công
 }
-function delete_danhmuc($id) {
-    $sql = "UPDATE danhmuc SET is_delete = 1 WHERE id = ".$id;
-    pdo_execute($sql);
-}
+
 
 function loadone_danhmuc($id){
     $sql = "select * from danhmuc where id=".$id;
@@ -23,3 +30,9 @@ function update_danhmuc($id,$tenloai,$hinh)  {
     $sql = "update danhmuc set name = '$tenloai',img = '$hinh' where id =".$id;
     pdo_execute($sql);
  }
+ function delete_dm($id){
+    $query="DELETE FROM danhmuc WHERE id=".$id;
+    pdo_execute($query);
+}
+
+
