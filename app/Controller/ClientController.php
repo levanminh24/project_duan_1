@@ -23,6 +23,7 @@ if (isset($_GET['act'])) {
                 $product = load_one_sp($id);
                 if ($product) {
                     extract($product);
+                    update_luotxem($id);
                     $namedm = load_category_name($iddm);
                     extract($namedm);
                     $comments = load_comments($product['id']);
@@ -157,26 +158,29 @@ if (isset($_GET['act'])) {
             break;
         case 'dangnhap':
             $errors = ['tendangnhap' => '', 'matkhau' => ''];
+            $tendangnhap = $matkhau = '';
+
             if (isset($_POST['dangnhap'])) {
                 $tendangnhap = $_POST['tendangnhap'];
                 $matkhau = $_POST['matkhau'];
 
                 if (empty($tendangnhap)) {
-                    $errors['tendangnhap'] = "Tên đang nhập không được để trống";
+                    $errors['tendangnhap'] = "Tên đăng nhập không được để trống.";
                 }
+
                 if (empty($matkhau)) {
-                    $errors['matkhau'] = "Mật khẩu không được để trống";
+                    $errors['matkhau'] = "Mật khẩu không được để trống.";
                 }
-                if (empty($errors['tendangnhap'] && $errors['matkhau'])) {
+
+                if (empty($errors['tendangnhap']) && empty($errors['matkhau'])) {
                     $taikhoan = dangnhap($tendangnhap, $matkhau);
                     if ($taikhoan && $taikhoan['tendangnhap'] == $tendangnhap && $taikhoan['matkhau'] == $matkhau) {
                         $_SESSION['tendangnhap'] = $tendangnhap;
                         $_SESSION['role'] = $taikhoan['role'];
                         $_SESSION['idtendangnhap'] = $taikhoan['id'];
-                        echo "<script>alert('Đăng nhập thành công');</script>";
-                        echo "<script>window.location.href='index.php?act=trangchu';</script>";
-                      
-                    }else {
+                        echo '<script>alert("Đăng nhập thành công")</script>';
+                        echo '<script>window.location.href = "index.php"</script>';
+                    } else {
                         $errors['tendangnhap'] = "Sai tài khoản hoặc mật khẩu.";
                     }
                 }
@@ -256,6 +260,7 @@ if (isset($_GET['act'])) {
                 foreach ($giohang as $item) {
                     $tongThanhToan += $item['thanhtien'];
                 }
+                
             
                 // Gọi view để hiển thị giỏ hàng
                 include "app/view/Client/cart/giohang.php";
@@ -279,6 +284,7 @@ if (isset($_GET['act'])) {
             if (isset($_POST['delete_item'])) {
                 $id = $_POST['delete_item'];
                 delete_giohang($id); // Gọi hàm để xóa sản phẩm khỏi giỏ hàng
+               
             }
 
             // Sau khi xoá, load lại giỏ hàng và tính lại tổng thanh toán
@@ -370,17 +376,24 @@ if (isset($_GET['act'])) {
                             }
                             break;
                                             
-                    case 'donhangcuatoi':
-                        // Lấy id của tài khoản người dùng đang đăng nhập từ session
-                        $idtaikhoan = $_SESSION['idtendangnhap'];
-                        
-                        
-                        // Gọi hàm để lấy thông tin chi tiết tất cả đơn hàng và sản phẩm trong từng đơn hàng
-                        $donhang = load_all_billchitiet($idtaikhoan);
-                        
-                        // Gọi giao diện để hiển thị thông tin đơn hàng
-                        include "app/view/Client/cart/dhct.php";
-                        break;
+                            case 'donhangcuatoi':
+                                // Check if the user is logged in
+                                if (isset($_SESSION['idtendangnhap'])) {
+                                    // Get the account ID from the session
+                                    $idtaikhoan = $_SESSION['idtendangnhap'];
+                                    
+                                    // Call the function to get the details of all orders and products in each order
+                                    $donhang = load_all_billchitiet($idtaikhoan);
+                                    
+                                    // Load the view to display the order information
+                                    include "app/view/Client/cart/dhct.php";
+                                } else {
+                                    // If the user is not logged in, redirect to the login page
+                                    echo '<script>window.location.href = "?act=dangnhap";</script>';
+                                    exit(); // Stop further execution
+                                }
+                                break;
+                            
                     
                         case 'thanhtoan':
                             if (isset($_POST['thanhtoan'])) {
@@ -468,6 +481,15 @@ if (isset($_GET['act'])) {
                 include 'app/view/Client/gioithieu/gioithieu.php';
                 break;
                
+
+                case 'tatcatintuc':
+                    include "app/view/Client/tintuc/tatcatintuc.php";
+                    break;
+                    case 'tintucchitiet':
+                        $id = $_GET['id'];
+                        $tintucchitiet = tintuc_chitiet($id);
+                        include "app/view/Client/tintuc/tintucchitiet.php";
+                        break;   
 
     }
 } else {

@@ -72,6 +72,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?act=listtk">Danh sách tai khoan</a>
                         <a class="collapse-item" href="index.php?act=listtkQtv">Danh sách Admin</a>
+                        <a class="collapse-item" href="index.php?act=listtkc">Danh sách khoá</a>
                         <a class="collapse-item" href="?act=addtk" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Add Tài khoản Admin</span></a>
@@ -126,7 +127,6 @@
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=listBill">Danh sách đơn hàng</a>
-                        <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
                         <a class="collapse-item" href="?act=donhangbihuy">Danh sách đã hủy</a>
                     </div>
@@ -165,20 +165,7 @@
             <!-- Nav Item - Tables -->
            
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="true" aria-controls="collapseSix">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Thống kê</span>
-                </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=bieudo">Biểu đồ</a>
-                        <a class="collapse-item" href="?act=danhsachthongke">Danh sách</a>
-                    </div>
-                </div>
-            </li>
+            
             <li class="nav-item  mb-3">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
                     aria-expanded="true" aria-controls="collapseSevent">

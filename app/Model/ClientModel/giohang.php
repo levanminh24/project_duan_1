@@ -66,6 +66,22 @@ function load_all_bills_by_user($idtaikhoan) {
     $query = "SELECT * FROM bill WHERE idtaikhoan = $idtaikhoan ORDER BY id DESC";
     return pdo_query($query);
 }
+function demsoluong_giohang($idtaikhoan) {
+    // Truy vấn SQL để lấy tổng số lượng sản phẩm trong giỏ hàng của người dùng
+    $sql = "SELECT SUM(giohang.soluong) AS tong_soluong 
+            FROM giohang 
+            WHERE giohang.idtaikhoan = '$idtaikhoan'";
+    
+    // Thực hiện truy vấn
+    $result = pdo_query($sql);
+    
+    // Kiểm tra và trả về kết quả
+    if (!empty($result)) {
+        return $result[0]['tong_soluong'] ? $result[0]['tong_soluong'] : 0;
+    } else {
+        return 0; // Trả về 0 nếu không có sản phẩm nào trong giỏ hàng
+    }
+}
 
 // Lấy chi tiết sản phẩm cho từng đơn hàng
 function load_all_billchitiet($idtaikhoan) {

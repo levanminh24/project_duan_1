@@ -34,7 +34,7 @@
                         extract($sanpham);
                         $suasp = "index.php?act=suasp&id=" . $id;
                         $xoasp = "index.php?act=xoasp&id=" . $id;
-                        $hinhpath = "../../images/" . $img;  // Đường dẫn đến ảnh
+                        $hinhpath = "../../../public/images/" . $img;  // Đường dẫn đến ảnh
                         $hinh = is_file($hinhpath) ? $hinhpath : "path/to/default/image.jpg"; 
                         $trangthai_text = $trangthai == 0 ? "Còn hàng" : "Hết hàng";
 

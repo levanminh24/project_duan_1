@@ -92,7 +92,7 @@
         <div class="section-border section-border-margin-1" data-aos="fade-up" data-aos-delay="200">
             <div class="section-title-timer-wrap bg-white">
                 <div class="section-title-1">
-                    <h2>Hot Sale Hôm Nay</h2>
+                    <h2>Sản Phẩm Mới Hôm Nay</h2>
                 </div>
 
             </div>
@@ -110,6 +110,7 @@
                             <div class="product-img img-zoom mb-25">
                                 <a href="?act=chitietsp&id=<?= $id ?>">
                                     <img src="public/images/<?= $img ?>" alt="">
+                                    
                                 </a>
                                 <div class="product-action-wrap">
 
@@ -203,7 +204,7 @@
                             </div>
                             <h3><a href="#"><?= $tieude ?></a></h3>
                             <div class="blog-btn">
-                                <a href="#">Xem thêm</a>
+                            <a href="?act=tintucchitiet&id=<?= $id ?>">Xem thêm</a>
                             </div>
                         </div>
                     </div>

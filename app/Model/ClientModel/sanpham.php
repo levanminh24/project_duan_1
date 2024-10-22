@@ -92,3 +92,9 @@ function search_sanpham($tensp)
     $sql = "SELECT * FROM sanpham WHERE tensp LIKE '%$tensp%'";
     return pdo_query($sql);
 }
+function update_luotxem($id) {
+    $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $id";
+    
+    pdo_execute($sql);
+}
+

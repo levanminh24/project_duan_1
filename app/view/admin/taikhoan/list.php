@@ -1,4 +1,3 @@
-<!-- /.container-fluid -->
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800 mb-5">Tài khoản</h1>
@@ -21,32 +20,30 @@
                                 <th>Email</th>
                                 <th>SĐT</th>
                                 <th>Địa chỉ</th>
-                                <th>vaitro</th>
-                               
+                                <th>Vai trò</th>
+                                <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($listtaikhoan as $taikhoan) {
                                 extract($taikhoan);
                                 $suatk = "index.php?act=suatk&id=" . $id;
-                                
+                                $xoatk = "index.php?act=xoatk&id=" . $id;
                                 $vaitro = $role == 0 ? "Người dùng" : "Admin";
 
                                 echo '<tr>
-                                <td>' . $id . '</td>
-                                <td>' . $tendangnhap . '</td>
-                                 <td>***</td>
-                                <td>' . $sodienthoai . '</td>
-                                <td>' . $email . '</td>
-                                <td>' . $diachi . '</td>
-                                 <td>' . $vaitro . '</td>
-                                   <td>
-                             
-                                
-                              
-                                    
-                                </td>
-                            </tr>';
+                                    <td>' . $id . '</td>
+                                    <td>' . $tendangnhap . '</td>
+                                    <td>***</td>
+                                    <td>' . $sodienthoai . '</td>
+                                    <td>' . $email . '</td>
+                                    <td>' . $diachi . '</td>
+                                    <td>' . $vaitro . '</td>
+                                    <td>
+                                     
+                                        <a href="' . $xoatk . '" class="btn btn-danger btn-sm" onclick="return confirmDelete();">Khoá</a>
+                                    </td>
+                                </tr>';
                             } ?>
                         </tbody>
                     </table>
@@ -60,6 +57,6 @@
 <!-- JavaScript function to confirm delete -->
 <script>
     function confirmDelete() {
-        return confirm('Bạn có chắc chắn muốn xóa danh mục này không?');
+        return confirm('Bạn có chắc chắn muốn khoá tài khoản này không?');
     }
 </script>

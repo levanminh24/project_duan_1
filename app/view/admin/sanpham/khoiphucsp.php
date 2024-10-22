@@ -33,10 +33,10 @@
                     <?php foreach ($listsanpham as $sanpham) {
                         extract($sanpham);
                        
-                        $hinhpath = "../../images/" . $img;  // Đường dẫn đến ảnh
+                        $hinhpath = "../../../public/images/" . $img;  // Đường dẫn đến ảnh
                         $hinh = is_file($hinhpath) ? $hinhpath : "path/to/default/image.jpg"; 
                         $trangthai_text = $trangthai == 0 ? "Còn hàng" : "Hết hàng";
-
+                        $xoasp = "index.php?act=xoaspkp&id=" . $id;
                         echo '<tr>
                             <td>' . $id . '</td>
                             <td>' . $tensp . '</td>
@@ -48,7 +48,7 @@
                             <td>' . $trangthai_text . '</td>
                             <td>
                                 <a href="index.php?act=khphục&id=' . $id . '" class="btn btn-success btn-sm">Khôi phục</a> <!-- Nút khôi phục -->
-                               
+                                <a href="' . $xoasp . '" class="btn btn-danger btn-sm">Xóa</a>
                         </tr>';
                     } ?>
                 </tbody>

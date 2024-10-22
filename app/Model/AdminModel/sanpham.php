@@ -48,7 +48,11 @@ function restore_sanpham($id)
     
     return false; // Sản phẩm không tồn tại hoặc không thể khôi phục
 }
-
+function delete_sanphamkp($id)
+{
+    $sql = "delete from sanpham where id = " . $id;
+    pdo_execute($sql);
+}
 
 function layChiTietSanPham($idbill) {
     $sql = "SELECT sp.tensp, sp.img, ctdh.soluong, ctdh.dongia, (ctdh.soluong * ctdh.dongia) AS thanhtien 

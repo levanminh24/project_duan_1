@@ -98,7 +98,7 @@ if (isset($_GET['act'])) {
                         // Check if a new file is uploaded
                         if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                             $hinh = basename($_FILES["hinh"]["name"]);
-                            $target_dir = "../../images/";
+                            $target_dir = "../../../public/images/";
                             $target_file = $target_dir . $hinh;
                             move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
                         } else {
@@ -179,7 +179,7 @@ if (isset($_GET['act'])) {
                     // Kiểm tra file hình ảnh
                     if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                         $hinh = basename($_FILES["hinh"]["name"]);
-                        $target_dir = "../../images/";
+                        $target_dir = "../../../public/images/";
                        
                         $target_file = $target_dir . $hinh;
                         move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
@@ -231,7 +231,7 @@ if (isset($_GET['act'])) {
                 $hinh = $_POST['hinhcu'];   // Giữ hình ảnh cũ nếu không có hình mới được tải lên
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
-                    $target_dir = "../../images/";
+                    $target_dir = "../../../public/images/";
                     $target_file = $target_dir . $hinh;
                     move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
                 }
@@ -256,10 +256,52 @@ if (isset($_GET['act'])) {
             $listdanhmuc = loadall_danhmuc();
             include "sanpham/list.php";
             break;
+            case 'xoaspkp':
+                if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                    delete_sanphamkp($_GET['id']);
+                }
+                $listdanhmuc = loadall_danhmuc();
+                $listsanpham = loadall_sanpham_khoiphuc();
+                include 'sanpham/khoiphucsp.php';
+                break;
         case 'listtk':
             $listtaikhoan = listtaikhoan();
             include "taikhoan/list.php";
             break;
+            case 'xoatk':
+                if (isset($_GET['id']) && ($_GET['id'] > 1)) {
+                    delete_tk($_GET['id']);
+                } else {
+                    echo '<script>alert("Không thể xóa tài khoản quản trị !")</script>';
+                }
+                $listtaikhoan = listtaikhoan();
+                include "taikhoan/list.php";
+                break;
+                case 'listtkc':
+                $listtaikhoan = listtaikhoanc();
+                include "taikhoan/listtkkhoa.php";
+                break;
+                case 'xoacung':
+                    if (isset($_GET['id']) && ($_GET['id'] > 1)) {
+                        delete_tkc($_GET['id']);
+                    } else {
+                        echo '<script>alert("Không thể xóa tài khoản quản trị !")</script>';
+                    }
+                    $listtaikhoan = listtaikhoan();
+                    include "taikhoan/list.php";
+                    break;
+                    case 'khoiphuctkk':
+                    if (isset($_GET['id'])) {
+                        $id = $_GET['id'];
+                        // Gọi hàm khôi phục sản phẩm
+                        if (restore_tk($id)) {
+                            echo '<script>alert("Khôi phụcthài khoản thành công!"); window.location.href = "index.php?act=listtk";</script>';
+                        } else {
+                            echo '<script>alert("Không thể khôi phục tài khoản!"); window.location.href = "index.php?act=listtkc";</script>';
+                        }
+                    }
+                    break;
+            
             case 'khphục':
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
@@ -307,7 +349,7 @@ if (isset($_GET['act'])) {
                 $ngaydang = $_POST['ngaydang'];
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
-                    $target_dir = "../../images/banner/";
+                    $target_dir = "../../../public/images/banner/";
                     $target_file = $target_dir . $hinh;
                     move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
                     inssert_banner($idsanpham, $hinh, $ngaydang);
@@ -320,15 +362,21 @@ if (isset($_GET['act'])) {
             $sanpham_list = loadall_sanpham();
             include "banner/add.php";
             break;
+           
+           
+            
+            
+            case 'xoabn':
+                if (isset($_GET['id']) && ($_GET['id']) > 0) {
+                    delete_banner($_GET['id']);
 
-        case 'xoabanner':
-            if (isset($_GET['id']) && ($_GET['id'] != "")) {
-                $id = $_GET['id'];
-                delete_banner($id);
-            }
-            $listbanner = loadall_banner('');
-            include "banner/list.php";
-            break;
+                }
+                $listbanner = loadall_banner('');
+                include "banner/list.php";
+                
+                break;
+            
+            
         case "qltintuc":
             $listtintuc = load_tintuc();
             include "tintuc/list.php";
@@ -342,7 +390,7 @@ if (isset($_GET['act'])) {
 
                 if (isset($_FILES['hinh']) && $_FILES['hinh']['error'] == UPLOAD_ERR_OK) {
                     $hinh = basename($_FILES["hinh"]["name"]);
-                    $target_dir = "../../images/";
+                    $target_dir = "../../../public/images/";
                     $target_file = $target_dir . $hinh;
                     move_uploaded_file($_FILES["hinh"]["tmp_name"], $target_file);
                     insert_tintuc($ngaydang, $tacgia, $hinh, $tieude, $noidung);
