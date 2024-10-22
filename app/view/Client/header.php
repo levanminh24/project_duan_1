@@ -85,7 +85,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="?act=tatcatintuc">Tin Tức</a></li>
-                                        <li><a href="?act=lienhe">Liên Hệ </a></li>  
+                                        
                                     </ul>
                                 </nav>
                             </div>
@@ -140,8 +140,46 @@
 
                                 </div>
                                 <div class="header-action-style">
-                                    <a title="cart" href="index.php?act=giohang"><i class="pe-7s-shopbag"></i></a>
-                                </div>
+    <a title="cart" href="index.php?act=giohang">
+        <i class="pe-7s-shopbag"></i>
+        <?php 
+            // Lấy ID tài khoản từ session
+            $idtaikhoan = isset($_SESSION['idtendangnhap']) ? $_SESSION['idtendangnhap'] : null;
+
+            // Kiểm tra nếu có ID tài khoản để tính số lượng sản phẩm trong giỏ hàng
+            if ($idtaikhoan) {
+                $soluong = demsoluong_giohang($idtaikhoan); // Gọi hàm với $idtaikhoan
+                if ($soluong > 0) {
+                    // Nếu có sản phẩm trong giỏ hàng, hiển thị số lượng
+                    echo '<sup class="shop-count">' . $soluong . '</sup>';
+                }
+            }
+        ?>
+    </a>
+</div>
+<style>
+    .header-action-style {
+    position: relative; /* Để tạo ra vị trí tương đối cho phần tử con */
+}
+
+.header-action-style .shop-count {
+    position: absolute; /* Vị trí tuyệt đối */
+    top: -5px; /* Điều chỉnh vị trí dọc */
+    right: -10px; /* Điều chỉnh vị trí ngang */
+    background-color: red; /* Màu nền cho số lượng */
+    color: white; /* Màu chữ */
+    border-radius: 50%; /* Tạo hình tròn */
+    width: 20px; /* Chiều rộng */
+    height: 20px; /* Chiều cao */
+    display: flex; /* Sử dụng flexbox để căn giữa */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    font-size: 12px; /* Kích thước chữ nhỏ */
+    font-weight: bold; /* Đậm chữ */
+}
+
+</style>
+
                               
                                 <div class="header-action-style d-block d-lg-none">
                                     <a class="mobile-menu-active-button" href="#"><i class="pe-7s-menu"></i></a>

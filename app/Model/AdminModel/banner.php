@@ -8,7 +8,7 @@ function loadall_banner($kyw){
     return pdo_query($sql);
 }
 function delete_banner($id){
-    $sql = " delete from banner where id='$id'";
+    $sql = "delete from banner where id=".$id;
     pdo_execute($sql);
 }
 function inssert_banner($idsanpham,$hinh,$ngaydang){
@@ -22,8 +22,7 @@ function load_one_banner($id){
     $dm = pdo_query_one($sql);
     return $dm;
 }
-function update_banner($id, $idsanpham, $hinh) {
-    $sql = "update banner set idsanpham = '$idsanpham',image = '$hinh' where id = $id";
-    pdo_execute($sql);
-}
+
+
+
 

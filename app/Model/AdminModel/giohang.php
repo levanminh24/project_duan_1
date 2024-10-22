@@ -76,6 +76,45 @@ function layChiTietDonHangTheoTaiKhoan($idTaiKhoan) {
     $donHang = pdo_query($sql);
     return $donHang;
 }
+function load_all_thongke($ngay) {
+    // Khởi tạo câu truy vấn cơ bản
+    $query = "
+        SELECT 
+            DATE_FORMAT(t.ngaydat, '%Y-%m-%d') AS ngay,
+            COUNT(DISTINCT t.id_bill_ct) AS tongdonhang,
+            SUM(bc.thanhtien) AS doanhthu,
+            SUM(bc.soluong) AS soluongban
+        FROM 
+            thongke t
+        JOIN 
+            bill_chitiet bc ON t.id_bill_ct = bc.id
+        WHERE 
+            1
+    ";
+
+    // Thêm điều kiện khoảng thời gian vào câu truy vấn
+    if ($ngay == 365) {
+        $query .= " AND t.ngaydat >= DATE_SUB(NOW(), INTERVAL 365 DAY)";
+    } else if ($ngay == 180) {
+        $query .= " AND t.ngaydat >= DATE_SUB(NOW(), INTERVAL 180 DAY)";
+    } else if ($ngay == 90) {
+        $query .= " AND t.ngaydat >= DATE_SUB(NOW(), INTERVAL 90 DAY)";
+    } else if ($ngay == 28) {
+        $query .= " AND t.ngaydat >= DATE_SUB(NOW(), INTERVAL 28 DAY)";
+    } else if ($ngay == 7) {
+        $query .= " AND t.ngaydat >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
+    }
+
+    // Thêm GROUP BY để nhóm theo ngày
+    $query .= " GROUP BY DATE_FORMAT(t.ngaydat, '%Y-%m-%d')";
+
+    // Thực thi truy vấn và trả về kết quả
+    return pdo_query($query);
+}
+function update_donhang_thanhtoan($trangthai,$thanhtoan,$iddonhang){
+    $query="UPDATE `donhang` SET `thanhtoan`='$thanhtoan',`trangthai`='$trangthai' WHERE id=".$iddonhang;
+    pdo_execute($query);
+}
 
 
 

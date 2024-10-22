@@ -44,6 +44,13 @@ function insert_bill_chitiet($idsanpham, $soluong, $dongia, $thanhtien,  $idbill
    
     pdo_execute($query);
 }
+function insert_thongke($ngaydat, $id_bill_ct, $doanhthu, $soluongban) {
+    $query = "INSERT INTO thongke (ngaydat, id_bill_ct, doanhthu, soluongban) 
+              VALUES ('$ngaydat', '$id_bill_ct', '$doanhthu', '$soluongban')";
+    
+    pdo_execute($query);
+}
+
 function update_soluong_sanpham($idsanpham, $soluong) {
     $query = "UPDATE sanpham SET soluong = soluong - $soluong WHERE id = $idsanpham";
    
@@ -58,6 +65,22 @@ function delete_all_giohang($idtaikhoan) {
 function load_all_bills_by_user($idtaikhoan) {
     $query = "SELECT * FROM bill WHERE idtaikhoan = $idtaikhoan ORDER BY id DESC";
     return pdo_query($query);
+}
+function demsoluong_giohang($idtaikhoan) {
+    // Truy vấn SQL để lấy tổng số lượng sản phẩm trong giỏ hàng của người dùng
+    $sql = "SELECT SUM(giohang.soluong) AS tong_soluong 
+            FROM giohang 
+            WHERE giohang.idtaikhoan = '$idtaikhoan'";
+    
+    // Thực hiện truy vấn
+    $result = pdo_query($sql);
+    
+    // Kiểm tra và trả về kết quả
+    if (!empty($result)) {
+        return $result[0]['tong_soluong'] ? $result[0]['tong_soluong'] : 0;
+    } else {
+        return 0; // Trả về 0 nếu không có sản phẩm nào trong giỏ hàng
+    }
 }
 
 // Lấy chi tiết sản phẩm cho từng đơn hàng
@@ -104,5 +127,45 @@ function get_product_details($idsanpham) {
     return null; // Nếu không tìm thấy sản phẩm
 
 }
-
+function load_all_ctdh_lsmh($iddonhang){
+    $query="SELECT chitietdonhang.id, chitietdonhang.iddonhang, chitietdonhang.idsanpham, chitietdonhang.soluong, chitietdonhang.dongia, chitietdonhang.thanhtien,
+    donhang.id as iddh, donhang.idtaikhoan, donhang.hovatennhan, donhang.ngaydathang, donhang.diachinhan, donhang.sodienthoainhan, donhang.phuongthuctt, donhang.trangthai,
+    sanpham.id as idsp, sanpham.iddm, sanpham.tensp, sanpham.giakm, sanpham.image FROM bill_chitiet 
+    INNER JOIN bill ON chitietdonhang.iddonhang=donhang.id
+    INNER JOIN sanpham ON chitietdonhang.idsanpham=sanpham.id  WHERE chitietdonhang.iddonhang='$iddonhang'";
+    return pdo_query($query);
+}
+function load_all_ctdh_update($iddonhang){
+    $query="SELECT chitietdonhang.id, chitietdonhang.iddonhang, chitietdonhang.idsanpham, chitietdonhang.soluong, chitietdonhang.dongia, chitietdonhang.thanhtien,
+    donhang.id as iddh, donhang.idtaikhoan, donhang.hovatennhan, donhang.ngaydathang, donhang.diachinhan, donhang.sodienthoainhan, donhang.phuongthuctt, donhang.trangthai,
+    sanpham.id as idsp, sanpham.iddm, sanpham.tensp, sanpham.giakm, sanpham.image FROM bill_chitiet
+    INNER JOIN bill ON chitietdonhang.iddonhang=donhang.id
+    INNER JOIN sanpham ON chitietdonhang.idsanpham=sanpham.id  WHERE chitietdonhang.iddonhang='$iddonhang'";
+    return pdo_query($query);
+}
+function load_all_dh_lsmh($idtaikhoan,$trangthai){
+    $query="SELECT * FROM bill WHERE idtaikhoan='$idtaikhoan'";
+    if($trangthai==0){
+        $query .=" AND trangthai='$trangthai'";
+    }else if($trangthai==2){
+        $query .=" AND (trangthai='1' OR trangthai='2')";
+    }else if($trangthai==3){
+        $query .=" AND trangthai='$trangthai'";
+    }else if($trangthai==4){
+        $query .=" AND trangthai='$trangthai'";
+    }
+    else if($trangthai==5){
+        $query .=" AND trangthai='$trangthai'";
+    }
+    $query .=" ORDER BY id desc";
+    return pdo_query($query);
+}
+function load_one_dh($id){
+    $query="SELECT * FROM bill WHERE id=".$id;
+    return pdo_query_one($query);
+}
+function update_giohang($soluong,$thanhtien,$idsanpham){
+    $query="UPDATE `giohang` SET `soluong`='$soluong',`thanhtien`='$thanhtien' WHERE idsanpham=".$idsanpham;
+    pdo_execute($query);
+}
 

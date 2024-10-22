@@ -26,8 +26,8 @@
                             <?php foreach ($listbanner as $danhmuc) {
                                 extract($danhmuc);
                               
-                                $xoabanner = "index.php?act=xoabanner&id=" . $id;
-                                $hinhpath = "../../images/banner/" . $imagebanner;  // Đường dẫn đến ảnh
+                                $xoabanner = "index.php?act=xoabanner&id=" . $idbanner;
+                                $hinhpath = "../../../public/images/banner/" . $imagebanner;  // Đường dẫn đến ảnh
                                 $hinh = is_file($hinhpath) ? $hinhpath : "path/to/default/image.jpg";
                               
 
@@ -37,8 +37,11 @@
                                 <td>' . $tensp . '</td>
                                  <td>' . $ngaydang . '</td>
                                 <td>
+                                    <a href="' . $xoabanner . '" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Xóa</a>
                                    
-                                   <a href="' . $xoabanner . '" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Xóa</a>
+                                  
+                                     
+                                   
                                 </td>
                             </tr>';
                             } ?>

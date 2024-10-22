@@ -39,11 +39,12 @@
                                 <span><?= number_format($item['soluong'] * $item['giasp']) ?> VND</span>
                             </td>
                             <td class="product-remove">
-                                <input type="hidden" name="delete_item" value="<?= $item['id'] ?>">
-                                <button type="submit" class="btn-delete" title="Xóa sản phẩm">
-                                    <i class="ti-trash"></i>
-                                </button>
-                            </td>
+    <input type="hidden" name="delete_item" value="<?= $item['id'] ?>">
+    <button type="button" class="btn-delete" title="Xóa sản phẩm" onclick="confirmDelete(<?= $item['id'] ?>)">
+        <i class="ti-trash"></i>
+    </button>
+</td>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -86,3 +87,26 @@
 
     </div>
 </div>
+<script>
+function confirmDelete(itemId) {
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng không?')) {
+        // Gửi yêu cầu AJAX để xóa sản phẩm
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'index.php?act=xoagiohang', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Gửi ID sản phẩm cần xóa
+        xhr.send('delete_item=' + itemId);
+
+        // Xử lý phản hồi từ máy chủ
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Tải lại giỏ hàng
+                location.reload(); // Reload trang
+            } else {
+                alert('Có lỗi xảy ra. Vui lòng thử lại!');
+            }
+        };
+    }
+}
+</script>

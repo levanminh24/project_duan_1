@@ -72,6 +72,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="index.php?act=listtk">Danh sách tai khoan</a>
                         <a class="collapse-item" href="index.php?act=listtkQtv">Danh sách Admin</a>
+                        <a class="collapse-item" href="index.php?act=listtkc">Danh sách khoá</a>
                         <a class="collapse-item" href="?act=addtk" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Add Tài khoản Admin</span></a>
@@ -107,6 +108,7 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=listsp">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="?act=listspkhoiphuc">Kho lưu trữ sản phẩm</a>
                         <a class="collapse-item" href="?act=addsp" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
@@ -125,7 +127,6 @@
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="?act=listBill">Danh sách đơn hàng</a>
-                        <a class="collapse-item" href="?act=kiemduyet">Kiểm duyệt đơn hàng </a>
                         <a class="collapse-item" href="?act=dagiao">Danh sách đã giao</a>
                         <a class="collapse-item" href="?act=donhangbihuy">Danh sách đã hủy</a>
                     </div>
@@ -146,29 +147,25 @@
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - Tables -->
-
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="?act=listbinhluan">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThreertt"
+                    aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-comment"></i>
-                    <span>Quản lý bình luận</span></a>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="true" aria-controls="collapseSix">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Thống kê</span>
+                    <span>Quản bình luận</span>
                 </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                <div id="collapseThreertt" class="collapse" aria-labelledby="headingThree">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="?act=bieudo">Biểu đồ</a>
-                        <a class="collapse-item" href="?act=home">Danh sách</a>
+                        <a class="collapse-item" href="?act=listbinhluan">Danh sách binh luận</a>
+                        <a class="collapse-item" href="?act=listbinhluanan">Danh sách bl ẩn</a>
                     </div>
                 </div>
             </li>
+            <!-- Nav Item - Tables -->
+
+            <!-- Nav Item - Tables -->
+           
+
+            
             <li class="nav-item  mb-3">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
                     aria-expanded="true" aria-controls="collapseSevent">

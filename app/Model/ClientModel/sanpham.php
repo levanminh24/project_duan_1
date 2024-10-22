@@ -2,14 +2,14 @@
 include_once "pdo.php";
 function loadall_spHome()
 {
-    $sql = "select * from sanpham order by id desc";
+    $sql = "select * from sanpham where is_delete = 0 order by id desc";
     $listsp = pdo_query($sql);
     return $listsp;
 }
 
 function load_spnoibat()
 {
-    $query = "SELECT * FROM sanpham ORDER BY luotxem desc limit 0,4";
+    $query = "SELECT * FROM sanpham WHERE is_delete = 0 ORDER BY luotxem desc limit 0,4";
     return pdo_query($query);
 }
 function load_one_sp($id)
@@ -92,3 +92,9 @@ function search_sanpham($tensp)
     $sql = "SELECT * FROM sanpham WHERE tensp LIKE '%$tensp%'";
     return pdo_query($sql);
 }
+function update_luotxem($id) {
+    $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE id = $id";
+    
+    pdo_execute($sql);
+}
+
